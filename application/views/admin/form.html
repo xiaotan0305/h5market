@@ -1,0 +1,75 @@
+{!include file = "admin/header.html" action=form !}
+<!-- 判断项目下是否有表单,如果有的话显示,否则提示该项目下没有报名信息 -->
+{!if $formInfo.count >= 1!}
+<div class="formMain" id="formMain">
+    {!foreach from=$formInfo.formInfo item=item!}
+    {!if $formInfo.count > 1 !}
+    <a class="form" href="{!$applicationConfig.domain.siteUrl.admin!}?c=admin&a=formInfo&id={!$formInfo.id!}&formId={!$item.formid!}&page=1"><span>{!$item.title!}</span></a>
+    {!/if!}
+    {!/foreach!}
+    {!foreach from=$formInfo.formInfo item=item!}
+    {!if $formId == $item.formid!}
+    <h3><b class="title">{!$item.title!}</b></h3>
+    <a class="excel" href="{!$applicationConfig.domain.siteUrl.admin!}?c=admin&a=ajaxGetSignInfo&projectid={!$formInfo.id!}" target="_blank"><span>导出到excel</span></a>
+    {!/if!}
+    {!/foreach!}
+</div>
+<div class="content">
+    <table class="zebra">
+        <thead>
+        <tr>
+            {!foreach $formInfo.formInfo item=item!}
+            {!if $formId === $item.formid!}
+            <th>序号</th>
+            {!foreach $item.forminfo item=val!}
+            <th>{!$val.name!}</th>
+            {!/foreach!}
+            <th>报名时间</th>
+            {!/if!}
+            {!/foreach!}
+        </tr>
+        </thead>
+        <tbody>
+        {!foreach from=$signInfo key=key item=value!}
+        <tr>
+            <td>{!$key+1!}</td>
+            {!foreach from=$value.content item=val!}
+            <td>{!$val!}</td>
+            {!/foreach!}
+        </tr>
+        {!/foreach!}
+        </tbody>
+    </table>
+    <div class="page">
+        <a {!if $page > 1!}href="{!$applicationConfig.domain.siteUrl.admin!}?c=admin&a=formInfo&id={!$formInfo.id!}&fromId={!$formId!}&page={!$page-1!}"{!else!}style="color: darkgray;"{!/if!}>前一页</a>
+        <span>第{!if $page > $pageCount!}0{!else!}{!$page!}{!/if!}页 / 共{!$pageCount!}页</span>
+        <a {!if $page < $pageCount!}href="{!$applicationConfig.domain.siteUrl.admin!}?c=admin&a=formInfo&id={!$formInfo.id!}&fromId={!$formId!}&page={!$page+1!}"{!else!}style="color: darkgray;"{!/if!}>后一页</a>
+    </div>
+</div>
+
+
+<br><br><br></div>
+{!/if!}
+<a id="showgohead" class="goTop" href="javascript:void(0)">&nbsp;</a>
+<input id="imgSite" type="hidden" value="{!$applicationConfig.domain.imgUrl.admin!}"/>
+<input id="pcSite" type="hidden" value="{!$applicationConfig.domain.siteUrl.admin!}"/>
+<script type="text/javascript" src="{!$applicationConfig.domain.imgUrl.admin!}js/sea/sea.js"></script>
+<script>
+    document.domain = 'fang.com';
+    var _vars = {};
+    window.scrollTo(0, 1);
+    var mainSite = '{!$applicationConfig.domain.siteUrl.admin!}';
+    var imgVer = '{!$applicationConfig.application.imgver!}';
+    seajs.config({
+        base: '{!$applicationConfig.domain.imgUrl.admin!}js',
+        alias: {jquery: "jquery/2.1.1/jquery"},
+        map: [function (uri) {
+            return uri.indexOf('src') !== -1 ? uri + '?_' + imgVer : uri;
+        }],
+        vars: _vars,
+        debug: true
+    });
+    seajs.use('src/form/form');
+</script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="soufun, fang">
+    <title>搜房网{!if $result[0].name!}-{!$result[0].name!}{!/if!}</title>
+    <link rel="stylesheet" href="{!$applicationConfig.domain.imgUrl.admin!}css/marketPreview.css?_{!$applicationConfig.application.imgver!}"/>
+    <link rel="stylesheet" href="{!$applicationConfig.domain.imgUrl.admin!}css/basic.css?_{!$applicationConfig.application.imgver!}"/>
+</head>
+<body>
+<div id="app">
+    <div class="TipsBar" id="sendFloat" style="display: none;text-align: center;">
+        <div class="TipsBar-container TipsBar-successBg">
+            <span>标题更新成功</span>
+        </div>
+    </div>
+    <div id="ProjectCompletePage" class="ProjectCompletePage">
+        <div class="ProjectCompletePage-container">
+            <div class="ProjectPreview complete ">
+                <div class="ProjectPreview-container ProjectPreview-sharePageWidth">
+                    <div class="ProjectPreview-container-infoarea"  style="height:150px;">
+                        <div class="ProjectPreview-publishInfo"><span>创建于</span><span>{!$result[0].createtime!}</span><span> 最后一次修改 </span><span>{!$result[0].updatetime!}</span>
+                        </div>
+                        <div class="ProjectPreview-thum">
+                            <img id="upload" src="{!$result[0].cover!}">
+                            {!if $result[0].user === $user!}
+                            <div class="able ProjectPreview-thum-tip">点击更换封面</div>
+                            {!/if!}
+                            <input type="file" class="uploadBtn" accept="image/*" {!if $result[0].user !== $user!}disabled="true"{!/if!} class="ProjectPreview-thum">
+                        </div>
+                        <div class="ProjectPreview-infoarea">
+                            <div><input placeholder="请输入标题（20字以内)" {!if $result[0].user !== $user!}readonly="true"{!/if!} class="{!if $result[0].user === $user!}able {!/if!}ProjectPreview-container-infoarea-title titlecContent" type="text" value="{!$result[0].name!}"></div>
+                            <div><textarea placeholder="请输入描述（50字以内)" {!if $result[0].user !== $user!}readonly="true"{!/if!} class="{!if $result[0].user === $user!}able {!/if!}ProjectPreview-container-infoarea-content titlecContent" type="text">{!$result[0].introduction!}</textarea>
+                                {!if $result[0].user === $user!}
+                                <button id="setCity" style="background-color: {!if $color === 'green'!}#42c2b3{!else!}#df3031{!/if!};" title="设置或更改该项目的集团城市渠道等信息~"><a data-href="{!$applicationConfig.domain.siteUrl.admin!}?c=admin&a=citylist&burl={!$burl!}&id={!$id!}&from=preview">{!if $color === 'green'!}更改项目集团信息{!else!}设置集团城市渠道{!/if!}</a></button>
+                                <button id="openProject" style="transform: translateX(110%);{!if $isOpen!}background-color: #42c2b3{!/if!}" title="更改该项目的公开状态~"><a href="javascript:;">{!if $isOpen!}取消公开{!else!}设置为公开{!/if!}</a></button>
+                                {!/if!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ProjectPreview-container-preview">
+                        <div id="iframeBox" class="ProjectPreview-container-preview-framearea">
+                            <div class="ProjectPreview-container-preview-btnarea">
+                                <button id="prePage" class="ProjectPreview-container-preview-btn"><i class="caret-up"></i></button>
+                                <button id="nextPage" class="ProjectPreview-container-preview-btn"><i class="caret-down"></i></button>
+                            </div>
+                        </div>
+                        <div class="ProjectPreview-container-preview-share">
+                            <div class="ProjectPreview-container-preview-share-title">
+                                扫描二维码预览并分享给朋友
+                            </div>
+                            <div id="quickmark" class="ProjectPreview-container-preview-share-QRCode"></div>
+                            <div class="ProjectPreview-container-preview-share-friend">你可以复制以下链接发送给朋友</div>
+                            <div class="ProjectPreview-container-preview-share-link" style="border-color:#df3031;" >
+                                <input id="projectUrl" value="">
+                                <div id="projectCopy" title="复制地址" class="ProjectPreview-ShareCpyBtn" style="background-color:#df3031;">复制</div>
+                            </div>
+                            {!if $f !== 'edit'!}
+                            <div id="editOn"  style="margin-top: 35px;">
+                                <button class="maka-button-largeless-green dislodgeColor toHref" id="editSelect" >
+                                    {!if $f === 'index'!}
+                                    <a data-href="{!$applicationConfig.domain.siteUrl.admin!}?c=admin&a=edit&id={!$result[0].id!}" >去编辑</a>
+                                    {!else!}
+                                    <span id="select">选取</span>
+                                    {!/if!}
+                                </button>
+                                <button class="maka-button-largeless-green toHref" id="close" style="margin-left:20px;"><a data-href="{!$applicationConfig.domain.siteUrl.admin!}?c=admin&a=index" style="color:#fff;">关闭</a></button>
+                            </div>
+                            {!/if!}
+                        </div>
+                    </div>
+                    <div class="ProjectPreview-ThumbCrop"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input id="action" type="hidden" value="PCpreview"/>
+<input id="imgSite" type="hidden" value="{!$applicationConfig.domain.imgUrl.admin!}"/>
+<!--http://js.h5.test.fang.com/--><!--mainSite-->
+<input id="pcSite" type="hidden" value="{!$applicationConfig.domain.siteUrl.admin!}"/>
+<!--http://h5admin.test.fang.com/-->
+<input id="phoneSite" type="hidden" value="{!$applicationConfig.domain.siteUrl.web!}"/>
+<!--http://h5.test.fang.com/-->
+<input id="projectID" type="hidden" value="{!$id!}"/>
+<input id="city" type="hidden" value="{!$result[0].city!}"/>
+<input id="channel" type="hidden" value="{!$result[0].groups!}"/>
+<input id="source" type="hidden" value="{!$result[0].source!}"/>
+<!--是否公开-->
+<input id="isOpen" type="hidden" value="{!$isOpen!}"/>
+<input id="from" type="hidden" value="{!$f!}"/>
+<script>
+    document.domain = 'fang.com';
+    var _vars = _vars || {};
+    _vars.mainSite = "http://" + location.host + "/";
+    _vars.mySite = "http://" + location.host + "/my/";
+    _vars.city = "bj";
+    _vars.img_ver = "{!$applicationConfig.application.imgver!}";
+    var baseUrl;
+    if (_vars.mainSite) {
+        var thisSite = _vars.mainSite;
+        _vars.public = "{!$applicationConfig.domain.imgUrl.admin!}";
+        baseUrl = _vars.public + "js/";
+    }
+    _vars.action = document.querySelector('#action').value || '${param.m}';
+    _vars.entrance = '{!$applicationConfig.domain.imgUrl.admin!}js/src/PCpreview/main';
+    (function (m, d, s, u, l) {
+        u = d.createElement("script");
+        u.id = "seajsnode";
+        u.async = true;
+        u.src = s.base + "sea/sea.js";
+        u.onload = function () {
+            seajs.config(s);
+            seajs.use(_vars.entrance);
+        };
+        l = d.getElementsByTagName("head")[0];
+        l.appendChild(u);
+    })(window, document, {
+        base: baseUrl, alias: {jquery: "jquery/2.1.1/jquery", util: "util/util"},map: [function (uri) {
+            return uri.indexOf('src') !== -1 ? uri + '?_' + _vars.img_ver : uri;
+        }], paths: {count: "http://js.soufunimg.com/count"}, vars: _vars
+    });
+</script>
+</body>
+</html>

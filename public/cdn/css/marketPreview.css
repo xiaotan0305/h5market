@@ -1,0 +1,846 @@
+.maka-button-large-green, .maka-button-largeless-green, .maka-button-largeless-white, .maka-button-middle-green, .maka-button-middle-white, .maka-button-normal, .maka-button-normal-disabled, .maka-button-normal-green, .maka-button-normal-white, .maka-button-normal-white-green, .maka-button-side-green, .maka-button-side-white-green, .maka-button-small, .maka-button-small-green, .maka-button-small-white {
+    cursor: pointer;
+    outline: 0
+}
+
+.maka-button-large-green, .maka-button-largeless-green, .maka-button-largeless-white, .maka-button-middle-green, .maka-button-middle-white, .maka-button-normal, .maka-button-normal-disabled, .maka-button-normal-green, .maka-button-normal-white, .maka-button-normal-white-green, .maka-button-small, .maka-button-small-green, .maka-button-small-white {
+    border-radius: 5px;
+    background-clip: padding-box
+}
+
+.maka-button-normal-disabled, .maka-button-normal-green, .maka-button-normal-white, .maka-button-normal-white-green, .maka-button-small, .maka-button-small-green, .maka-button-small-white {
+    width: 140px;
+    height: 40px
+}
+
+.maka-button-small-green {
+    background: #42c2b3;
+    color: #fff;
+    border: 0
+}
+
+.maka-button-small-green:hover {
+    background-color: #3ab3a4
+}
+
+.maka-button-small-white {
+    background-color: #fff;
+    border: 1px solid silver;
+    color: #9f9f9f
+}
+
+.maka-button-small-white:hover {
+    background-color: #fafafa
+}
+
+.maka-button-small-green, .maka-button-small-white {
+    width: 75pt;
+    height: 30px;
+    line-height: 28px;
+    text-align: center
+}
+
+.ProjectCompletePage {
+    margin: 0 auto;
+    padding: 0 0 40px;
+    position: relative;
+    min-height: 100%;
+    max-width: 1010px;
+    background-color: #fff
+}
+
+@media (min-width: 0) {
+    .ProjectCompletePage {
+        max-width: 1540px
+    }
+}
+@media (min-width: 1300px) {
+    .ProjectCompletePage {
+        max-width: 975pt
+    }
+}
+
+@media (min-width: 1540px) {
+    .ProjectCompletePage {
+        max-width: 64pc
+    }
+}
+
+.ProjectCompletePage:after {
+    content: "";
+    display: block;
+    clear: both
+}
+
+.ProjectCompletePage-container {
+    padding: 10px 5pc;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: #f0f0f0
+}
+
+.ProjectCompletePage-head-left {
+    display: inline-block;
+    width: 50%
+}
+
+.ProjectCompletePage-foot {
+    float: left
+}
+
+@media (min-width: 0) {
+    .ProjectCompletePage-foot {
+        max-width: 1540px
+    }
+}
+
+@media (min-width: 1300px) {
+    .ProjectCompletePage-foot {
+        max-width: 975pt
+    }
+}
+
+@media (min-width: 1540px) {
+    .ProjectCompletePage-foot {
+        max-width: 64pc
+    }
+}
+
+.ProjectCompletePage p {
+    color: #959595
+}
+.maka-button-large-green, .maka-button-largeless-green, .maka-button-largeless-white, .maka-button-middle-green, .maka-button-middle-white, .maka-button-normal, .maka-button-normal-disabled, .maka-button-normal-green, .maka-button-normal-white, .maka-button-normal-white-green, .maka-button-side-green, .maka-button-side-white-green, .maka-button-small, .maka-button-small-green, .maka-button-small-white {
+    cursor: pointer;
+    outline: 0
+}
+
+.maka-button-large-green, .maka-button-largeless-green, .maka-button-largeless-white, .maka-button-middle-green, .maka-button-middle-white, .maka-button-normal, .maka-button-normal-disabled, .maka-button-normal-green, .maka-button-normal-white, .maka-button-normal-white-green, .maka-button-small, .maka-button-small-green, .maka-button-small-white {
+    border-radius: 5px;
+    background-clip: padding-box
+}
+
+.maka-button-normal-disabled, .maka-button-normal-green, .maka-button-normal-white, .maka-button-normal-white-green, .maka-button-small, .maka-button-small-green, .maka-button-small-white {
+    width: 140px;
+    height: 40px
+}
+
+.maka-button-small-green {
+    background: #42c2b3;
+    color: #fff;
+    border: 0
+}
+
+.maka-button-small-green:hover {
+    background-color: #3ab3a4
+}
+
+.maka-button-small-white {
+    background-color: #fff;
+    border: 1px solid silver;
+    color: #9f9f9f
+}
+
+.maka-button-small-white:hover {
+    background-color: #fafafa
+}
+
+.maka-button-small-green, .maka-button-small-white {
+    width: 75pt;
+    height: 30px;
+    line-height: 28px;
+    text-align: center
+}
+
+.ProjectPreview {
+    background-color: rgba(40, 40, 40, .9);
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto
+}
+
+.ProjectPreview .ProjectPreview-completePageWidth {
+    width: 520px
+}
+
+.ProjectPreview-appAD {
+    font-size: 14px;
+    color: #959595
+}
+
+.ProjectPreview-appAD a, .ProjectPreview-appAD a:active {
+    color: #42c2b3
+}
+
+.ProjectPreview-sharePageWidth {
+    width: 1010px
+}
+
+.ProjectPreview-completePageWidth {
+    width: 520px
+}
+
+.ProjectPreview div {
+    box-sizing: border-box
+}
+
+.ProjectPreview-finishPage-QRcodeImgDiv {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0
+}
+
+.ProjectPreview-finishPage-QRcodeImgDiv-QRCode {
+    margin-left: 46px;
+    display: inline-block;
+    vertical-align: top;
+    width: 183px;
+    height: 183px
+}
+
+.ProjectPreview-finishPage-QRcodeImgDiv-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none
+}
+
+.ProjectPreview-finishPage-QRcodeImgDiv:hover .ProjectPreview-finishPage-QRcodeImgDiv-cover {
+    top: 0;
+    width: 183px;
+    height: 183px;
+    display: inline-block;
+    position: absolute;
+    background-color: rgba(0, 0, 0, .5);
+    left: 46px;
+    color: #fff;
+    font-size: 1pc;
+    text-align: center;
+    line-height: 183px
+}
+
+.ProjectPreview-ShareCpyBtn {
+    display: inline-block;
+    width: 115px;
+    height: 29px;
+    border: #42c2b3;
+    background-color: #42c2b3;
+    color: #fff;
+    text-align: center;
+    font-size: 1pc;
+    line-height: 30px;
+    cursor: pointer
+}
+
+.ProjectPreview-share {
+    position: relative
+}
+
+.ProjectPreview-share-scan {
+    display: inline-block;
+    width: 285px;
+    height: 228px
+}
+
+.ProjectPreview.complete, .ProjectPreview.noShadow {
+    background: #fff
+}
+
+.ProjectPreview-Tags:nth-of-type(2) {
+    background-color: #f0f0f0
+}
+
+.ProjectPreview-Tags:first-of-type {
+    margin-right: 20px;
+    background-color: #f0f0f0
+}
+
+.ProjectPreview-Tags-span {
+    border: 1px solid #959595;
+    border-radius: 30px;
+    font-size: 9pt;
+    color: #959595;
+    padding: 2px 10px;
+    margin-right: 5px
+}
+
+.ProjectPreview-btnarea {
+    margin-top: 60px
+}
+
+.ProjectPreview-btnarea button {
+    margin-right: 20px
+}
+
+.ProjectPreview-container {
+    height: 678px;
+    width: 1010px;
+    background: #fff;
+    margin: 0 auto;
+    position: relative
+}
+
+.ProjectPreview-container-loading {
+    text-align: center;
+    width: 100%;
+    line-height: 600px;
+    font-size: 20px
+}
+
+.ProjectPreview-container-loading i {
+    color: #42c2b3
+}
+
+.ProjectPreview-container-infoarea {
+    width: 100%;
+    height: 170px;
+    border-bottom: 1px solid silver;
+    position: relative
+}
+
+.ProjectPreview-container-infoarea-content {
+    color: silver;
+    font-size: 14px;
+    width:100%;
+    height: 3pc;
+    line-height: 24px;
+    border: 1px dashed transparent;
+    outline: 0;
+    resize: none;
+    padding: 0;
+    margin-bottom: 7px
+}
+
+.ProjectPreview-container-infoarea-content.able:hover, .ProjectPreview-container-infoarea-content.able:focus {
+    border: 1px dashed silver
+}
+
+.ProjectPreview-container-infoarea-content.disable:hover {
+    border: 0 dashed silver
+}
+
+.ProjectPreview-container-infoarea-title {
+    width: 426px;
+    color: #959595;
+    font-size: 1pc
+}
+
+.ProjectPreview-container-infoarea input {
+    padding: 0;
+    margin: 0;
+    margin-bottom: 1pc;
+    height: 24px;
+    border: 1px solid transparent
+}
+
+.ProjectPreview-container-infoarea input.able:hover, .ProjectPreview-container-infoarea input.able:focus {
+    border: 1px dashed silver
+}
+
+.ProjectPreview-container-infoarea input.disable:hover {
+    border: 0 dashed silver
+}
+
+.ProjectPreview-container-preview {
+    width: 100%;
+    margin-top: 25px;
+    position: relative
+}
+
+.ProjectPreview-container-preview-framearea {
+    margin-left: 52px;
+    width: 380px;
+    height: 484px;
+    border: 0;
+    position: absolute;
+    top: 0;
+    overflow: hidden
+}
+
+.ProjectPreview-container-preview-framearea iframe {
+    border: 0;
+    width: 295px;
+    height: 29pc
+}
+
+.ProjectPreview-container-preview-btnarea {
+    position: absolute;
+    top: 140px;
+    right: 0;
+    width: 50px
+}
+
+.ProjectPreview-container-preview-btn {
+    width: 45px;
+    height: 90px;
+    border: 1px solid silver;
+    outline: 0;
+    color: silver;
+    font-size: 30px;
+    float: right;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #fff
+}
+
+.ProjectPreview-container-preview-btn:hover {
+    border-color: #DF3031;
+    border-radius: 5px;
+    background-color: #fff
+}
+
+.ProjectPreview-container-preview-btn:hover .caret-down, .ProjectPreview-container-preview-btn:hover .caret-up {
+    color: #DF3031
+}
+
+.ProjectPreview-container-preview-share {
+    width: 25pc;
+    height: 504px;
+    border: 0;
+    position: absolute;
+    left: 599px
+}
+
+.ProjectPreview-container-preview-share-title {
+    color: #959595;
+    margin-left: 60px;
+    font-size: 14px
+}
+
+.ProjectPreview-container-preview-share-QRCode {
+    margin-top: 28px;
+    margin-left: 60px;
+    display: inline-block;
+    vertical-align: top;
+    width: 180px;
+    height: 180px
+}
+
+.ProjectPreview-container-preview-share-friend {
+    margin-top: 28px;
+    margin-top: 80px;
+    margin-bottom: 20px;
+    color: #4a4a4a;
+    font-size: 14px;
+    line-height: 20px
+}
+
+.ProjectPreview-container-preview-share-link {
+    height: 31px;
+    border: 1px solid #42c2b3;
+    display: inline-block;
+    position: relative
+}
+
+.ProjectPreview-container-preview-share-link input {
+    width: 235px;
+    height: 20px;
+    border: 0;
+    color: #9b9b9b;
+    font-size: 9pt;
+    line-height: 20px;
+    text-indent: 1em;
+    overflow: hidden
+}
+
+.ProjectPreview-container-preview-share-linkOfFinishPage {
+    height: 31px;
+    border: 1px solid #42c2b3;
+    display: inline-block;
+    position: relative
+}
+
+.ProjectPreview-container-preview-share-linkOfFinishPage input {
+    width: 399px;
+    height: 20px;
+    border: 0;
+    color: #9b9b9b;
+    font-size: 9pt;
+    line-height: 20px;
+    text-indent: 1em;
+    overflow: hidden
+}
+
+.ProjectPreview-closeBtn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 22px;
+    color: silver;
+    cursor: pointer
+}
+
+.ProjectPreview-thum {
+    display: inline-block;
+    overflow: hidden;
+    margin-left: 52px;
+    margin-top: 21px;
+    position: relative
+}
+
+.ProjectPreview-thum, .ProjectPreview-thum img {
+    width: 75pt;
+    height: 75pt;
+    border-radius: 75pt
+}
+
+.ProjectPreview-thum:hover .ProjectPreview-thum-tip {
+    display: block
+}
+
+.ProjectPreview-thum-tip {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 75pt;
+    height: 75pt;
+    background: rgba(0, 0, 0, .6);
+    color: #fff;
+    line-height: 75pt;
+    text-align: center;
+    font-size: 1pc;
+    cursor: pointer;
+    display: none
+}
+
+.ProjectPreview-infoarea {
+    display: inline-block;
+    min-width: 500px;
+    margin-top: 21px;
+    margin-left: 10px;
+    height: 75pt
+}
+.ProjectPreview-infoarea div{
+    padding-left: 25px;
+    background: url("../imgs/edit.jpg") 0 4px no-repeat;
+    background-size: 20px 20px;
+    width:500px;
+    position: relative;
+}
+.ProjectPreview-infoarea button{
+    position: absolute;
+    left: 103%;
+    top: 20%;
+    width: 150px;
+    height: 40px;
+    background-color: #df3031;
+    font-size: 16px;
+    color: white;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+}
+.ProjectPreview-infoarea button:hover{
+    font-weight: bold;
+}
+.ProjectPreview-infoarea a{
+    color: #fff;
+}
+.ProjectPreview-publishInfo {
+    position: absolute;
+    right: 20px;
+    top: 22px;
+    color: silver;
+    font-size: 9pt
+}
+
+.ProjectPreview-ThumbCrop {
+    position: absolute;
+    top: 10px;
+    left: 20px
+}
+
+.caret-down {
+    border-top: 9pt dashed
+}
+
+.caret-down, .caret-up {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    vertical-align: middle;
+    color: #d8d8d8;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent
+}
+
+.caret-up {
+    border-bottom: 9pt dashed
+}
+
+#ProjectPrevew-templateDesc {
+    position: absolute;
+    right: 60px;
+    top: 203px;
+    font-size: 14px;
+    color: hsla(0, 0%, 59%, .4)
+}
+.maka-button-large-green, .maka-button-largeless-green, .maka-button-largeless-white, .maka-button-middle-green, .maka-button-middle-white, .maka-button-normal, .maka-button-normal-disabled, .maka-button-normal-green, .maka-button-normal-white, .maka-button-normal-white-green, .maka-button-side-green, .maka-button-side-white-green, .maka-button-small, .maka-button-small-green, .maka-button-small-white {
+    cursor: pointer;
+    outline: 0
+}
+
+.maka-button-large-green, .maka-button-largeless-green, .maka-button-largeless-white, .maka-button-middle-green, .maka-button-middle-white, .maka-button-normal, .maka-button-normal-disabled, .maka-button-normal-green, .maka-button-normal-white, .maka-button-normal-white-green, .maka-button-small, .maka-button-small-green, .maka-button-small-white {
+    border-radius: 5px;
+    background-clip: padding-box
+}
+
+.maka-button-normal-disabled, .maka-button-normal-green, .maka-button-normal-white, .maka-button-normal-white-green, .maka-button-small, .maka-button-small-green, .maka-button-small-white {
+    width: 140px;
+    height: 40px
+}
+
+.maka-button-small-green {
+    background: #42c2b3;
+    color: #fff;
+    border: 0
+}
+
+.maka-button-small-green:hover {
+    background-color: #3ab3a4
+}
+
+.maka-button-small-white {
+    background-color: #fff;
+    border: 1px solid silver;
+    color: #9f9f9f
+}
+
+.maka-button-small-white:hover {
+    background-color: #fafafa
+}
+
+.maka-button-small-green, .maka-button-small-white {
+    width: 75pt;
+    height: 30px;
+    line-height: 28px;
+    text-align: center
+}
+
+.Dropdown {
+    display: inline-block;
+    position: relative;
+    border-radius: 3px;
+    text-align: center;
+    height: 31px;
+    width: 75pt;
+    font-size: 9pt;
+    color: #271e1e;
+    outline: 0;
+    cursor: pointer
+}
+
+.Dropdown-title {
+    line-height: 31px
+}
+
+.Dropdown-dropdown {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    top: 100%;
+    left: 0;
+    z-index: 999;
+    border: 1px solid rgba(0, 0, 0, .15);
+    background-color: #fff;
+    min-width: 98px;
+    border-radius: 3px;
+    display: none;
+    max-height: 200px;
+    overflow-y: auto
+}
+
+.Dropdown-dropdown > li {
+    cursor: pointer;
+    line-height: 33px;
+    text-align: center;
+    list-style: none
+}
+
+.Dropdown-dropdown > li:hover {
+    background-color: #f0f0f0
+}
+
+.Dropdown-dropdown a {
+    color: #959595
+}
+
+.Dropdown-caret {
+    position: absolute;
+    top: 14px;
+    right: 9pt;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    vertical-align: middle;
+    border-top: 5px dashed;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    color: #d8d8d8
+}
+
+.rotate {
+    transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -o-transform: rotate(180deg)
+}
+.TipsBar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+.TipsBar-uploading {
+    text-align: center;
+    margin-left: -150px;
+    background: #fff
+}
+
+.TipsBar-uploading-span1, .TipsBar-uploading-span2, .TipsBar-uploading-span3 {
+    display: inline-block;
+    vertical-align: middle;
+    width: 10px;
+    height: 10px;
+    margin: 2pc auto;
+    background: #000;
+    border-radius: 50px;
+    -webkit-animation: loader .9s infinite alternate;
+    -moz-animation: loader .9s infinite alternate
+}
+
+.TipsBar-uploading-span2 {
+    -webkit-animation-delay: .3s;
+    -moz-animation-delay: .3s
+}
+
+.TipsBar-uploading-span3 {
+    -webkit-animation-delay: .6s;
+    -moz-animation-delay: .6s
+}
+
+.TipsBar-uploading-desc {
+    position: absolute;
+    top: 0;
+    width: 200px;
+    left: 50%;
+    margin-left: -75pt;
+    font-size: 1pc;
+    color: #959595
+}
+
+.TipsBar-uploading-desc i {
+    color: #42c2b3
+}
+
+.TipsBar-container {
+    height: 44px;
+    line-height: 44px;
+    margin: 0 auto;
+    color: #fff;
+    min-width: 400px;
+}
+
+.TipsBar-container-span1 {
+    padding-left: 20px
+}
+
+.TipsBar-successBg {
+    display: inline-block;
+    padding: 0 20px;
+    background-color: #df3031;
+}
+
+.TipsBar-errorBg {
+    background-color: #ff5266
+}
+
+.TipsBar-warningBg {
+    background-color: #feb916
+}
+
+.TipsBar-tipsBg {
+    background-color: #2f9df4
+}
+
+@-webkit-keyframes loader {
+    0% {
+        width: 10px;
+        height: 10px;
+        opacity: .9;
+        -webkit-transform: translateY(0)
+    }
+    to {
+        width: 24px;
+        height: 24px;
+        opacity: .1;
+        -webkit-transform: translateY(-21px)
+    }
+}
+/*2015-10-12图片上传*/
+.ProjectPreview-thum input{
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    height: 75pt;
+}
+/*弹层*/
+.sf-os-maskFixed {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 998;
+}
+.sf-uc-alertInfo {
+    position: fixed;
+    top: 45%;
+    margin: 0 auto;
+    width: 100%;
+    line-height: 3rem;
+    color: #ffffff;
+    background: transparent;
+    text-align: center;
+}
+.sf-uc-alertInfo span {
+    margin: 0 auto;
+    display: inline-block;
+    max-width: 160px;
+    line-height: 1rem;
+    padding: 1rem 15px;
+    border-radius: 5px;
+    background: rgba(0,0,0,0.6);
+}
+.bar-moveFromTopSlow {
+    -webkit-animation: moveFromTop .6s ease both;
+    animation: moveFromTop .6s ease both;
+}
+.bar-moveToTopSlow {
+    -webkit-animation: moveToTop .6s ease both;
+    animation: moveToTop .6s ease both;
+}
+@-webkit-keyframes moveFromTop {
+    from { -webkit-transform: translateY(-100%);opacity: 1.0;	 }
+}
+@keyframes moveFromTop {
+    from { -webkit-transform: translateY(-100%); transform: translateY(-100%); }
+}
+@-webkit-keyframes moveToTop {
+    from { }
+    to { -webkit-transform: translateY(-100%);opacity: 0.0;	 }
+}
+@keyframes moveToTop {
+    from { }
+    to { -webkit-transform: translateY(-100%); transform: translateY(-100%);opacity: 0.0;	}
+}

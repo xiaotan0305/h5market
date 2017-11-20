@@ -1,0 +1,71 @@
+{!include file = "admin/header.html" action=tongji !}
+<div class="cityMain" id="cityMain">
+    <h3><b class="result">统计选项</b></h3>
+
+    <div class="name">
+            <span class="">
+                <a class="guding">集团:</a>
+                <select id="channel" class="right getMsg">
+                    <option value="" selected>请选择...</option>
+                    <option value="newhouse">新房</option>
+                    <option value="esf">二手房</option>
+                    <option value="rentcenter">租房</option>
+                    <option value="jiaju">家居</option>
+                    <option value="industry">研究院</option>
+                    <option value="zhishi">知识新闻</option>
+                </select>
+            </span>
+            <span class="">
+                <a class="guding">类型:</a>
+                <select id="tongjiType" class="right getMsg">
+                    <option value="" selected>请选择...</option>
+                    <option value="1">专题总数</option>
+                    <option value="2">报名总人数</option>
+                    <option value="3">UV总量</option>
+                </select>
+            </span>
+            <span class="">
+                <a class="guding">开始时间:</a>
+                <input id="beginTime" type="date" class="right getMsg">
+            </span>
+            <span class="">
+                <a class="guding">结束时间:</a>
+                <input id="overTime"  type="date" class="right getMsg">
+            </span>
+        <button id="btnSure" class="btn btn-success" data-open="0">确定</button>
+    </div>
+    <!--提示信息-->
+    <div id="noMsg" class="noMsg">请完善统计选项...</div>
+    <!--加载动画-->
+    <div id="loading" style="display: none;">
+        <div id="modelLoading" class="spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div>
+    </div>
+    <div id="liebiao"></div>
+</div>
+<br><br><br></div>
+<a id="showgohead" class="goTop" href="javascript:void(0)">&nbsp;</a>
+<input id="imgSite" type="hidden" value="{!$applicationConfig.domain.imgUrl.admin!}"/>
+<input id="pcSite" type="hidden" value="{!$applicationConfig.domain.siteUrl.admin!}"/>
+<script type="text/javascript" src="{!$applicationConfig.domain.imgUrl.admin!}js/sea/sea.js"></script>
+<script>
+    document.domain = 'fang.com';
+    var _vars = {};
+    window.scrollTo(0, 1);
+    var mainSite = '{!$applicationConfig.domain.siteUrl.admin!}';
+    var imgVer = '{!$applicationConfig.application.imgver!}';
+    seajs.config({
+        base: '{!$applicationConfig.domain.imgUrl.admin!}js',
+        alias: {jquery: "jquery/2.1.1/jquery"}, map: [function (uri) {
+            return uri.indexOf('src') !== -1 ? uri + '?_' + imgVer : uri;
+        }], vars: _vars, debug: true
+    });
+    seajs.use('src/tongji/tongji');
+</script>
+</body>
+</html>

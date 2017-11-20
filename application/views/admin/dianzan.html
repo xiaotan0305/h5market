@@ -1,0 +1,49 @@
+{!include file = "admin/header.html" action=form!}
+<div class="formMain" id="formMain">
+    <h3><b class="title">项目点赞统计</b></h3>
+</div>
+<div class="content">
+    <table class="zebra">
+        <thead>
+        <tr>
+            <th>名称</th>
+            <th>点赞按钮id</th>
+            <th>点赞数量</th>
+        </tr>
+        </thead>
+        <tbody>
+        {!foreach from=$result key=key item=value!}
+        <tr>
+            <td>{!$value.name!}</td>
+            <td>{!$value.btnid!}</td>
+            <td>{!$value.counts!}</td>
+        </tr>
+        {!/foreach!}
+        </tbody>
+    </table>
+</div>
+<br><br><br>
+</div>
+<a id="showgohead" class="goTop" href="javascript:void(0)">&nbsp;</a>
+<input id="imgSite" type="hidden" value="{!$applicationConfig.domain.imgUrl.admin!}"/>
+<input id="pcSite" type="hidden" value="{!$applicationConfig.domain.siteUrl.admin!}"/>
+<script type="text/javascript" src="{!$applicationConfig.domain.imgUrl.admin!}js/sea/sea.js"></script>
+<script>
+    document.domain = 'fang.com';
+    var _vars = {};
+    window.scrollTo(0, 1);
+    var mainSite = '{!$applicationConfig.domain.siteUrl.admin!}';
+    var imgVer = '{!$applicationConfig.application.imgver!}';
+    seajs.config({
+        base: '{!$applicationConfig.domain.imgUrl.admin!}js',
+        alias: {jquery: "jquery/2.1.1/jquery"},
+        map: [function (uri) {
+            return uri.indexOf('src') !== -1 ? uri + '?_' + imgVer : uri;
+        }],
+        vars: _vars,
+        debug: true
+    });
+    seajs.use('src/form/form');
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+.leftCon{
+    width: 360px;
+    margin-top: 50px;
+    float: left;
+    background-color: #ffffff;
+}
+.leftCon ul li:hover{
+    background-color: #E6E6E6;
+}
+.leftCon ul li a{
+    padding: 15px 0 15px 25px;
+    display: block;
+    font-size: 16px;
+    color: #666666 !important;
+}
+.rightCon{
+    width: 820px;
+    margin: 50px 0 0 50px;
+    float: left;
+    background-color: #ffffff;
+}
+.question{
+    padding: 25px 40px 13px 40px;
+}
+.question h4{
+    font-size: 16px;
+    color:#df3031;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eeeeee;
+}
+.question p{
+    font-size: 14px;
+    padding: 10px 20px;
+    color: #666666;
+}
+.question img{
+    padding-left: 20px;
+}

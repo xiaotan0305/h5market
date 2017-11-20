@@ -1,0 +1,98 @@
+{!include file = "admin/header.html" action=citySelect !}
+<div class="cityMain">
+    <h3><b class="result">{!if $from === 'index'!}用户默认--{!else!}项目({!if $result.name!}{!$result.name!}{!else!}您的项目未命名{!/if!})--{!/if!}设置结果预览</b></h3>
+    <div class="name">
+        <div class="nameBox">
+            <span class=""><a>渠道:</a><a id="source" class="right"></a></span>
+            <span class=""><a>集团:</a><a id="channel" data-channel="" class="right"></a></span>
+            <span class=""><a>城市:</a><a id="city" data-city="" class="right"></a></span>
+        </div>
+        <button id="btnSure" class="btn btn-success">确定</button>
+    </div>
+    <h3><b>渠道</b></h3>
+    <div class="cityBox cityH">
+        <input id="sourceTxt" type="text" placeholder="请输入您的渠道名称(限英文、数字)... 例:konggu01">
+        <!--<button id="sourceSure" class="btn btn-success">确定</button>-->
+    </div>
+    <h3><b>业务/集团</b></h3>
+    <div class="cityBox" id="channelBox">
+        {!foreach from=$groups key=k item=v!}
+        <a data-channel="{!$v.name!},{!$v.shortname!}" class="channelclickdom">{!$v.name!}</a>
+        {!/foreach!}
+    </div>
+    <h3><b>城市</b>（按首字母顺序）</h3>
+    <div class="cncity quanguo"><a data-cncity="全国,quanguo" class="cityclickdom">全国</a></div>
+    <div class="tablebox">
+
+        <div class="word">
+            {!foreach from=$citylist key=key item=item!}
+            <a href="#{!$key!}">{!$key!}</a>
+            {!/foreach!}
+        </div>
+    </div>
+    {!foreach from=$citylist key=key item=item!}
+    <h3 id="{!$key!}">{!$key!}</h3>
+    <div class="tablebox cncity">
+        <table border="0" cellpadding="0" cellspacing="0">
+            <tbody>
+            {!foreach from=$citylist.$key key=k item=v!}
+            {!if $k % 3 == 0 !}
+            <tr>
+                {!/if!}
+                <td>
+                    <a data-cncity="{!$v.cityname!},{!$v.shortname!}" class="cityclickdom">
+                        {!$v.cityname!}
+                    </a>
+                </td>
+                {!if $k+3 != 3 && $k+3 % 3 == 0 !}
+            </tr>
+            {!/if!}
+            {!/foreach!}
+            </tbody>
+        </table>
+    </div>
+    {!/foreach!}
+</div>
+
+<br><br><br>
+</div>
+<a id="showgohead" class="goTop" href="javascript:void(0)">&nbsp;</a>
+<!--图片站主域名-->
+<input id="imgSite" type="hidden" value="{!$applicationConfig.domain.imgUrl.admin!}"/>
+<!--http://js.h5.test.fang.com/--><!--mainSite-->
+<input id="pcSite" type="hidden" value="{!$applicationConfig.domain.siteUrl.admin!}"/>
+<!--http://h5admin.test.fang.com/-->
+<input id="phoneSite" type="hidden" value="{!$applicationConfig.domain.siteUrl.web!}"/>
+<!--项目id-->
+<input id="projectID" type="hidden" value="{!$id!}"/>
+<!--burl-->
+<input id="burl" type="hidden" value="{!$burl!}">
+<!--来源-->
+<input id="from" type="hidden" value="{!$from!}">
+<!--初始化信息-->
+<input id="cityState" type="hidden" value="{!$result.city!}"/>
+<input id="channelState" type="hidden" value="{!$result.groups!}"/>
+<input id="sourceState" type="hidden" value="{!$result.source!}"/>
+<script>
+
+</script>
+<script type="text/javascript" src="{!$applicationConfig.domain.imgUrl.admin!}js/sea/sea.js"></script>
+<script>
+    document.domain = 'fang.com';
+    var _vars = {};
+    window.scrollTo(0, 1);
+    var mainSite = '{!$applicationConfig.domain.siteUrl.admin!}';
+    var imgVer = '{!$applicationConfig.application.imgver!}';
+    seajs.config({
+        base: '{!$applicationConfig.domain.imgUrl.admin!}js',
+        alias: {jquery: "jquery/2.1.1/jquery"},
+        map: [function (uri) {
+            return uri.indexOf('src') !== -1 ? uri + '?_' + imgVer : uri;
+        }],
+        vars:_vars,
+        debug: true
+    });
+    seajs.use('src/cityList/city');
+</script>
+</body>
+</html>

@@ -1,0 +1,277 @@
+{!include file = "admin/header.html" action=index !}
+<div class="panel">
+    <div class="panel_top">
+        <img src="{!$applicationConfig.domain.imgUrl.admin!}imgs/cover/logo02.png" class="panel_head"/>
+
+        <p class="panel_top_name"></p>
+
+        <p class="panel_top_email"></p>
+    </div>
+    <div class="panel_tabs">
+        <p class="panel_tab_num panel_mypro_num">{!$count.count!}</p>
+
+        <p class="panel_tab_name panel_mypro_name">{!if $status=='online'!}我的项目{!else!}回收站{!/if!}</p>
+    </div>
+    {!if $status == 'online'!}
+    <div id="newpro" class="panel_newpro">
+        <p class="panel_newpro_add"><em>+</em>新建项目</p>
+    </div>
+    {!/if!}
+</div>
+<div class="list" id="list">
+    <div class="list_ul">
+        {!foreach from=$project item=row key=key!}
+        <div class="list_li">
+            <div class="list_li_title">
+                {!if $status=='online'!}
+                <div class="list_li_qr">
+                    <div class="list_li_easqr"></div>
+                </div>
+                <div class="list_li_qrcode">
+                    <img class="list_li_qrimg" src=""
+                         data-src="{!$applicationConfig.domain.siteUrl.qrcode!}?type=market&resize=180&url={!$row.previewUrl!}"/>
+                </div>
+                {!/if!}
+                <div class="list_li_titlearea" {!if $status=='delete'!} style="text-align: center;margin: 0;"{!/if!}>{!$row.name!}
+            </div>
+            {!if $status=='online'!}
+            <div class="list_li_num" title="" pid="{!$row.id!}">{!$row.circlenum!}</div>
+            <div class="list_li_titleNum" title="微信转发人数:0<br>微信转发次数:0">
+                <p>微信转发人数:<b>10</b></p>
+                <p>微信转发次数:<b>20</b></p>
+            </div>
+            {!/if!}
+
+        </div>
+        <div class="list_li_msg">
+            <div class="list_li_abstract">
+                <p>{!$row.introduction!}</p>
+            </div>
+            <div class="list_li_thum">
+                <img src="" data-original="{!$row.cover!}"/>
+
+                <div class="list_lineoff_mask {!$row.status!}">已下线
+                    <!--<img src="{!$applicationConfig.domain.imgUrl.admin!}/imgs/gongkai07.png" alt="">-->
+                    <div></div>
+                </div>
+            </div>
+            <div class="list_li_cover fadein" pid="{!$row.id!}">
+                {!if $status=='online'!}
+                <div class="list_li_cover_more">
+                    <div class="list_li_morebtn">...</div>
+                    <div class="list_li_pvbtn" data-time="{!$row.createtime!}">流量</div>
+                    {!if $row.status == 'offline'!}
+                    <div class="list_li_onlinebtn">上线</div>
+                    {!else!}
+                    <div class="list_li_offlinebtn">下线</div>
+                    {!/if!}
+                    <div class="list_li_copybtn">复制</div>
+                </div>
+                {!/if!}
+                <div class="{!if $status=='online'!}list_cover_icon{!else!}list_goback_icon{!/if!}"
+                     data-href="?c=admin&a=pcpreview&id={!$row.id!}&t=p&f=index" data-status="{!$status!}" data-imgURL="{!$row.cover!}">
+                    <div class="list_cover_view"></div>
+                </div>
+                {!if $row.forminfo!}
+                <div class="list_cover_btm list_cover_btm_more">
+                    {!else!}
+                    <div class="list_cover_btm">
+                        {!/if!}
+                        {!if $status=='online'!}
+                        <div class="list_cover_enter list_cover_edit">
+                            <a href="/?c=admin&a=edit&id={!$row.id!}" target="_blank"></a>
+                            <div class="list_edit_img"></div>
+                            <p class="list_edit_cha">编辑</p>
+                        </div>
+                        {!if $row.forminfo!}
+                        <div class="list_cover_enter list_cover_count">
+                            <div class="list_count_img"></div>
+                            <p class="list_count_cha">表单</p>
+                        </div>
+                        {!/if!}
+                        {!if $row.voteinfo!}
+                        <div class="list_cover_enter list_cover_dianzan">
+                            <div class="list_dianzan_img"></div>
+                            <p class="list_dianzan_cha">点赞</p>
+                        </div>
+                        {!/if!}
+                        <div class="list_cover_enter list_cover_delbtn">
+                            <div class="list_count_delimg">X</div>
+                            <p class="list_cover_delcha">删除</p>
+                        </div>
+                        {!/if!}
+                    </div>
+                </div>
+            </div>
+            {!if $row.isopen!}
+            <div  class="openStatus">
+                <span>已公开</span>
+            </div>
+            {!/if!}
+        </div>
+        {!/foreach!}
+    </div>
+    {!if $count.pages > 0!}
+    <div class="list_page">
+        {!if $page > 1!}
+        <a href="{!$applicationConfig.domain.siteUrl.admin!}?c=admin&a=index&status={!$status!}&page={!$page-1!}">前一页</a>
+        第{!$page!}页 /
+        {!else!}
+        <a href="javascript:void(0);" style="color: darkgray;">前一页</a>
+        第{!$page!}页 /
+        {!/if!}
+        共{!$count.pages!}页
+        {!if $page < $count.pages!}
+        <a href="{!$applicationConfig.domain.siteUrl.admin!}?c=admin&a=index&status={!$status!}&page={!$page+1!}">后一页</a>
+        {!else!}
+        <a href="javascript:void(0);" style="color: darkgray;">后一页</a>
+        {!/if!}
+    </div>
+    {!/if!}
+</div>
+
+<div class="bg" id="bg">
+    <div id="modelContent" class="model-content scaleUpCenter flipInX">
+        <div class="model-header">
+            <span>选取模板</span>
+
+            <div id="close" class="close">X</div>
+        </div>
+        <div class="model-body">
+            <div id="cat" style="height:40px;line-height:40px;width:100%;">
+                <span type-id="1" class="active">数据报告</span>
+                <span type-id="2">招聘</span>
+                <span type-id="3">邀请函</span>
+                <span type-id="4">节日专题</span>
+                <span type-id="5">企业宣传</span>
+                <span type-id="6">产品推广</span>
+                <span type-id="7">榜单类</span>
+                <span type-id="8">看房团活动</span>
+                <span type-id="9">楼盘导购</span>
+                <span type-id="0">其他</span>
+            </div>
+            <div id="modelLeft" class="model-left">
+
+                <div>
+                    <ul id = 'modelCon'>
+                        {!foreach from=$sysTemplate item=item key=key!}
+                        <li pid="{!$item.id!}">
+                            <img src="{!$applicationConfig.domain.imgUrl.admin!}imgs/{!$item.cover!}"/>
+                            <p>{!$item.name!}</p>
+                            <div class="text-box">
+                                <div class="text-con">{!$item.name!}</div>
+                            </div>
+                        </li>
+                        {!/foreach!}
+                    </ul>
+                </div>
+            </div>
+            <div class="model-right relative">
+                <div id="iframeBox" class="ProjectPreview-container-preview-framearea">
+                    <iframe id="previewIframe" class="right-content" name="previewFrame"></iframe>
+                    <div class="ProjectPreview-container-preview-btnarea">
+                        <button id="prePage" class="ProjectPreview-container-preview-btn"><i
+                                class="caret-up"></i></button>
+                        <button id="nextPage" class="ProjectPreview-container-preview-btn"><i
+                                class="caret-down"></i></button>
+                    </div>
+                </div>
+                <!--<div class="rightContentBg"></div>-->
+            </div>
+        </div>
+        <div class="footer relative">
+            <button class="btn-new1" id="add_empt_temp">+ 新建空白模板</button>
+            <button class="btn-new2" id="add_new_temp">选取</button>
+            {!if $permission!}
+            <button class="btn-new2" id="edit_new_temp">编辑</button>
+            {!/if!}
+        </div>
+    </div>
+</div>
+<input id="imgSite" type="hidden" value="{!$applicationConfig.domain.imgUrl.admin!}"/>
+<!--http://js.h5.test.fang.com/--><!--mainSite-->
+<input id="pcSite" type="hidden" value="{!$applicationConfig.domain.siteUrl.admin!}"/>
+<!--http://h5admin.test.fang.com/-->
+<input id="phoneSite" type="hidden" value="{!$applicationConfig.domain.siteUrl.web!}"/>
+<!--http://h5.test.fang.com/-->
+<input id="city" type="hidden" value="{!$login_admin_info.city!}"/>
+<input id="groups" type="hidden" value="{!$login_admin_info.groups!}"/>
+</div>
+<!--浮层-->
+<div class="floating" id="floating"></div>
+<div id="tishi" class="tishi fadeInUp">
+    <div class="shanjiao"></div>
+    <p style="text-indent: 26px;font-size: 22px;">您还没有设置城市、集团信息哦,点击<a style="color: red;" href="{!$applicationConfig.domain.siteUrl.admin!}?c=admin&a=cityList">城市集团渠道</a>进入设置页面~</p>
+    <p style="font-size: 16px;text-indent: 0;color: #736D6D;">
+        <span>注：<br/></span>
+        <span class="zhushi">1.该设置选项为用户默认城市集团信息设置，即用户在设置完成后再新建的项目城市集团信息默认为用户的城市集团信息；<br/></span>
+        <span class="zhushi">2.项目的城市集团信息可以在预览页单独设置，单独设置的项目信息只影响当前项目，不影响用户默认城市集团信息，新建的项目信息仍与用户默认信息保持一致<br/></span>
+    </p>
+    <div id="closeMsg" class="closeMsg" title="关闭提示">X</div>
+</div>
+<!--加载动画-->
+<div id="modelLoading">
+    <div class="rect1"></div>
+    <div class="rect2"></div>
+    <div class="rect3"></div>
+    <div class="rect4"></div>
+    <div class="rect5"></div>
+</div>
+<!--pvuv统计-->
+<div class="pvuv scaleUpDown" id="pvuv">
+    <div class="pvuv-header">PV-UV统计</div>
+    <div class="pvuv-content">
+        <ul id="content-header" class="content-header">
+            <li>今日</li>
+            <li>本周</li>
+            <!--<li>本月</li>-->
+            <li>总共</li>
+        </ul>
+        <div class="pvuv-list">
+            <div class="list-left">PV</div>
+            <ul>
+                <li id="todayPv"></li>
+                <li id="weekPv"></li>
+                <!--<li id="monthPv"></li>-->
+                <li id="totalPv" class="total"></li>
+            </ul>
+        </div>
+        <div class="pvuv-list">
+            <div class="list-left">UV</div>
+            <ul>
+                <li id="todayUv"></li>
+                <li id="weekUv"></li>
+                <!--<li id="monthUv"></li>-->
+                <li id="totalUv" class="total"></li>
+            </ul>
+        </div>
+    </div>
+    <div class="pvuv-footer">
+        <button id="btnSure" class="btn btn-success">确定</button>
+        <!--<button class="btn btn-danger" >取消</button>-->
+    </div>
+</div>
+<!--pc预览-->
+<div class="iframefloat fadeInOut" id="iframefloat">
+    <iframe id="previewarea" width="101%" height="101%"
+            src=""></iframe>
+</div>
+<script type="text/javascript" src="{!$applicationConfig.domain.imgUrl.admin!}js/sea/sea.js"></script>
+
+<script>
+    document.domain = 'fang.com';
+    var imgSiteUrl = '{!$applicationConfig.domain.imgUrl.admin!}imgs/';
+    var mainSite = '{!$applicationConfig.domain.siteUrl.admin!}';
+    var imgVer = '{!$applicationConfig.application.imgver!}';
+    seajs.config({
+        base: '{!$applicationConfig.domain.imgUrl.admin!}js',
+        alias: {jquery: "jquery/2.1.1/jquery"},
+        map: [function (uri) {
+            return uri.indexOf('src') !== -1 ? uri + '?_' + imgVer : uri;
+        }],
+        debug: true
+    });
+    seajs.use('src/index/main');
+</script>
+</body>
+</html>

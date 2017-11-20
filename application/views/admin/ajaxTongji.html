@@ -1,0 +1,31 @@
+{!if $quanguo && $quanguo.num > 0!}
+<h3></h3>
+<div class="tablebox cncity">
+    <div class="item">
+        <a> 全国 </a>
+        <span>{!$quanguo.num!}</span>
+    </div>
+</div>
+{!/if!}
+{!if $result!}
+<h3><b>城市</b>（按首字母顺序）</h3>
+<div class="tablebox">
+    <div class="word">
+        {!foreach from=$result key=k item=v!}
+        <a href="#{!$k!}">{!$k!}</a>
+        {!/foreach!}
+    </div>
+</div>
+
+{!foreach from=$result key=k item=v!}
+<h3 id="{!$k!}">{!$k!}</h3>
+<div class="tablebox cncity">
+    {!foreach from=$result[$k] key=key item=v!}
+    <div class="item">
+        <a data-cncity="{!$v.cityname!},{!$v.shortname!}" class="cityclickdom"> {!$v.cityname!} </a>
+        <span>{!$v.num!}</span>
+    </div>
+    {!/foreach!}
+</div>
+{!/foreach!}
+{!/if!}

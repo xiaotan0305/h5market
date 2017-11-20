@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>模板添加页</title>
+    <link rel="stylesheet" type="text/css"
+          href="{!$applicationConfig.domain.imgUrl.admin!}css/add.css?_{!$applicationConfig.application.imgver!}">
+</head>
+<body style="font-size: 14px;color: #333333;">
+<div class="main">
+    <div class="center">
+        <div class="paragraph">
+            模板地址：
+            <input type="text" placeholder="请输入模板id或者url" class="template" id="templateId">
+        </div>
+		<div class="paragraph">
+            模板来源：
+            <select class="select" id="templateSource">
+                <option value="1">外站模板</option>
+                <option value="2">本站模板</option>
+            </select>
+        </div>
+        <div class="paragraph coverConText">
+            模板封面：
+            <input type="text" placeholder="请输入模板封面图地址" class="template" id="templateCover">
+        </div>
+        <div class="paragraph">
+            模板类型：
+            <select class="select" id="templateType">
+                <option value="0">组模版</option>
+                <option value="1">单页模版</option>
+            </select>
+        </div>
+		<div class="paragraph">
+            所属分类：
+            <select class="select" id="templateCate">
+                <option value="1">数据报告</option>
+                <option value="2">招聘</option>
+				<option value="3">邀请函</option>
+				<option value="4">节日专题</option>
+				<option value="5">企业宣传</option>
+				<option value="6">产品推广</option>
+				<option value="7">榜单类</option>
+				<option value="8">看房团活动</option>
+				<option value="9">楼盘导购</option>
+				<option value="0">其他</option>
+            </select>
+        </div>
+        <div id="many" class="paragraph">
+            模板描述：
+            <input type="text" placeholder="请输入模板描述" class="template" id="templateName">
+        </div>
+        <div id="single" class="paragraph" style="display: none;">
+            模板描述：
+            <select class="select" id="singleType" >
+                <option value="1">封面</option>
+                <option value="2">图文</option>
+                <option value="3">滑块</option>
+                <option value="4">表单</option>
+            </select>
+        </div>
+        <div class="paragraph relative">
+            <div id="add">
+                添加
+            </div>
+        </div>
+    </div>
+    <!--浮层-->
+    <div id="float">提交中，请等待。。。</div>
+</div>
+<script type="text/javascript" src="{!$applicationConfig.domain.imgUrl.admin!}js/jquery/2.1.1/jquery.js"></script>
+<script type="text/javascript" src="{!$applicationConfig.domain.imgUrl.admin!}js/src/add/addTemplate.js"></script>
+</body>
+</html>

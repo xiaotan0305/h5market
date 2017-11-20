@@ -1,0 +1,177 @@
+@charset "UTF-8";
+/*
+ * For wap module
+ */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body, form, fieldset, p, div, h1, h2, h3, h4, h5, h6 {
+    -webkit-text-size-adjust: none;
+}
+
+body {
+    font-family: Arial, "Microsoft Yahei";
+    background: #f4f4f4;
+}
+
+form, img, table, td {
+    border: 0;
+}
+
+ul, ol, li {
+    list-style-type: none;
+    display: block;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-weight: normal;
+}
+
+input, textarea, img {
+    vertical-align: middle;
+    font-family: Arial, "Microsoft Yahei";
+}
+
+@media screen and (max-device-width: 320px) {
+    body {
+        -webkit-text-size-adjust: none
+    }
+}
+
+@media screen and (max-device-width: 480px) {
+    body {
+        -webkit-text-size-adjust: none
+    }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+    body {
+        -webkit-text-size-adjust: none
+    }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+    body {
+        -webkit-text-size-adjust: none
+    }
+}
+
+
+html, body {
+    height: 100%;
+}
+
+input, textarea, button {
+    -webkit-appearance: none;
+}
+
+input[type="radio"] {
+    -webkit-appearance: radio;
+}
+
+input[type="checkbox"] {
+    -webkit-appearance: checkbox;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+/* 城市列表 */
+.formMain {
+    padding: 0 14px;
+}
+
+.formMain h3 {
+    line-height: 1;
+    font-size: 14px;
+    color: #83868f;
+    text-align: center;
+}
+.formMain h3 .title{
+    font-size: 22px;
+    color: #000;
+}
+.formMain .excel {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    padding-left: 20px;
+    margin-right: 20px;
+    height: 20px;
+    background: url("../imgs/excel.png") 0 0 no-repeat;
+    background-size: 20px 20px;
+    z-index: 1;
+}
+.formMain .form{
+    position: relative;
+    top: 40px;
+    display: inline-block;
+    margin-right: 20px;
+    z-index: 1;
+}
+.formMain .form:hover,.formMain .excel:hover{
+    text-decoration:underline;
+}
+table {
+    border-spacing: 0;
+    width: 100%;
+}
+.zebra tbody tr:nth-child(even) {
+    background: #fff;
+    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
+    -moz-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
+    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
+}
+.zebra tbody tr:hover {
+    background: #EFE6BB;
+    -webkit-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+}
+.zebra td, .zebra th {
+    padding: 10px;
+    border-bottom: 1px solid #f2f2f2;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    max-width: 300px;
+}
+.zebra th:first-child {
+    -moz-border-radius: 6px 0 0 0;
+    -webkit-border-radius: 6px 0 0 0;
+    border-radius: 6px 0 0 0;
+}
+.zebra th {
+    background-color: #dce9f9;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#ebf3fc), to(#dce9f9));
+    background-image: -webkit-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image: -moz-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image: -ms-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image: -o-linear-gradient(top, #ebf3fc, #dce9f9);
+    background-image: linear-gradient(top, #ebf3fc, #dce9f9);
+    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
+    -moz-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
+    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
+    border-top: none;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+}
+.zebra th:last-child {
+    -moz-border-radius: 0 6px 0 0;
+    -webkit-border-radius: 0 6px 0 0;
+    border-radius: 0 6px 0 0;
+}
+.content .page {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 16px;
+}
+.content .page a{
+    padding:0 15px;
+}

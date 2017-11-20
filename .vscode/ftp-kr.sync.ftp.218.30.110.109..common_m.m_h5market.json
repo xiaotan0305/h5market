@@ -1,0 +1,37 @@
+{
+    "type": "d",
+    "name": "",
+    "size": 4096,
+    "files": [
+        {
+            "type": "d",
+            "name": "css",
+            "size": 4096,
+            "files": []
+        },
+        {
+            "type": "d",
+            "name": "imgs",
+            "size": 4096,
+            "files": []
+        },
+        {
+            "type": "d",
+            "name": "js",
+            "size": 4096,
+            "files": []
+        },
+        {
+            "type": "d",
+            "name": "music",
+            "size": 4096,
+            "files": []
+        },
+        {
+            "type": "d",
+            "name": "webMusic",
+            "size": 4096,
+            "files": []
+        }
+    ]
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>【房地产门户|房地产网】- 搜房网 房天下</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf8">
+    <link rel="stylesheet" type="text/css"
+          href="{!$applicationConfig.domain.imgUrl.admin!}css/common.css?_{!$applicationConfig.application.imgver!}">
+    {!if $action=="index"!}
+    <link rel="stylesheet" type="text/css"
+          href="{!$applicationConfig.domain.imgUrl.admin!}css/index.css?_{!$applicationConfig.application.imgver!}">
+    {!elseif $action=="help"!}
+    <link rel="stylesheet" type="text/css"
+          href="{!$applicationConfig.domain.imgUrl.admin!}css/help.css?_{!$applicationConfig.application.imgver!}">
+    {!elseif $action=="updateLog"!}
+    <link rel="stylesheet" type="text/css"
+          href="{!$applicationConfig.domain.imgUrl.admin!}css/log.css?_{!$applicationConfig.application.imgver!}">
+    {!elseif $action=="citySelect"!}
+    <link rel="stylesheet" type="text/css"
+          href="{!$applicationConfig.domain.imgUrl.admin!}css/city.css?_{!$applicationConfig.application.imgver!}">
+    {!elseif $action == "tongji"!}
+    <link rel="stylesheet" type="text/css"
+          href="{!$applicationConfig.domain.imgUrl.admin!}css/tongji.css?_{!$applicationConfig.application.imgver!}">
+    {!elseif $action == "form"!}
+    <link rel="stylesheet" type="text/css"
+          href="{!$applicationConfig.domain.imgUrl.admin!}css/form.css?_{!$applicationConfig.application.imgver!}">
+    {!elseif $action=="open"!}
+    <link rel="stylesheet" type="text/css"
+          href="{!$applicationConfig.domain.imgUrl.admin!}css/open.css?_{!$applicationConfig.application.imgver!}">
+    {!elseif $action=="inviteUser"!}
+    <link rel="stylesheet" type="text/css"
+          href="{!$applicationConfig.domain.imgUrl.admin!}css/add.css?_{!$applicationConfig.application.imgver!}">
+    {!/if!}
+    <script>
+        window.onload = function () {
+            var update = document.getElementById('update');
+            var updateVer = update.getAttribute('data-ver');
+            if (updateVer !== localStorage.updateVer) {
+                update.nextElementSibling.style.display = 'block';
+            }
+            update.onclick = function () {
+                localStorage.updateVer = updateVer;
+            };
+        };
+    </script>
+</head>
+<body>
+<!-- 导航 start -->
+<div class="top relative">
+    <div class="logo">
+        <img src="{!$applicationConfig.domain.imgUrl.admin!}imgs/logo.png"/>
+    </div>
+    <ul class="logoUl">
+        <li><a href="{!$applicationConfig.domain.siteUrl.admin!}?c=admin&a=index">项目</a></li>
+        <li><a href="{!$applicationConfig.domain.siteUrl.admin!}?c=admin&a=open">公开模板</a></li>
+        <li><a href="{!$applicationConfig.domain.siteUrl.admin!}?c=admin&a=cityList">城市集团渠道</a><span class="light" style="background-color: {!if $color === 'yellow'!}#EBD21B{!/if!}"></span></li>
+        <li><a href="{!$applicationConfig.domain.siteUrl.admin!}?c=admin&a=tongji">统计</a></li>
+
+        <li><a href="{!$applicationConfig.domain.siteUrl.admin!}?c=admin&a=help">帮助</a></li>
+        <li><a id="update" href="{!$applicationConfig.domain.siteUrl.admin!}?c=admin&a=updateLog" data-ver="20161114">更新日志</a><span class="light" style="background-color:#00FF00;display: none;"></span></li>
+        <li><a id="invite" href="{!$applicationConfig.domain.siteUrl.admin!}?c=admin&a=showInvitePage">邀请用户</a><span class="light" style="background-color:#00FF00;display: none;"></span></li>
+    </ul>
+    {!if $controllerName == 'Admin' && $actionName == 'index'!}
+    <div class="nav" title="点击进入{!if $status=='online' !}回收站{!else!}我的项目{!/if!}">
+        <div id="recycle" class="recycle_box" style="display: {!if $status=='online' !}block{!else!}none{!/if!};">
+            <a href="{!$applicationConfig.domain.siteUrl.admin!}?c=admin&a=index&status=delete">
+                <img src="{!$applicationConfig.domain.imgUrl.admin!}imgs/recycle.png" height="34" alt="回收站">
+                <!--<span  class="recycle_num">{!$thatCount.count!}</span>-->
+            </a>
+        </div>
+        <div id="project" class="recycle_box" style="display: {!if $status=='delete' !}block{!else!}none{!/if!};">
+            <a href="{!$applicationConfig.domain.siteUrl.admin!}?c=admin&a=index">
+                <img src="{!$applicationConfig.domain.imgUrl.admin!}imgs/project.png" height="34" alt="我的项目">
+                <!--<span  class="recycle_num">{!$thatCount.count!}</span>-->
+            </a>
+        </div>
+    </div>
+    <div id="hint" class="hint">
+        <a href="http://dlsw.baidu.com/sw-search-sp/soft/9d/14744/ChromeStandalone_46.0.2490.71_Setup.1445416246.exe">
+            <p class="moveFromTopSlow">请务必使用chrome浏览器进行操作(点击下载)</p>
+        </a>
+    </div>
+    {!else!}
+    <div class="nav2">
+        <a href="http://dlsw.baidu.com/sw-search-sp/soft/9d/14744/ChromeStandalone_46.0.2490.71_Setup.1445416246.exe">
+            <p>请务必使用 <b>chrome浏览器</b> 进行操作</p>
+        </a>
+    </div>
+    {!/if!}
+</div>
+<div {!if $action=='citySelect' || $action=='open' || $action=="tongji"!}class="main"{!else!}class="content clearfix" {!/if!}>
+<!-- 导航 end -->

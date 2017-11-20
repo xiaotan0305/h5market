@@ -1,0 +1,129 @@
+/* Create by desand */
+
+.desand{}
+.desand .ds-help{ text-align: center; width: 72px; height: 66px; line-height: 33px;}
+.desand .ds-help p{ margin: 0; font-size: 14px;}
+.desand .ds-help p a{ color: #bcb9c0;}
+.desand .ds-help p a:hover{ color: rgb(57, 187, 170); text-decoration: none;}
+
+.desand .ds-wechat{ text-align: left; width: 170px; height: 212px; line-height: 18px; padding: 0 20px;}
+.desand .ds-wechat p{ margin: 0; font-size: 12px;}
+.desand .ds-wechat img{ width:150px; margin-left: -10px;}
+.desand .ds-wechat p span{ color: rgb(57, 187, 170);}
+
+.desand .cornertoolbolck.feedback{ background-position:-354px -430px; height: 50px;}
+.desand .cornertoolbolck.feedback:hover { background-position: -414px -430px; height: 50px;}
+
+.desand .leftframe .mbclass{ background: #f6f5f6; border-bottom: 1px solid #cecece; border-left: 1px solid #f6f5f6; border-right: 1px solid #f6f5f6}
+.desand .leftframe .mbclass.focus{ background: #e9e9e9; color: rgb(57, 187, 170); border-right: 1px solid #dcdcdc}
+
+.desand .leftframe .nav > li > a{ padding: 5px 0 3px; color: #333; border-radius: none;}
+
+.desand .leftframe .nav > li > a,
+.desand .leftframe .nav > li > a:focus,
+.desand .leftframe .nav > li > a:hover,
+.desand .leftframe .nav > li > a:active{ outline: none; background: none; border: none; border-radius: none;}
+
+.desand .leftframe .nav-tabs > li > a, 
+.desand .leftframe .nav-tabs.nav-justified > li > a{ border-radius: none;}
+
+.desand .leftframe .nav-tabs > li.active > a, 
+.desand .leftframe .nav-tabs > li.active > a:focus, 
+.desand .leftframe .nav-tabs > li.active > a:hover{
+    color: #41c3b4;
+    border: none;
+    border-bottom: 4px solid #41c3b4;
+    outline: none;
+    border-radius: none;
+}
+
+.desand .leftframe .tab-pane .col-sm-6.ng-scope{ padding: 10px 5px;}
+.desand .leftframe .tab-pane .col-sm-6.ng-scope img{ width: 100% !important; /*border: 1px solid #838383;*/ height:100% !important; cursor: pointer;border: 4px solid rgb(230,230,230);}
+.desand .leftframe .tab-pane .col-sm-6.ng-scope:hover img,.desand .leftframe .tab-pane .col-sm-6.ng-scope.selectedImg img{border: 4px solid #42c2b3;}
+.desand .selectedImg{ background: none;}
+.desand .leftframe .tab-content .tab-pane.active > .ng-scope{ 
+    bottom: 62px;
+    overflow: hidden;
+    position: absolute;
+    top: 72px;
+}
+.desand .addMusicbtn{
+    margin-left: 15px;
+    margin-top: 6px;
+}
+.desand #musicview .ng-binding:hover{ color: #42c2b3;}
+
+.desand .rightframe{}
+.desand .rightframe .fulltab,.desand .rightframe .halftab{ background: none;}
+.desand .rightframe .nav-tabs > li{ background: #d6d6d6;}
+.desand .rightframe .nav-tabs > li > a{ border-radius: none; border: none;}
+.desand .rightframe .nav-tabs > li > a, 
+.desand .rightframe .nav-tabs > li > a:focus, 
+.desand .rightframe .nav-tabs > li > a:hover{ 
+	background: #f6f6f6!important; 
+	color: #333;
+	outline: none;
+}
+.desand .rightframe .nav-tabs > li.active > a{ background: #e6e6e6!important;}
+
+.desand .rightframe .btn-table{ width: 100%;}
+.desand .rightframe .btn-table td{ padding: 15px 0; /*border-bottom: 1px solid #d0d0d0;*/ position: relative;}
+.desand .rightframe .btn-table td input{ border: 1px solid #d8d8d8;
+    border-radius: 3px;
+    width: 60px;
+    text-align: center;
+}
+.desand .rightframe .btn-table tr.url input{ width: 205px;}
+.desand .rightframe .btn-table tr.t-color .btn-color{ width: 50px!important;}
+
+.desand .t-color .colorBoard{ 
+	height: 214px;
+    left: -50px;
+    top: 50px;
+    width: 272px;
+}
+.desand .t-color.t280 .colorBoard{ width: 280px;}
+
+.desand .t-slide .ng-valid{
+	position: absolute;
+    right: 0;
+    top: 14px;
+}
+.desand .t-slide .ui-slider{
+	background: none repeat scroll 0 0 #f0f0f0;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px 0 rgba(153, 153, 153, 0.5) inset;
+    left: 10px;
+    position: absolute;
+    top: 25px;
+    width: 124px;
+}
+
+
+/*.desand .t-effect .action{ margin: 3px 2px;}*/
+.desand .textstylebtn{ width: 55px;}
+.desand .btn-table td select.ng-valid{ font-size: 14px!important;}
+.desand .jcroplist span{ margin: 3px; background: none;}
+
+.desand .ui-widget-content{ border: none;}
+.desand .ui-slider-horizontal{ height: 4px;}
+.desand .ui-slider-handle{ margin-top: -3px;}
+
+.desand .ta-root{ outline: none!important;}
+.desand .ta-scroll-window{ border-radius: 0; border: 1px solid #d8d8d8;}
+.desand .myborder{ border-bottom:1px solid #dcdcdc;}
+
+.desand .colorshow{margin-left: 0px!important;}
+
+.desand .textstylebtn.tb1{ position: absolute; left: 0; top: 13px;}
+.desand .textstylebtn.tb2{ position: absolute; left: 85px; top: 13px;}
+.desand .textstylebtn.tb3{ position: absolute; margin: 0; right: 0; top: 13px;}
+
+.desand .pos1{position: absolute; top: 15px; left: 40px;}
+.desand .pos2{position: absolute; top: 15px; right: 0}
+.desand .freelock:hover .res{ background-position: -220px -180px}
+
+.desand .myborder .ta-editor p{
+    word-break: break-all;
+    word-wrap: break-word;
+}

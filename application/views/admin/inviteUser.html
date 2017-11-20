@@ -1,0 +1,56 @@
+{!include file = "admin/header.html" action=inviteUser !}
+<div class="main"  style="font-size: 14px;color: #333333;">
+    <div class="center" style="margin:200px auto;width:350px;">
+        <div class="paragraph" style="width:400px">
+            搜房邮箱:
+            <input type="text" placeholder="请输入被邀请用户的搜房邮箱" class="template" id="email">
+            <span style="padding-left:5px">@fang.com</span>
+        </div>
+
+        <div class="paragraph relative">
+            <div id="add">
+                添加
+            </div>
+        </div>
+    </div>
+    <!--浮层-->
+    <div id="float">提交中，请等待。。。</div>
+</div>
+<input id="pcSite" type="hidden" value="{!$applicationConfig.domain.siteUrl.admin!}"/>
+<input id="action" type="hidden" value="showInvitePage"/>
+
+<script type="text/javascript" src="{!$applicationConfig.domain.imgUrl.admin!}js/jquery/2.1.1/jquery.js"></script>
+<script>
+    document.domain = 'fang.com';
+    var _vars = _vars || {};
+    _vars.mainSite = "http://" + location.host + "/";
+    _vars.mySite = "http://" + location.host + "/my/";
+    _vars.city = "bj";
+    _vars.img_ver = "{!$applicationConfig.application.imgver!}";
+    var baseUrl;
+    if (_vars.mainSite) {
+        var thisSite = _vars.mainSite;
+        _vars.public = "{!$applicationConfig.domain.imgUrl.admin!}";
+        baseUrl = _vars.public + "js/";
+    }
+    _vars.action = document.querySelector('#action').value || '${param.m}';
+    _vars.entrance = '{!$applicationConfig.domain.imgUrl.admin!}js/src/add/main';
+    (function (m, d, s, u, l) {
+        u = d.createElement("script");
+        u.id = "seajsnode";
+        u.async = true;
+        u.src = s.base + "sea/sea.js";
+        u.onload = function () {
+            seajs.config(s);
+            seajs.use(_vars.entrance);
+        };
+        l = d.getElementsByTagName("head")[0];
+        l.appendChild(u);
+    })(window, document, {
+        base: baseUrl, alias: {jquery: "jquery/2.1.1/jquery", util: "util/util"},map: [function (uri) {
+            return uri.indexOf('src') !== -1 ? uri + '?_' + _vars.img_ver : uri;
+        }], paths: {count: "http://js.soufunimg.com/count"}, vars: _vars
+    });
+</script>
+</body>
+</html>

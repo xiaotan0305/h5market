@@ -1,0 +1,98 @@
+{!include file = "admin/header.html" action=open !}
+    <div class="TemplatestorePage ps-active-y">
+        <div class="TemplatestorePage-container">
+            <div class="TemplatestorePage-container-list">
+                <div class="TemplateHotNavi">
+                    <div>
+                        <div class="TemplateHotNavi-title">热门公开模版</div>
+                        <div class="Dropdown" tabindex="1"></div>
+                    </div>
+                    <ul class="TemplateHotNavi-list">
+                        {!foreach from=$groups item=v!}
+                        <li class="TemplateHotNavi-item {!if $v.shortname === $group!}active{!/if!}" id="{!$v.shortname!}">
+                            <a href="{!$applicationConfig.domain.siteUrl.admin!}?c=admin&a=open&group={!$v.shortname!}">
+                            {!$v.name!}
+                            </a>
+                        </li>
+                        {!/foreach!}
+                    </ul>
+                </div>
+                <div class="StoreTemplateList" id="templateList">
+                    {!foreach from=$result item=v!}
+                    <div class="StoreTemplateItem" data-url="?c=admin&a=pcpreview&id={!$v.id!}&t=p&f=open">
+                        <div class="StoreTemplateItem-coverarea">
+                            <img width="100%" height="100%" src="{!$v.cover!}">
+                        </div>
+                        <div class="StoreTemplateItem-shadow">
+                            <div class="StoreTemplateItem-shadow-QRpic QRCode">
+                                <img src="{!$qrUrl!}?type=market&resize=180&url={!$v.previewUrl!}" alt="二维码">
+                            </div>
+                        </div>
+                        <div class="StoreTemplateItem-pricearea">
+                            <span class="StoreTemplateItem-pricearea-price">{!$v.groups!}</span>
+                        </div>
+                        <div class="StoreTemplateItem-titlearea">
+                            <img class="StoreTemplateItem-designthum" src="{!$v.cover!}" alt="封面图片">
+                            <span class="StoreTemplateItem-title">{!$v.name!}</span>
+                            <span class="StoreTemplateItem-desc">
+                                <span>设计:</span>
+                                <span>{!$v.user!}</span>
+                            </span>
+                        </div>
+                    </div>
+                    {!/foreach!}
+                <!--<div class="StoreTemplateList-clear"></div>-->
+            </div>
+            <div class="TemplatestorePage-container-rightbar">
+                <div class="HotDesigner" id="HotDesigner">
+                    <div class="HotDesigner-title">公开模板排行榜</div>
+                    {!if $leaderFive|@count > 0!}
+                    {!foreach from=$leaderFive item=v!}
+                    <div>
+                        <div class="HotDesigner-item" data-id="{!$v.id!}">
+                            <span class="imageloader loaded HotDesigner-item-thum fadeIn">
+                                <img src="{!$v.cover!}"></span>
+                            <span class="HotDesigner-item-name">{!$v.name!}</span>
+                            <span class="HotDesigner-item-score ScoreBar">
+                                <span class="ScoreBar-emptystar">使用量：{!$v.loadcount!}</span>
+                            </span>
+                        </div>
+                    </div>
+                    {!/foreach!}
+                    {!else!}
+                    <div class="noData">暂无排行...</div>
+                    {!/if!}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="floating" id="floating"></div>
+<div class="iframefloat fadeInOut" id="iframefloat">
+    <iframe id="previewarea" width="101%" height="101%" src=""></iframe>
+</div>
+
+<input id="imgSite" type="hidden" value="{!$applicationConfig.domain.imgUrl.admin!}"/>
+<input id="pcSite" type="hidden" value="{!$applicationConfig.domain.siteUrl.admin!}"/>
+<input id="phoneSite" type="hidden" value="{!$applicationConfig.domain.siteUrl.web!}"/>
+<input id="channel" type="hidden" value="{!$group!}"/>
+<script type="text/javascript" src="{!$applicationConfig.domain.imgUrl.admin!}js/sea/sea.js"></script>
+<script>
+    document.domain = 'fang.com';
+    var _vars = {};
+    window.scrollTo(0, 1);
+    var mainSite = '{!$applicationConfig.domain.siteUrl.admin!}';
+    var imgVer = '{!$applicationConfig.application.imgver!}';
+    seajs.config({
+        base: '{!$applicationConfig.domain.imgUrl.admin!}js',
+        alias: {jquery: "jquery/2.1.1/jquery"},
+        map: [function (uri) {
+            return uri.indexOf('src') !== -1 ? uri + '?_' + imgVer : uri;
+        }],
+        vars:_vars,
+        debug: true
+    });
+    seajs.use('src/open/open');
+</script>
+</body>
+</html>
