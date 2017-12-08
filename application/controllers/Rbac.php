@@ -69,6 +69,47 @@ class RbacController extends AbstractAdminController
         $rbacModel = new RbacModel();
         $rbacModel->batchAddUser();
     }
+
+    /**
+     * 获取用户，并调用OA接口查询用户是否离职
+     * @return void
+     */
+    public function getUserInfoAction()
+    {
+        $rbacModel = new RbacModel();
+        $result = $rbacModel -> getAllUser('n');
+
+        $isso = new IssoModel();
+        foreach ($result as $key => $value) {
+            $status = $isso -> getUserOADetail($value['email'].'@fang.com');
+            if ($status == 5) {
+                //如果用户已离职，更新用户的isdelete字段为y
+                $data = ['name' => $value['name'], 'isdelete' => 'y'];
+                $rbacModel -> updateUserByid($data, $value['id']);
+                $logData = ['id'=>$value['id'], 'name' => $value['name'], 'status'=>$status];
+                self::updateUserStatusLog($logData, 'updateUserStatus');
+            } else {
+                $logData = ['id'=>$value['id'], 'name' => $value['name'], 'status'=>$status];
+                self::updateUserStatusLog($logData, 'updateUserStatus');
+            }
+        }
+    }
+
+    /**
+     * 记录离职用户日志
+     * @param array $data 需要记录的数据
+     */
+    private function updateUserStatusLog($data, $filename)
+    {
+        $log = new Log($filename);
+        $str = '';
+        if (isset($data) && is_array($data)) {
+            foreach ($data as $key => $value) {
+                $str .= $value.';;';
+            }
+        }
+        $log -> fileWrite($str);
+    }
 }
 
 /* End of file Rbac.php */

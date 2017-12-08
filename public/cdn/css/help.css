@@ -1,38 +1,58 @@
+.content {
+    padding: 0px 0 40px;
+    position: relative;
+    margin-top: 20px;
+}
 .leftCon{
-    width: 360px;
+    width: 260px;
     margin-top: 50px;
     float: left;
     background-color: #ffffff;
+    position:absolute;
+    z-index: 2;
 }
-.leftCon ul li:hover{
+.leftCon a:hover{
     background-color: #E6E6E6;
 }
-.leftCon ul li a{
+.leftCon a{
     padding: 15px 0 15px 25px;
     display: block;
     font-size: 16px;
     color: #666666 !important;
 }
+.leftCon ul li ul li{
+    padding: 0px 0 0px 30px;
+}
 .rightCon{
-    width: 820px;
+    width: 720px;
     margin: 50px 0 0 50px;
     float: left;
     background-color: #ffffff;
+    margin-left: 300px;
 }
-.question{
+.markdown-body{
     padding: 25px 40px 13px 40px;
 }
-.question h4{
+.markdown-body h3 {
     font-size: 16px;
     color:#df3031;
+    padding-top: 15px;
+    border-top: 1px solid #eeeeee;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eeeeee;  
+}
+.markdown-body h4 {
+    font-size: 14px;
+    color:#df3031;
+    padding-top: 15px;
     padding-bottom: 15px;
     border-bottom: 1px solid #eeeeee;
 }
-.question p{
+.markdown-body p, .markdown-body li{
     font-size: 14px;
     padding: 10px 20px;
     color: #666666;
 }
-.question img{
+.markdown-body img{
     padding-left: 20px;
 }

@@ -68,6 +68,26 @@ class Oajk extends Http
             throw $e;
         }
     }
+
+    /**
+     * 获取OA账号信息
+     * @param array $query 查询数据
+     * @return array
+     */
+    public function getOAUserInfo(array $query)
+    {
+        try {
+            $result = $this->httpGetContent($this->conf['host'], $this->conf['path']['getUserDetail'], $query);
+
+            if (is_array($result) && isset($result['user'])) {
+                return $result['user'];
+            } else {
+                return false;
+            }
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
 }
 
 /* End of file Oajk.php */

@@ -704,6 +704,26 @@ class RbacModel extends BaseModel
 
         return $RbacWriteDb->deleteUserRoleByUserid($userid);
     }
+
+    /**
+     * 根据通行证用户id获取用户资料
+     * @param  int    $userid 用户id
+     * @return boolean/array
+     */
+    public function getUserByUserid($userid)
+    {
+        $userid = trim($userid);
+
+        //必填项检查
+        if (strlen($userid) === 0) {
+            throw new Yaf_Exception('用户id不能为空');
+        }
+
+        $RbacReadDb = new RbacReadDb();
+        $result = $RbacReadDb->getUserByUserid($userid);
+
+        return (is_array($result) && count($result) > 0) ? array_shift($result) : array();
+    }
 }
 
 /* End of file Rbac.php */

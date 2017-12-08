@@ -1,31 +1,163 @@
 {!include file = "admin/header.html" action=help !}
-<div class="leftCon">
-    <ul>
-        <li><a href="#que1">1. 如何画直线</a></li>
-        <li><a href="#que2">2. 怎么添加透明按钮</a></li>
-        <li><a href="#que3">3. 怎么删除已上传图片</a></li>
+<div id="leftCon" class="leftCon">
+    <ul class="toc">
+        <li>
+            <a href="#一-如何使用h5后台">一. 如何使用H5后台</a>
+            <ul>
+                <li>
+                    <a href="#1-创建项目">1. 创建项目</a>
+                </li>
+                <li>
+                    <a href="#2-编辑项目">2. 编辑项目</a>
+                </li>
+                <li>
+                    <a href="#3-预览项目">3. 预览项目</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#二-特殊技巧">二. 特殊技巧</a>
+            <ul>
+                <li>
+                    <a href="#1-如何画直线">1. 如何画直线</a>
+                </li>
+                <li>
+                    <a href="#2-怎么添加透明按钮">2. 怎么添加透明按钮</a>
+                </li>
+                <li>
+                    <a href="#3怎么删除已上传图片">3．怎么删除已上传图片</a>
+                </li>
+                <li>
+                    <a href="#4如何配置流量本地化">4．如何配置流量本地化</a>
+                </li>
+                <li>
+                    <a href="#5-h5后台新增功能">5. H5后台新增功能</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#三-如何利用h5促进成交">三. 如何利用H5促进成交</a>
+            <ul>
+                <li>
+                    <a href="#1-搜集销售线索">1. 搜集销售线索</a>
+                </li>
+                <li>
+                    <a href="#2-向核心业务引流">2. 向核心业务引流</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#四-意见反馈">四. 意见反馈</a>
+        </li>
     </ul>
 </div>
-<div class="rightCon">
-    <div id='que1' class="question">
-        <h4>如何画直线</h4>
-        <p>1. 选择矩形形状元素添加到页面</p>
-        <p>2. 拖拽或者手动输入宽度和高度调整线条的粗细和长短</p>
-        <p>3. 设置形状颜色</p>
-    </div>
-    <div id='que2' class="question">
-        <h4>怎么添加透明按钮</h4>
-        <p>1. 选择普通按钮元素添加到页面</p>
-        <p>2. 设置按钮的背景色为透明，边框无或者为0px，阴影为0px</p>
-        <img src="{!$applicationConfig.domain.imgUrl.admin!}imgs/help/button.png">
-    </div>
-    <div id='que3' class="question">
-        <h4>怎么删除已上传图片</h4>
-        <p>1. 打开图片库，鼠标放到目标图片上，左上角会显示X按钮</p>
-        <p>2. 点击按钮，删除图片</p>
-        <img src="{!$applicationConfig.domain.imgUrl.admin!}imgs/help/delete.png">
-    </div>
+<article class="markdown-body rightCon">
+    <h3 id="一-如何使用h5后台" data-source-line="2"><a class="markdownIt-Anchor" href="#一-如何使用h5后台"></a>一. 如何使用H5后台</h3>
+    <p data-source-line="4"><strong>注意事项：H5推广后台要求使用chrome浏览器</strong></p>
+    <p data-source-line="6"><img src="https://ws4.sinaimg.cn/large/006tNc79ly1flz451etejj30bl02bdg0.jpg" alt="image"></p>
+    <h4 id="1-创建项目" data-source-line="8"><a class="markdownIt-Anchor" href="#1-创建项目"></a>1. 创建项目</h4>
+    <p data-source-line="10">进入后台后，在列表点击左侧的新建项目。</p>
+    <p data-source-line="12">有系统模板跟空白模板两种类型可供选择</p>
+    <p data-source-line="14">在选取模板页的右侧，可以预览选择的模板。</p>
+    <p data-source-line="16"><img src="https://ws4.sinaimg.cn/large/006tNc79ly1flz45ust2vj30bl04faca.jpg" alt="image"></p>
+    <p data-source-line="18"><img src="https://ws2.sinaimg.cn/large/006tNc79ly1flz46ft09bj30bl070myw.jpg" alt="image"></p>
+    <h4 id="2-编辑项目" data-source-line="20"><a class="markdownIt-Anchor" href="#2-编辑项目"></a>2. 编辑项目</h4>
+    <p data-source-line="22">当进入编辑页面后。分为几个区域。</p>
+    <p data-source-line="24"><img src="https://ws4.sinaimg.cn/large/006tNc79ly1flz4743fu9j30bm076ac6.jpg" alt="image"></p>
+    <ul data-source-line="26">
+        <li>页面展示区：此区域是查看每个界面的信息的区域。可以通过上下拖拽达到页面位置替换的目的。</li>
+        <li>新建文本：可以添加文字信息，</li>
+        <li>图片库：可以选择现有图片，也可以自己上传图片，然后添加到当前页面。</li>
+        <li>形状元素：可选择现有图形添加到当前页面。</li>
+        <li>按键链接：可以给当前页面加一些按钮、超链接。</li>
+        <li>音乐按钮：可以选择现有音乐作为背景音乐。</li>
+        <li>主编辑区：可编辑当前页面，包括元素位置移动，添加删除各种元素等等各种操作。</li>
+        <li>属性设置区：可对选择的元素进行设置相关属性和动作。</li>
+    </ul>
+    <h4 id="3-预览项目" data-source-line="35"><a class="markdownIt-Anchor" href="#3-预览项目"></a>3. 预览项目</h4>
+    <p data-source-line="37">预览页面可以在PC端预览，也可以通过PC预览页面的二维码或者主页的二维码预览。</p>
+    <p data-source-line="39"><img src="https://ws4.sinaimg.cn/large/006tNc79ly1flz47nt0xmj30bl07otar.jpg" alt="image"></p>
+    <h3 id="二-特殊技巧" data-source-line="41"><a class="markdownIt-Anchor" href="#二-特殊技巧"></a>二. 特殊技巧</h3>
+    <h4 id="1-如何画直线" data-source-line="43"><a class="markdownIt-Anchor" href="#1-如何画直线"></a>1. 如何画直线</h4>
+    <ol data-source-line="45">
+        <li>选择矩形形状元素添加到页面</li>
+        <li>拖拽或者手动输入宽度和高度调整线条的粗细和长短</li>
+        <li>设置形状颜色</li>
+    </ol>
+    <h4 id="2-怎么添加透明按钮" data-source-line="49"><a class="markdownIt-Anchor" href="#2-怎么添加透明按钮"></a>2. 怎么添加透明按钮</h4>
+    <ol data-source-line="51">
+        <li>选择普通按钮元素添加到页面</li>
+        <li>设置按钮的背景色为透明，边框无或者为0px，阴影为0px</li>
+    </ol>
+    <p data-source-line="54"><img src="https://ws2.sinaimg.cn/large/006tNc79ly1flzwg44smej308d08qglw.jpg" alt="image"></p>
+    <h4 id="3怎么删除已上传图片" data-source-line="56"><a class="markdownIt-Anchor" href="#3怎么删除已上传图片"></a>3．怎么删除已上传图片</h4>
+    <ol data-source-line="58">
+        <li>打开图片库，鼠标放到目标图片上，左上角会显示X按钮</li>
+        <li>点击按钮，删除图片</li>
+    </ol>
+    <p data-source-line="61"><img src="https://ws3.sinaimg.cn/large/006tNc79ly1flzwh662ecj30gt0cmmxq.jpg" alt="image"></p>
+    <h4 id="4如何配置流量本地化" data-source-line="63"><a class="markdownIt-Anchor" href="#4如何配置流量本地化"></a>4．如何配置流量本地化</h4>
+    <p data-source-line="65">进行正确的城市集团设置，能帮你实现H5项目流量本地化</p>
+    <p data-source-line="67">渠道参数的设置，不影响流量本地化，可自定义添加</p>
+    <p data-source-line="69"><img src="https://ws3.sinaimg.cn/large/006tNc79ly1flz48j0u3ej30bl03c3yr.jpg" alt="image"></p>
+    <h4 id="5-h5后台新增功能" data-source-line="71"><a class="markdownIt-Anchor" href="#5-h5后台新增功能"></a>5. H5后台新增功能</h4>
+    <p data-source-line="73">网页嵌套功能，可直接在H5中嵌套wap页面</p>
+    <p data-source-line="75">图集功能，可以传多张图片，然后一键生成轮播</p>
+    <p data-source-line="77">点赞交互功能</p>
+    <h3 id="三-如何利用h5促进成交" data-source-line="79"><a class="markdownIt-Anchor" href="#三-如何利用h5促进成交"></a>三. 如何利用H5促进成交</h3>
+    <h4 id="1-搜集销售线索" data-source-line="81"><a class="markdownIt-Anchor" href="#1-搜集销售线索"></a>1. 搜集销售线索</h4>
+    <ul data-source-line="83">
+        <li>将表单模板添加在你所制作的H5中，能够精准搜集目标用户信息，产生销售线索。</li>
+    </ul>
+    <p data-source-line="85"><img src="https://ws4.sinaimg.cn/large/006tNc79ly1flz49ays1fj306q06xq4j.jpg" alt="image"></p>
+    <ul data-source-line="87">
+        <li>在项目列表页点击表单，可导出相应销售线索</li>
+    </ul>
+    <p data-source-line="89"><img src="https://ws4.sinaimg.cn/large/006tNc79ly1flz49xlqjkj305107dmxp.jpg" alt="image"></p>
+    <h4 id="2-向核心业务引流" data-source-line="91"><a class="markdownIt-Anchor" href="#2-向核心业务引流"></a>2. 向核心业务引流</h4>
+    <p data-source-line="93">使用按钮链接工具，在H5项目内添加核心页面引流的链接</p>
+    <p data-source-line="95"><img src="https://ws1.sinaimg.cn/large/006tNc79ly1flz4b2f2kuj307j0583yt.jpg" alt="image"> ．
+    </p>
+    <h3 id="四-意见反馈" data-source-line="97"><a class="markdownIt-Anchor" href="#四-意见反馈"></a>四. 意见反馈</h3>
+    <p data-source-line="99">使用中遇到问题请联系集团对接人，运营人员 齐小玉（qixiaoyu@）</p>
+    <p data-source-line="101">欢迎大家提出意见，不断的完善我们的后台</p>
+</article>
 </div>
-</div>
+<script>
+!(function(window){
+    var document = window.document;
+    function getScrollTop()
+    {
+        var scrollTop=0;
+        if(document.documentElement&&document.documentElement.scrollTop)
+        {
+            scrollTop=document.documentElement.scrollTop;
+        }
+        else if(document.body)
+        {
+            scrollTop=document.body.scrollTop;
+        }
+        return scrollTop;
+    }
+
+    var leftCon = document.getElementById('leftCon');
+    window.onscroll = function(){
+        var offsetTop = getScrollTop();
+        console.log(offsetTop);
+        if (offsetTop > 124) {
+            if (leftCon.style.position !== 'fixed') {
+                leftCon.style.position = 'fixed';
+                leftCon.style.top = '-50px';
+            }
+
+        } else{
+            leftCon.style.position = 'absolute';
+            leftCon.style.top = '0px';
+        }
+    }
+})(window);
+
+</script>
 </body>
+
 </html>

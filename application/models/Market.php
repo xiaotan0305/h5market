@@ -1248,5 +1248,52 @@ class MarketModel extends BaseModel
             throw $e;
         }
     }
+
+    /**
+     * 向数据库插入一条新建的项目数据
+     * @param array $data 一维数组项目数据
+     * @return bool
+     * @throws Exception
+     */
+    public function insertPassportUser($data)
+    {
+        //将id与添加时间合并到数组中
+        $data['id'] = Util::guid();
+        $data['createtime'] = $data['updatetime'] = time();
+
+        try {
+            $MarketWriteDb = new MarketWriteDb();
+            $result = $MarketWriteDb->insertData('passportUser', $data);
+            return $result;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    /**
+     * 在OA账号绑定通行证账号时，使用事务在RbacUser表中插入userid的值，在passportUser表中插入一条记录
+     * 在project、media、music、MyTemplate表中更新user字段的值为通行证的userid
+     * @param array   $insertData
+     * @param int     $userid
+     * @param string  $email
+     * @param array   $passportInfo
+     */
+    public function bindPassportUser($insertData, $userid, $email, $passportInfo)
+    {
+        //将id与添加时间合并到数组中
+        $insertData['id'] = Util::guid();
+        $insertData['createtime'] = $insertData['updatetime'] = time();
+
+        $data['user'] = $userid;
+        $wheres = [['user', '=', $email]];
+
+        $rbacWheres = [['email', '=', $email]];
+        $rbacData['userid'] = $userid;
+
+        $MarketWriteDb = new MarketWriteDb();
+        $result = $MarketWriteDb -> bindPassportUserTrans($insertData, $data, $wheres, $rbacWheres, $rbacData, $passportInfo);
+
+        return $result;
+    }
 }
 /* End of file Market.php */

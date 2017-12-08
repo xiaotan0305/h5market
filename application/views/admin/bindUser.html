@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>OA用户绑定通行证账号</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <style>
+        body {
+            background: #f5f5f5;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 398px;
+            margin: -239px 0 0 -230px;
+            padding: 10px 40px;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 2px;
+        }
+
+        .title {
+            position: relative;
+            padding: 15px 0 20px;
+            border-bottom: 1px solid #F3F3F3;
+        }
+
+        .title span {
+            font-size: 20px;
+            color: #000;
+        }
+
+        .con .fail {
+            margin: 30px 0 20px 0;
+        }
+
+        .con .fail img {
+            height: 79px;
+        }
+
+        .con .text {
+            font-size: 14px;
+            color: #999;
+            line-height: 24px;
+        }
+
+        .con .dl {
+            width: 294px;
+            margin: 0 auto;
+            margin-top: 25px;
+        }
+
+        .con .dd {
+            text-align: center;
+            margin: 0;
+        }
+
+        .btn-box {
+            display: inline-block;
+            width: 200px;
+            height: 38px;
+            border: 1px solid #CCCCCC;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            padding: 5px 15px;
+            cursor: pointer;
+            background-color: #ef5b00;
+        }
+
+        .btn-text {
+            color: #fff;
+            font-size: 16px;
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            line-height: 38px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="title">
+            <span>请前往通行证登录绑定通行证账号</span>
+        </div>
+        <div class="con">
+            <div class="fail">
+                <img src="//static.test.soufunimg.com/common_m/pc_public/images/bg_esfie8.png" alt="头部图片">
+            </div>
+            <p class="text">尊敬的用户,您还未绑定通行证账号,为了公司网络安全,请前往通行证页面进行绑定。</p>
+            <dl class="dl">
+                <dd class="dd">
+                    <div class="btn-box">
+                        <a href="{!$tipArr.url!}">
+                            <span class="btn-text">前往绑定</span>
+                        </a>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+    </div>
+</body>
+
+</html>

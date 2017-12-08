@@ -162,4 +162,41 @@ class MarketWrite extends Db
         $this->from("vote_".strtolower(substr($id, -1)))->where([['pid', '=', $id],['btnid', '=', $voteId]], '', '');
         return $this->increment('counts');
     }
+
+    /**
+     * 事务，在更新RbacUser表添加userid字段时给passportUser表中插入一条用户数据，更新project、media、music、MyTemplate表中的user字段值
+     * 如果已经在passportUser中插入过数据不再插入数据
+     * @param array  $insertData    插入passportUser表的数据
+     * @param array  $data          更新到project、media、music、MyTemplate表中的数据
+     * @param array  $wheres        更新到project、media、music、MyTemplate表中时的条件
+     * @param array  $rbacWheres    更新到RbacUser表中时的条件
+     * @param array  $rbacData      更新到RbacUser表中的数据
+     * @param array  $passportInfo  用来判断当前用户是否登录
+     * @return bool
+     */
+    public function bindPassportUserTrans($insertData, $data, $wheres, $rbacWheres, $rbacData, $passportInfo)
+    {
+        $this->db->beginTransaction();
+        $ret1 = $this->updateData('RbacUser', $rbacWheres, $rbacData);
+        if (count($passportInfo) == 0) {
+            $ret2 = $this->insertData('passportUser', $insertData);
+        } else {
+            $ret2 = true;
+        }
+        $ret3 = $this->updateData('project', $wheres, $data);
+        $ret4 = $this->updateData('media', $wheres, $data);
+        $ret5 = $this->updateData('music', $wheres, $data);
+        $ret6 = $this->updateData('MyTemplate', $wheres, $data);
+
+        if ($ret1 && $ret2 && $ret3 && $ret4 && $ret5 && $ret6) {
+            if ($this->db->commit()) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            $this->db->rollback();
+            return false;
+        }
+    }
 }

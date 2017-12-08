@@ -419,6 +419,29 @@ class WebController extends AbstractWebController
         $data['date'] = date('Y-m-d H:i:s', time());
         self::writeSignInfoLog($data, 'sendCodeLog');
     }
+    /**
+     *记录用户发送验证码的行为日志
+     */
+    public function imLogAction()
+    {
+        $params = Yaf_Registry::get('http_param');
+        $type = isset($params['post']['type']) ? $params['post']['type'] : 'flash';
+        $logData['mesg'] = isset($params['post']['mesg']) ? $params['post']['mesg'] : '';
+        $logData['ip'] = Util::getClientIpAndPort()['ip'];//获取客户端ip
+        $logData['referer'] = $params['server']['HTTP_REFERER'];
+        $logData['ua'] = $params['server']['HTTP_USER_AGENT'];
+        if (isset($params['cookie']['sfut'])) {
+            $logData['sfut'] = $params['cookie']['sfut'];
+        } else {
+            $logData['sfut'] = '';
+        }
+        $logData['date'] = date('Y-m-d H:i:s', time());
+        if ($type !== 'flash') {
+            $type = 'web';
+        }
+        self::writeSignInfoLog($logData, 'im'.$type.'Log');
+        Output::outputData(['errcode'=>1, 'errmsg'=>'ok']);
+    }
 
     /**
      * 记录用户报名的行为日志

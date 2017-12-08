@@ -1,6 +1,75 @@
 /*css Reset*/
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, dialog, figure, header, footer, hgroup, menu, nav, section, time, mark, audio, video {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+sub,
+sup,
+tt,
+var,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+dialog,
+figure,
+header,
+footer,
+hgroup,
+menu,
+nav,
+section,
+time,
+mark,
+audio,
+video {
     margin: 0;
     padding: 0;
     border: 0;
@@ -10,7 +79,15 @@ article, aside, dialog, figure, header, footer, hgroup, menu, nav, section, time
     font-size: 100%;
 }
 
-article, aside, nav, section, dialog, figure, header, footer, hgroup {
+article,
+aside,
+nav,
+section,
+dialog,
+figure,
+header,
+footer,
+hgroup {
     display: block;
 }
 
@@ -27,12 +104,15 @@ table {
     border-spacing: 0;
 }
 
-caption, th, td {
+caption,
+th,
+td {
     text-align: left;
     font-weight: normal;
 }
 
-a img, iframe {
+a img,
+iframe {
     border: none;
 }
 
@@ -40,12 +120,16 @@ ul {
     list-style: none;
 }
 
-input, textarea, select, button {
+input,
+textarea,
+select,
+button {
     font-size: 100%;
     font-family: inherit;
 }
 
-input, select {
+input,
+select {
     vertical-align: middle;
 }
 
@@ -67,7 +151,7 @@ ol {
 
 /* ========================================= clearfix == */
 .clearfix:after {
-    content: ".";
+    content: '.';
     display: block;
     height: 0;
     clear: both;
@@ -136,14 +220,13 @@ body {
     color: #ffffff;
 }
 .nav2 p:hover {
-    font-style:italic;
+    font-style: italic;
 }
 
 .nav {
     position: absolute;
     top: 0;
     right: 0;
-    width: 70px;
     padding: 5px;
     height: 100%;
 }
@@ -161,17 +244,15 @@ body {
 }
 
 .nav .recycle_box {
-    position: absolute;
-    width: 25px;
-    height: 45px;
+    float: left;
+    padding: 0 10px;
+}
+.nav .recycle_box a {
+    display: inline-block;
 }
 
 .nav .recycle_box img {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-top: -17px;
-    margin-left: -13px;
+    vertical-align: middle;
 }
 
 .nav .recycle_num {
@@ -180,7 +261,15 @@ body {
     top: -15px;
     color: #fff;
 }
-
+.nav .user_box {
+    float: left;
+}
+.nav .user_box span {
+    color: #fff;
+    border-left: 1px solid #fff;
+    padding: 0px 10px;
+    cursor: default;
+}
 .logoUl {
     position: absolute;
     top: 0;
@@ -243,18 +332,24 @@ body {
     margin-top: -50px;
     margin-left: -250px;
 }
-.hint p:hover{
-    transition: .3s all ease;
-    color: #00CC00;
+.hint p:hover {
+    transition: 0.3s all ease;
+    color: #00cc00;
     text-shadow: #fff 0 0 100px;
 }
 .moveFromTopSlow {
-    -webkit-animation: moveFromTop .6s ease both;
-    animation: moveFromTop .6s ease both;
+    -webkit-animation: moveFromTop 0.6s ease both;
+    animation: moveFromTop 0.6s ease both;
 }
 @-webkit-keyframes moveFromTop {
-    from { -webkit-transform: translateY(-100%);transform: translateY(-100%);}
+    from {
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+    }
 }
 @keyframes moveFromTop {
-    from { -webkit-transform: translateY(-100%); transform: translateY(-100%);}
+    from {
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+    }
 }

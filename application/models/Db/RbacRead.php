@@ -236,5 +236,15 @@ class RbacRead extends Db
     {
         return $this->from('RbacRoleToResource')->where('userid', '=', $userid)->get(array('roleid'));
     }
+
+    /**
+     * 根据通行证用户id获取用户资料
+     * @param  int $id 用户id
+     * @return boolean/array
+     */
+    public function getUserByUserid($id)
+    {
+        return $this->from('passportUser')->where('userid', '=', $id)->get();
+    }
 }
 /* End of file RbacRead.php */

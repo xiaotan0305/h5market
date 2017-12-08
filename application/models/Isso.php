@@ -160,6 +160,33 @@ class IssoModel extends BaseModel
             throw $e;
         }
     }
+
+    /**
+     * 获取用户是否离职
+     * @return string/false
+     * https://oajk.3g.fang.com/platform/GetUserDetail?user=adminhouse&pwd=ns3nf7dm&email=taoxudong%40fang.com
+     */
+    public function getUserOADetail($email)
+    {
+        try {
+            $http_param = Yaf_Registry::get('http_param');
+            $query = array(
+                'user' => 'adminhouse',
+                'pwd' => 'ns3nf7dm',
+                'email' => $email,
+                'isAll' => 1,
+            );
+
+            $OajkHttp = new OajkHttp();
+            $result = $OajkHttp->getOAUserInfo($query);
+            if ($result && isset($result['status'])) {
+                //status -2:城市代理；-1:临时；0:试用；1:正式；3:待离职；5:离职
+                return $result['status'];
+            }
+        } catch (Exception $e) {
+            return false;
+        }
+    }
 }
 
 /* End of file Isso.php */

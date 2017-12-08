@@ -38,7 +38,9 @@ class AdminController extends AbstractAdminController
      */
     public function indexAction()
     {
-        $user = self::$login_admin_info['email'];
+        //$user = self::$login_admin_info['email'];
+        $user = self::$login_admin_info['userid'];
+        //$user = self::$login_user_info['userid'];
         $params = Yaf_Registry::get('http_param');
         //分页页码
         $page = isset($params['get']['page']) && intval($params['get']['page']) > 0 ? intval($params['get']['page']) : 1;
@@ -194,7 +196,8 @@ class AdminController extends AbstractAdminController
             Output::outputData($jsonArr);
             exit;
         }
-        $user = self::$login_admin_info['email'];
+        //$user = self::$login_admin_info['email'];
+        $user = self::$login_admin_info['userid'];
         $data = [
             'id' => $id,
             'user' => $user,
@@ -240,7 +243,8 @@ class AdminController extends AbstractAdminController
             Output::outputData($jsonArr);
             exit;
         }
-        $user = self::$login_admin_info['email'];
+        //$user = self::$login_admin_info['email'];
+        $user = self::$login_admin_info['userid'];
         $data = array(
             'id' => $id,
             'user' => $user,
@@ -290,7 +294,8 @@ class AdminController extends AbstractAdminController
             exit;
         }
         $data = $data[0];
-        $data['user'] = self::$login_admin_info['email'];
+        //$data['user'] = self::$login_admin_info['email'];
+        $data['user'] = self::$login_admin_info['userid'];
         $data['city'] = self::$login_admin_info['city'] ? self::$login_admin_info['city'] : '';
         $data['groups'] = self::$login_admin_info['groups'] ? self::$login_admin_info['groups'] : '';
         $data['source'] = self::$login_admin_info['source'] ? self::$login_admin_info['source'] : '';
@@ -413,7 +418,8 @@ class AdminController extends AbstractAdminController
         }
         $burl = $this->conf['domain']['siteUrl']['admin'] . '?c=admin&a=pcpreview&id=' . $id . '&t=' . $t . '&f=' . $f;
         $this->_view->assign('f', $f);
-        $this->_view->assign('user', self::$login_admin_info['email']);
+        //$this->_view->assign('user', self::$login_admin_info['email']);
+        $this->_view->assign('user', self::$login_admin_info['userid']);
         $this->_view->assign('color', $color);
         $this->_view->assign('id', $id);
         $this->_view->assign('result', $result);
@@ -454,7 +460,8 @@ class AdminController extends AbstractAdminController
      */
     private function _uploadMusicAction()
     {
-        $uid = self::$login_admin_info['email'];
+        //$uid = self::$login_admin_info['email'];
+        $uid = self::$login_admin_info['userid'];
         $arrIpPort = Util::getClientIpAndPort();
         $uip = $arrIpPort['ip'];
         $rand = rand(99, 999999);
@@ -535,7 +542,8 @@ class AdminController extends AbstractAdminController
         $source['name'] = $fileName;
         $source['url'] = $url;
 
-        $user = self::$login_admin_info['email'];
+        //$user = self::$login_admin_info['email'];
+        $user = self::$login_admin_info['userid'];
         $data = array(
             'source' => json_encode($source),
             'user' => $user,
@@ -612,7 +620,8 @@ class AdminController extends AbstractAdminController
             exit;
         }
 
-        $user = self::$login_admin_info['email'];
+        //$user = self::$login_admin_info['email'];
+        $user = self::$login_admin_info['userid'];
         if ($projectMes[0]['user'] != $user) {
             $jsonArr['errcode'] = 0;
             $jsonArr['errmsg'] = '您没有更改该项目的权限';
@@ -659,7 +668,8 @@ class AdminController extends AbstractAdminController
             Output::outputData($jsonArr);
             exit;
         }
-        $user = self::$login_admin_info['email'];
+        //$user = self::$login_admin_info['email'];
+        $user = self::$login_admin_info['userid'];
         try {
             $market = new MarketModel();
             $result = $market->delMediaByIdAndUser($id, $user);
@@ -686,7 +696,8 @@ class AdminController extends AbstractAdminController
      */
     private function _uploadAction()
     {
-        $uid = self::$login_admin_info['email'];
+        //$uid = self::$login_admin_info['email'];
+        $uid = self::$login_admin_info['userid'];
         $arrIpPort = Util::getClientIpAndPort();
         $uip = $arrIpPort['ip'];
         $rand = rand(99, 999999);
@@ -719,7 +730,8 @@ class AdminController extends AbstractAdminController
     {
         //获取user
         $loginAdminInfo = self::$login_admin_info;
-        $user = $loginAdminInfo['email'];
+        //$user = $loginAdminInfo['email'];
+        $user = $loginAdminInfo['userid'];
         try {
             $market = new MarketModel();
         } catch (Exception $e) {
@@ -866,7 +878,8 @@ class AdminController extends AbstractAdminController
     public function ajaxCreateNewProjectAction()
     {
         //获取user
-        $data['user'] = self::$login_admin_info['email'];
+        //$data['user'] = self::$login_admin_info['email'];
+        $data['user'] = self::$login_admin_info['userid'];
         $data['content'] = "";
         $data['city'] = self::$login_admin_info['city'] ? self::$login_admin_info['city'] : '';
         $data['groups'] = self::$login_admin_info['groups'] ? self::$login_admin_info['groups'] : '';
@@ -912,7 +925,8 @@ class AdminController extends AbstractAdminController
             'cover' => $result[0]['cover'],
             'music' => $result[0]['music'],
             'content' => $result[0]['content'],
-            'user' => self::$login_admin_info['email'],
+            //'user' => self::$login_admin_info['email'],
+            'user' => self::$login_admin_info['userid'],
             'city' => self::$login_admin_info['city'] ? self::$login_admin_info['city'] : '',
             'groups' => self::$login_admin_info['groups'] ? self::$login_admin_info['groups'] : '',
             'source' => self::$login_admin_info['source'] ? self::$login_admin_info['source'] : '',
@@ -942,7 +956,11 @@ class AdminController extends AbstractAdminController
     public function ajaxOperationTemplateAction()
     {
         $loginAdminInfo = self::$login_admin_info;
-        if ($loginAdminInfo['email'] !== 'liyingying') {
+        // if ($loginAdminInfo['email'] !== 'liyingying') {
+        //     Output::outputData(['errcode' => 0, 'errmsg' => '您没有权限进行该操作！']);
+        //     exit;
+        // }
+        if (!in_array($loginAdminInfo['user'], self::$users)) {
             Output::outputData(['errcode' => 0, 'errmsg' => '您没有权限进行该操作！']);
             exit;
         }
@@ -1009,7 +1027,8 @@ class AdminController extends AbstractAdminController
         //获取所有http参数
         $params = Yaf_Registry::get('http_param');
         //获取user
-        $user = self::$login_admin_info['email'];
+        //$user = self::$login_admin_info['email'];
+        $user = self::$login_admin_info['userid'];
         //获项目id
         $projectId = isset($params['get']['projectid']) && strlen(trim($params['get']['projectid'])) > 0 ? trim($params['get']['projectid']) : false;
         try {
@@ -1044,7 +1063,11 @@ class AdminController extends AbstractAdminController
     public function ajaxOperationMultiTemplateAction()
     {
         $loginAdminInfo = self::$login_admin_info;
-        if ($loginAdminInfo['email'] !== 'yueyanlei' && $loginAdminInfo['email'] !== 'liuxinlu') {
+        // if ($loginAdminInfo['email'] !== 'yueyanlei' && $loginAdminInfo['email'] !== 'liuxinlu') {
+        //     Output::outputData(['errcode' => 0, 'errmsg' => '您没有权限进行该操作！']);
+        //     exit;
+        // }
+        if (!in_array($loginAdminInfo['userid'], self::$users)) {
             Output::outputData(['errcode' => 0, 'errmsg' => '您没有权限进行该操作！']);
             exit;
         }
@@ -1236,7 +1259,8 @@ class AdminController extends AbstractAdminController
 
         try {
             $rbac = new RbacModel();
-            $result = $rbac->updateUserByEmail($data, self::$login_admin_info['email']);
+            //$result = $rbac->updateUserByEmail($data, self::$login_admin_info['email']);
+            $result = $rbac->updateUserByEmail($data, self::$login_admin_info['userid']);
             if ($result) {
                 Output::outputData(['errcode' => 1, 'errmsg' => '设置成功']);
             }
@@ -1331,7 +1355,8 @@ class AdminController extends AbstractAdminController
     public function ajaxOpenProjectAction()
     {
         $param = Yaf_Registry::get('http_param');
-        $data['user'] = self::$login_admin_info['email'];
+        //$data['user'] = self::$login_admin_info['email'];
+        $data['user'] = self::$login_admin_info['userid'];
         $data['id'] = isset($param['get']['id']) && strlen(trim($param['get']['id'])) === 32 ? $param['get']['id'] : false;
         $data['data']['isopen'] = isset($param['get']['isOpen']) && $param['get']['isOpen'] == 1 ? 1 : 0;
         try {
@@ -1386,7 +1411,8 @@ class AdminController extends AbstractAdminController
      */
     public function ajaxGetMyTemplateAction()
     {
-        $user = self::$login_admin_info['email'];
+        //$user = self::$login_admin_info['email'];
+        $user = self::$login_admin_info['userid'];
         $status = 'normal';
         $jsonArr = ['data' => ['datalist' => []]];
         if (!$user) {
@@ -1430,7 +1456,8 @@ class AdminController extends AbstractAdminController
         $data['instruction'] = (isset($params['post']['instruction']) && trim($params['post']['instruction']) != false) ? trim($params['post']['instruction']) : '';
         $data['cover'] = (isset($params['post']['cover']) && trim($params['post']['cover']) != false) ? trim($params['post']['cover']) : '';
         $data['content'] = (isset($params['post']['content']) && $params['post']['content']) != '' ? $params['post']['content'] : '';
-        $data['user'] = self::$login_admin_info['email'];
+        //$data['user'] = self::$login_admin_info['email'];
+        $data['user'] = self::$login_admin_info['userid'];
         $data['createtime'] = time();
         $data['updatetime'] = time();
         try {
@@ -1455,7 +1482,8 @@ class AdminController extends AbstractAdminController
     {
         $params = Yaf_Registry::get('http_param');
         $createtime = (isset($params['post']['createtime']) && trim($params['post']['createtime']) != false) ? trim($params['post']['createtime']) : '';
-        $user = self::$login_admin_info['email'];
+        //$user = self::$login_admin_info['email'];
+        $user = self::$login_admin_info['userid'];
         try {
             $market = new MarketModel();
             $result = $market->delMyTemplate($user, $createtime, ['status' => 'delete']);
@@ -1483,7 +1511,8 @@ class AdminController extends AbstractAdminController
         try {
             //先根据项目ID取出表单信息
             $marketModel = new MarketModel();
-            $formInfo = $marketModel->getFromInfoByProjId($id, self::$login_admin_info['email']);
+            //$formInfo = $marketModel->getFromInfoByProjId($id, self::$login_admin_info['email']);
+            $formInfo = $marketModel->getFromInfoByProjId($id, self::$login_admin_info['userid']);
 
             //如果项目中存在表单,再查询报名信息
             if (isset($formInfo) && isset($formInfo['formInfo']) && count($formInfo['formInfo']) > 0) {
