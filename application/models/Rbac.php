@@ -724,6 +724,65 @@ class RbacModel extends BaseModel
 
         return (is_array($result) && count($result) > 0) ? array_shift($result) : array();
     }
+
+    /**
+     * 根据email更新用户
+     * @param array  $data  新的用户kv数据
+     * @param string $userid 用户的通行证账号的userid
+     * @return integer/false
+     * @throws Yaf_Exception
+     */
+    public function updateUserByUserid(array $data, $userid)
+    {
+        //检查需要更新的数据
+        if (empty($data)) {
+            return 0;
+        }
+
+        //去除头尾空白
+        $data = array_map('trim', $data);
+        $email = trim($userid);
+        //必填项检查
+        if (strlen($userid) === 0) {
+            throw new Yaf_Exception('用户userid不能为空');
+        }
+        $data['updatetime'] = time();
+        //可能需要更新的字段列表
+        $groups = Yaf_Registry::get('groups');
+        $column = [];
+        foreach ($groups['groups'] as $value) {
+            $column[] = $value['shortname'];
+        }
+
+        if (isset($data['groups']) && !in_array($data['groups'], $column)) {
+            throw new Yaf_Exception('用户groups设定无效');
+        }
+
+        $RbacWriteDb = new RbacWriteDb();
+
+        return $RbacWriteDb->updateUserByUserid($data, $email);
+    }
+
+    /**
+     * 向数据库插入一条新建的项目数据
+     * @param array $data 一维数组项目数据
+     * @return bool
+     * @throws Exception
+     */
+    public function insertPassportUser($data)
+    {
+        //将id与添加时间合并到数组中
+        $data['id'] = Util::guid();
+        $data['createtime'] = $data['updatetime'] = time();
+
+        try {
+            $MarketWriteDb = new MarketWriteDb();
+            $result = $MarketWriteDb->insertData('passportUser', $data);
+            return $result;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
 }
 
 /* End of file Rbac.php */

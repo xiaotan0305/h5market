@@ -40,7 +40,6 @@ class AdminController extends AbstractAdminController
     {
         //$user = self::$login_admin_info['email'];
         $user = self::$login_admin_info['userid'];
-        //$user = self::$login_user_info['userid'];
         $params = Yaf_Registry::get('http_param');
         //分页页码
         $page = isset($params['get']['page']) && intval($params['get']['page']) > 0 ? intval($params['get']['page']) : 1;
@@ -1211,7 +1210,7 @@ class AdminController extends AbstractAdminController
             Output::outputData(array('errcode' => 0, 'errmsg' => '项目Id不正确'));
             exit;
         }
-        
+
         try {
             $datacenterModel = new DatacenterModel();
             $result = $datacenterModel->getUvPv($projectId);
@@ -1260,7 +1259,8 @@ class AdminController extends AbstractAdminController
         try {
             $rbac = new RbacModel();
             //$result = $rbac->updateUserByEmail($data, self::$login_admin_info['email']);
-            $result = $rbac->updateUserByEmail($data, self::$login_admin_info['userid']);
+            //$result = $rbac->updateUserByEmail($data, self::$login_admin_info['userid']);
+            $result = $rbac->updateUserByUserid($data, self::$login_admin_info['userid']);
             if ($result) {
                 Output::outputData(['errcode' => 1, 'errmsg' => '设置成功']);
             }

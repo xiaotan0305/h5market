@@ -209,4 +209,15 @@ class RbacWrite extends Db
     {
         return $this->from('RbacUserToRole')->where('userid', '=', $userid)->delete();
     }
+
+    /**
+     * 根据userid更新用户
+     * @param  array $user 新的用户kv数据
+     * @param  string $userid 用户userid
+     * @return integer/false
+     */
+    public function updateUserByUserid(array $user, $userid)
+    {
+        return $this->from('passportUser')->where('userid', '=', $userid)->update($user);
+    }
 }

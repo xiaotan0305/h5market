@@ -79,7 +79,7 @@ abstract class AbstractAdminController extends BaseController
                         'userid' => $passportUserinfo['userid'],
                         'name' => $passportUserinfo['username'],
                     ];
-                    $insertResult = $MarketModel -> insertPassportUser($data);
+                    $insertResult = $RbacModel -> insertPassportUser($data);
                     if ($insertResult) {
                         self::$login_admin_info = $RbacModel -> getUserByUserid($passportUserinfo['userid']);
                     } else {
@@ -89,6 +89,8 @@ abstract class AbstractAdminController extends BaseController
                 } else {
                     self::$login_admin_info = $login_user_info;
                 }
+                //将通行证中的昵称赋值到self::$login_admin_info中
+                self::$login_admin_info['nickname'] = $passportUserinfo['nickname'];
             } else {
                 //未登录通行证，跳转通行证登录
                 $this->redirectToPassportLogin();
@@ -101,7 +103,11 @@ abstract class AbstractAdminController extends BaseController
             if (is_array($userinfo) && count($userinfo) > 0) {
                 //在OA已登录的情况下先判断是否绑定通行证账号
                 if (isset($userinfo['userid']) && $userinfo['userid'] != '') {
+                    //如果绑定了通行证账号，直接从passportUser表中获取用户信息
                     self::$login_admin_info = $RbacModel -> getUserByUserid($userinfo['userid']);
+                    $userModel = new UserModel();
+                    $passportUserinfo = $userModel -> getUserInfoFromPassport($userinfo['userid']);
+                    self::$login_admin_info['nickname'] = $passportUserinfo['nickname'];
                 } else {
                     //如果没有绑定通行证账号，判断通行证账号是否登录，未登录跳转登录页面
                     //获取通行证用户信息
@@ -131,6 +137,7 @@ abstract class AbstractAdminController extends BaseController
 
                         if ($bindResult) {
                             self::$login_admin_info = $RbacModel -> getUserByUserid($passportUserinfo['userid']);
+                            self::$login_admin_info['nickname'] = $passportUserinfo['nickname'];
                         } else {
                             $this->redirectToBindUser();
                             exit;
