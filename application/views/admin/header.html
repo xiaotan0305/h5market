@@ -66,7 +66,7 @@
                 </a>
             </div>
             <div id="username" class="user_box" style="display: {!if $status=='online' !}block{!else!}none{!/if!};" title="用户名">
-                <span>tankunpeng@fang.com</span>
+                <span>{!if $login_admin_info.nickname != ''!}{!$login_admin_info.nickname!}{!else!}{!$login_admin_info.name!}{!/if!}</span>
             </div>
             <div id="project" class="recycle_box" style="display: {!if $status=='delete' !}block{!else!}none{!/if!};">
                 <a href="{!$applicationConfig.domain.siteUrl.admin!}?c=admin&a=index">
@@ -75,14 +75,32 @@
             </div>
         </div>
         <div id="hint" class="hint">
-            <a href="http://www.chromeliulanqi.com/Chrome_Latest_Setup.exe">
-                <p class="moveFromTopSlow">请务必使用chrome浏览器进行操作(点击下载)</p>
-            </a>
+            <div style="position: absolute;top: 50%;left: 50%;width: 398px;margin: -239px 0 0 -230px;padding: 10px 40px;text-align: center;background-color: #fff;border-radius: 2px;">
+                <div style="position:absolute;right:0;top:0;border:1px solid #CCCCCC;padding: 6px;line-height: 1;cursor: default;">×</div>
+                <div style="position: relative;padding: 15px 0 20px;border-bottom: 1px solid #F3F3F3;">
+                    <span style="font-size: 20px;color: #000;">请升级您的浏览器</span>
+                </div>
+                <div class="con">
+                    <div style="margin: 30px 0 20px 0;">
+                        <img src="//static.soufunimg.com/common_m/pc_public/images/bg_esfie8.png" alt="ie8头部图片" style="height:79px;">
+                    </div>
+                    <p style="font-size: 14px;color: #999;line-height: 24px;">尊敬的用户，为了您更好的编辑体验，请使用chrome浏览器。其他浏览器在编辑过程中可能存在不稳当情况 。</p>
+                    <dl style="width: 294px;margin: 0 auto;margin-top: 25px">
+                        <dd style="text-align:center;margin: 0">
+                            <div style="display:inline-block;width: 113px;height: 38px;border: 1px solid #CCCCCC;border-radius: 2px;margin-bottom: 15px;padding: 5px 0 0 25px;cursor: pointer;text-align:left;">
+                                <a href="http://www.chromeliulanqi.com/">
+                                    <img src="//static.soufunimg.com/common_m/pc_public/images/chrome_bgesf.jpg" style="height:32px;" alt="chrome浏览器">
+                                </a>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
         </div>
         {!else!}
         <div class="nav2">
             <a href="http://www.chromeliulanqi.com/Chrome_Latest_Setup.exe">
-                <p>请务必使用
+                <p>请使用
                     <b>chrome浏览器</b> 进行操作</p>
             </a>
         </div>
