@@ -47,6 +47,15 @@ class MarketModel extends BaseModel
     private $_cache_obj = null;
 
     /**
+     * 项目id的最后一位字符的对应关系
+     * @var array
+     */
+    private $relation = [0=>0, 1=>1, 2=>2, 3=>3, 4=>4, 5=>5, 6=>6, 7=>7, 8=>8, 9=>9,'a'=>10, 'b'=>11, 'c'=>12,
+        'd'=>13, 'e'=>14, 'f'=>15, 'g'=>16, 'h'=>17, 'i'=>18, 'j'=>19,'k'=>20, 'l'=>21, 'm'=>22,
+        'n'=>23, 'o'=>24, 'p'=>25, 'q'=>26, 'r'=>27, 's'=>28, 't'=>29,'u'=>30, 'v'=>31, 'w'=>32,
+        'x'=>33, 'y'=>34, 'z'=>35,];
+
+    /**
      * 构造函数
      */
     public function __construct()
@@ -277,10 +286,10 @@ class MarketModel extends BaseModel
         try {
             $MarketReadDb = new MarketReadDb();
             $result = $MarketReadDb->selectDataByCondition('project', ['*'], $wheres);
+            unset($result[0]['content']);
             if ($type !== 'edit' && $result) {
                 $result[0]['music'] = parent::formatContent(stripcslashes($result[0]['music']));
                 $result[0]['cover'] = parent::formatContent(stripcslashes($result[0]['cover']));
-                $result[0]['content'] = parent::formatContent($result[0]['content']);
             }
             return $result;
         } catch (Exception $e) {
@@ -776,8 +785,15 @@ class MarketModel extends BaseModel
             $data['introduction'] = '手机房天下是中国最大的房地产家居移动互联网门户，为亿万用户提供全面及时的房地产新闻资讯内容,为所有楼盘提供网上浏览及业主论坛信息。覆盖全国300多个城市,找新房、找二手房、找租房,更多便捷,更加精准。';
         }
         try {
+            $len = strlen($data['id']);
+            $num = $this->relation[$data['id']{$len-1}] % 10;
+            $from = ['project', 'content_' . $num];
+            $insert[1] = ['id' => $data['id'], 'content' => $data['content']];
+            unset($data['content']);
+            $insert[0] = $data;
             $MarketWriteDb = new MarketWriteDb();
-            $result = $MarketWriteDb->insertData('project', $data);
+            $result = $MarketWriteDb->insertDataTrans($from, $insert);
+            //$result = $MarketWriteDb->insertData('project', $data);
             return $result;
         } catch (Exception $e) {
             throw $e;
@@ -873,14 +889,28 @@ class MarketModel extends BaseModel
             if (isset($data['data']['isopen']) &&  $data['data']['isopen'] == 0) {
                 $data['data']['loadcount'] = 0;
             }
-            //给yueyuanlei开通权限,可以修改所有人的项目
-            if ($data['user'] === 'yueyanlei') {
+            //给yueyuanlei开通权限,可以修改所有人的项目  通行证的id
+            if ($data['user'] === '39417835') {
                 $wheres = [['id', '=', $data['id']]];
             } else {
                 $wheres = [['id', '=', $data['id']], ['user', '=', $data['user']]];
             }
+            if (isset($data['data']['content'])) {
+                //当需要更新项目的content的时候使用事务对两个表project和content_*中的数据进行更新
+                $len = strlen($data['id']);
+                $num = $this->relation[$data['id']{$len-1}] % 10;
+                $from = ['project', 'content_' . $num];
+                $data['update'][1]['content'] = $data['data']['content'];
+                unset($data['data']['content']);
+                $data['update'][0] = $data['data'];
+                unset($data['data']);
+                $where[0] = $wheres;
+                $where[1] = [['id', '=', $data['id']]];
+                $result = $MarketWriteDb->updateDataTrans($from, $where, $data['update']);
+            } else {
+                $result = $MarketWriteDb->updateData('project', $wheres, $data['data']);
+            }
 
-            $result = $MarketWriteDb->updateData('project', $wheres, $data['data']);
             return $result;
         } catch (Exception $e) {
             throw $e;
@@ -1273,6 +1303,92 @@ class MarketModel extends BaseModel
         $result = $MarketWriteDb -> bindPassportUserTrans($insertData, $data, $wheres, $rbacWheres, $rbacData, $passportInfo);
 
         return $result;
+    }
+
+    /**
+     * 向数据库插入一条新建的项目数据
+     * @param array $data 一维数组项目数据
+     * @return bool
+     * @throws Exception
+     */
+    public function insertPassportUser($data)
+    {
+        //将id与添加时间合并到数组中
+        $data['id'] = Util::guid();
+        $data['createtime'] = $data['updatetime'] = time();
+
+        try {
+            $MarketWriteDb = new MarketWriteDb();
+            $result = $MarketWriteDb->insertData('passportUser', $data);
+            return $result;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    /**
+     * 根据项目id获取项目内容
+     * @param string $id  项目id
+     * @param string $type 是否是编辑状态
+     * @return array/false
+     */
+    public function getProjectContentById($id, $type = '')
+    {
+        try {
+            $len = strlen($id);
+            $num = $this->relation[$id{$len-1}] % 10;
+            $table = 'content_' . $num;
+            $MarketReadDb = new MarketReadDb();
+            $content = $MarketReadDb -> selectDataByCondition($table, ['*'], [['id', '=', $id]]);
+            if ($type !== 'edit' && $content) {
+                $content[0]['content'] = parent::formatContent($content[0]['content']);
+            }
+            return $content;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    /**
+     * 向content_*表中插入数据
+     * @param  string $id        项目ID
+     * @param  string $content   项目的内容
+     * @return bool
+     * @throws Exception
+     */
+    public function insertContent($id, $content, $page)
+    {
+        try {
+            $data['id'] = $id;
+            $data['content'] = $content;
+            $data['page'] = $page;
+            $len = strlen($data['id']);
+            $num = $this->relation[$data['id']{$len-1}] % 10;
+            $from = 'content_' . $num;
+            $MarketWriteDb = new MarketWriteDb();
+            $result = $MarketWriteDb->insertContent($from, $data);
+            return $result;
+        } catch (Exception $e) {
+            throw $e;
+        }
+
+    }
+
+    /**
+     * 分页查询所有项目
+     * @param int    $page   页码
+     * @return false/array
+     * @throws Exception
+     */
+    public function getProjectsByPage($page, $pagesize)
+    {
+        try {
+            $MarketReadDb = new MarketReadDb();
+            $result = $MarketReadDb->selectDataByCondition('project', ['id', 'content'], [], $page, [['column' => 'createtime', 'order' => 'asc']], $pagesize);
+            return $result;
+        } catch (Exception $e) {
+            throw $e;
+        }
     }
 }
 /* End of file Market.php */

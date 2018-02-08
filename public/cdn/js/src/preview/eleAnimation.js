@@ -1,10 +1,9 @@
 /**
  * Created by liyingying on 15/12/7.
- * @Last Modified by:   tankunpeng
- * @Last Modified time: 2016/1/12
+ * @Last Modified by: tankunpeng@fang.com
+ * @Last Modified time: 2018-02-08 14:57:29
  */
-define('eleAnimation', ['snabbt'], function (require) {
-    'use strict';
+define('eleAnimation', ['snabbt'], function(require) {
     var snabbt = require('snabbt');
     var vars = seajs.data.vars;
     var eleAnimation = {
@@ -15,7 +14,7 @@ define('eleAnimation', ['snabbt'], function (require) {
          * @param action 动画效果对象
          * @returns {*} 配置数组
          */
-        getAnimations: function (ele, action) {
+        getAnimations: function(ele, action) {
             var n = parseInt(ele.element.height() ? ele.element.height() : 200);
             var i = parseInt(ele.element.width() ? ele.element.width() : 200);
             var animations;
@@ -383,7 +382,7 @@ define('eleAnimation', ['snabbt'], function (require) {
                     }];
                     break;
 
-            /**
+                    /**
              * 场间动画选项配置
              * @param case  动画名称
              * @param animations 动画效果配置选项数组
@@ -705,7 +704,7 @@ define('eleAnimation', ['snabbt'], function (require) {
                     }];
                     break;
 
-            /**
+                    /**
              * 出场动画选项配置
              * @param case  动画名称
              * @param animations 动画效果配置选项数组
@@ -882,7 +881,7 @@ define('eleAnimation', ['snabbt'], function (require) {
          * @param ele 当前元素
          * @returns {{}} 返回调整后的动画对象
          */
-        getEffect: function (ele) {
+        getEffect: function(ele) {
             var t = {};
             // 区分项目还是模板
             if (ele.data.animations) {
@@ -905,7 +904,7 @@ define('eleAnimation', ['snabbt'], function (require) {
          * @param ele 当前元素
          * @returns {{}} 返回调整后的动画对象
          */
-        getInEffect: function (ele) {
+        getInEffect: function(ele) {
             var t = {};
             // 区分项目还是模板
             if (ele.data.animations) {
@@ -917,7 +916,7 @@ define('eleAnimation', ['snabbt'], function (require) {
                 t.delay = ele.data.delay;
                 t.speed = ele.data.speed;
             }
-            if (!t.show) {
+            if (!t.show || t.show === 'noeffect') {
                 t = false;
             }
             return t;
@@ -928,7 +927,7 @@ define('eleAnimation', ['snabbt'], function (require) {
          * @param ele 当前元素
          * @returns {{}} 返回调整后的动画对象
          */
-        getOnEffect: function (ele) {
+        getOnEffect: function(ele) {
             var t = {};
             // 区分项目还是模板
             if (ele.data.animations) {
@@ -954,7 +953,7 @@ define('eleAnimation', ['snabbt'], function (require) {
          * @param ele 当前元素
          * @returns {{}} 返回调整后的动画对象
          */
-        getOutEffect: function (ele) {
+        getOutEffect: function(ele) {
             var t = {};
             // 区分项目还是模板
             if (ele.data.animations) {
@@ -977,7 +976,7 @@ define('eleAnimation', ['snabbt'], function (require) {
          * 执行单个元素动画
          * @param ele 目标元素
          */
-        actAnimation: function (ele) {
+        actAnimation: function(ele) {
             var effect = {};
             effect.in = this.getInEffect(ele);
             effect.on = this.getOnEffect(ele);
@@ -988,7 +987,7 @@ define('eleAnimation', ['snabbt'], function (require) {
                 var animations = {};
                 // 执行入场动画
                 animations.in = this.getAnimations(ele, effect.in);
-                animations.in[0].startCallback = function () {
+                animations.in[0].startCallback = function() {
                     ele.elementout.show();
                     // 判断当前显示的元素是否为iframe
                     if (ele.eletype === 'site') {
@@ -1018,10 +1017,10 @@ define('eleAnimation', ['snabbt'], function (require) {
                 // 执行出场动画
                 if (effect.out) {
                     animations.out = this.getAnimations(ele, effect.out);
-                    animations.out[0].startCallback = function () {
+                    animations.out[0].startCallback = function() {
                         ele.elementout.show();
                     };
-                    animations.out[0].callback = function () {
+                    animations.out[0].callback = function() {
                         ele.elementout.hide();
                     };
                     animations.out[0].delay = effect.out.delay > 300 ? parseInt(effect.out.delay - 300) : 0;
@@ -1037,7 +1036,7 @@ define('eleAnimation', ['snabbt'], function (require) {
          * 停止动画效果
          * @param ele 目标元素
          */
-        stopAnimation: function (ele) {
+        stopAnimation: function(ele) {
             snabbt(ele.element[0], 'stop');
             ele.elementout.hide();
         }

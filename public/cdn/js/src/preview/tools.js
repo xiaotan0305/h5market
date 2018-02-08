@@ -1,11 +1,10 @@
 /**
  * Created by liyy on 2015/12/30.
- * @Last Modified by:   tankunpeng
- * @Last Modified time: 2016/1/5
+ * @Last Modified by: tankunpeng@fang.com
+ * @Last Modified time: 2018-02-08 14:36:44
  */
 
-define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require) {
-    'use strict';
+define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function(require) {
     var vars = seajs.data.vars;
     var $ = require('jquery');
     var smsLogin = require('smsLogin');
@@ -21,7 +20,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * @param type 类型 width height left top
          * @returns {string} 处理后数据
          */
-        scale: function (e,type) {
+        scale: function(e, type) {
             e = parseInt(Math.round(parseInt(e) * (type ? vars.radio.ratio[type] : vars.radio.scaleRatio)));
             return e + 'px';
         },
@@ -31,7 +30,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * @param e 原始数据
          * @returns {string} 处理后数据
          */
-        rotate: function (e) {
+        rotate: function(e) {
             return 'rotate(' + e + 'deg)';
         },
 
@@ -39,7 +38,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * 图片地址过滤
          * @param str 字符串
          */
-        imgfilter: function (str) {
+        imgfilter: function(str) {
             return vars.imgUrlReg.test(str) ? str : vars.imgSite + 'imgs/' + str;
         },
         /**
@@ -47,7 +46,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * @param e 原始数据
          * @returns {string} 处理后数据
          */
-        addpx: function (e) {
+        addpx: function(e) {
             return parseInt(e) + 'px';
         },
 
@@ -56,7 +55,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * @param e 原始数据
          * @returns {string} 处理后数据
          */
-        shadow: function (e) {
+        shadow: function(e) {
             return '0 0 ' + this.addpx(e) + ' black';
         },
 
@@ -65,7 +64,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * @param str 原始数据
          * @returns {string} 处理后数据
          */
-        url: function (str) {
+        url: function(str) {
             var tmpurl;
             if (!str) {
                 tmpurl = 'javascript:void(0);';
@@ -82,7 +81,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * @param e
          * @returns {Array|{index: number, input: string}}
          */
-        isGif: function (e) {
+        isGif: function(e) {
             var t = /\.gif/i;
             return t.exec(e);
         },
@@ -91,7 +90,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * 补全两位数字
          * @param n
          */
-        toDou: function (n) {
+        toDou: function(n) {
             n = parseInt(n);
             return n < 10 ? '0' + n : '' + n;
         },
@@ -101,14 +100,14 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * @param obj 元素对象
          * @param data
          */
-        getCountDown: function (obj, data) {
+        getCountDown: function(obj, data) {
             var timeStr = (data.deadline_date + ' ' + data.deadline_time).replace(/-/g, '/');
             obj.oDate = obj.oDate || new Date(timeStr);
             obj.getTime = parseInt((obj.oDate.getTime() - new Date().getTime()) / 1000);
             obj.getDay = this.toDou(parseInt(obj.getTime / 86400));
             obj.getTime1 = obj.getTime % 86400;
             obj.getHours = this.toDou(parseInt(obj.getTime1 / 3600));
-            obj.getTime1 = obj.getTime1 % 3600;
+            obj.getTime1 %= 3600;
             obj.getMinutes = this.toDou(parseInt(obj.getTime1 / 60));
             obj.getSeconds = this.toDou(obj.getTime1 % 60);
             return {
@@ -122,7 +121,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * @param data
          * @param obj
          */
-        render: function (data, obj) {
+        render: function(data, obj) {
             var chartIndexLen = data.content.data.length;
             if (data.content.type === 'bar' || data.content.type === 'column' || data.content.type === 'line') {
                 switch (data.content.multiple) {
@@ -147,7 +146,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                         oImg.attr('src', vars.imgSite + 'imgs/swipewarn.png');
                         obj.append(oImg);
                         obj.find('img').fadeIn(500);
-                        setTimeout(function () {
+                        setTimeout(function() {
                             obj.find('img').fadeOut(500);
                         }, 2000);
                         break;
@@ -164,7 +163,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * 数据格式化
          * @param e
          */
-        normalizeData: function (e) {
+        normalizeData: function(e) {
             var t = e[0].data,
                 n = [];
             for (var i in t) {
@@ -184,7 +183,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * 加载图片
          * @param data 图片数据
          */
-        renderPic: function (data) {
+        renderPic: function(data) {
             var that = this;
             var elementout = $('<div></div>');
             var element = $('<div></div>');
@@ -198,7 +197,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                 width: that.scale(data.w),
                 height: that.scale(data.h),
                 left: that.scale(data.left),
-                top: that.scale(data.top,'top'),
+                top: that.scale(data.top, 'top'),
                 position: 'absolute',
                 opacity: data.opacity,
                 transform: that.rotate(data.rotate)
@@ -226,7 +225,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                 width: '100%',
                 height: '100%',
                 'border-radius': Math.min(data.borderradius, 50) + '%',
-                //'-webkit-border-radius': that.scale(data.borderradius * data.h / 200),
+                // '-webkit-border-radius': that.scale(data.borderradius * data.h / 200),
                 boxShadow: that.shadow(data.boxshadow)
             });
             // 解决border-radius在安卓机上不兼容的问题,不兼容则设置为背景
@@ -261,7 +260,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * 加载文本
          * @param data
          */
-        renderText: function (data) {
+        renderText: function(data) {
             var that = this;
             var elementout = $('<div></div>');
             var element = $('<div></div>');
@@ -270,7 +269,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                 position: 'absolute',
                 width: that.scale(data.w),
                 // width: 'auto',
-                top: that.scale(data.top,'top'),
+                top: that.scale(data.top, 'top'),
                 left: that.scale(data.left),
                 height: that.scale(data.height),
                 transform: that.rotate(data.rotate),
@@ -335,7 +334,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * 加载形状
          * @param data
          */
-        renderPshape: function (data) {
+        renderPshape: function(data) {
             var that = this;
             var elementout = $('<div></div>');
             var element = $('<div></div>');
@@ -385,17 +384,16 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                     type: 'GET',
                     dataType: 'text',
                     async: true,
-                    success: function (svg) {
+                    success: function(svg) {
                         // 请求返回文件
                         vars.shapesJon[shape + 'File'] = svg;
                         // 更改状态
                         vars.shapesJon[shape + 'State'] = 'resolved';
 
                         that.insertSvg(vars.shapesJon[shape], svg);
-
                     },
-                    error: function (e) {
-                        vars.shapesJon[shape + 'State'] = 'failed'
+                    error: function(e) {
+                        vars.shapesJon[shape + 'State'] = 'failed';
                         console.warn('需要新增的shape文件:', shape);
                     }
                 });
@@ -431,7 +429,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * @param arr 数组
          * @param svg svg文件
          */
-        insertSvg: function (arr, svg) {
+        insertSvg: function(arr, svg) {
             var that = this;
             for (var i = arr.length - 1; i > -1; i--) {
                 var data = arr[i].data,
@@ -455,7 +453,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * 加载按钮
          * @param data
          */
-        renderBtn: function (data) {
+        renderBtn: function(data) {
             var that = this;
             var elementout = $('<div></div>');
             var element = $('<a href="javascript:;"></a>');
@@ -502,7 +500,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * 加载随机数按钮 yangfan
          * @param data
          */
-        renderRandButton: function (data) {
+        renderRandButton: function(data) {
             var that = this;
             var elementout = $('<div></div>');
             var element = $('<a href="javascript:;"></a>');
@@ -564,7 +562,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
         /**
          * 加载特殊按钮
          */
-        renderPbutton: function (data) {
+        renderPbutton: function(data) {
             var that = this;
             var elementout = $('<div></div>');
             var element = $('<a></a>');
@@ -618,7 +616,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                     // 调整svnID
                     if (clicked) {
                         // svg命名规则为 点击过后的svg文件名多一个 'a'
-                        svgId = svgId + 'a';
+                        svgId += 'a';
                     }
                 }
                 if (svgId && !vars.svgJson['svg_' + svgId]) {
@@ -627,7 +625,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                         type: 'GET',
                         async: false,
                         dataType: 'text',
-                        success: function (svg) {
+                        success: function(svg) {
                             var $svg = $(svg);
                             $svg.css({
                                 width: that.scale(data.picwidth),
@@ -656,7 +654,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                 } else if (data.model_type === 'phone') {
                     data.phoneNumber && element.attr('href', 'tel:' + data.phoneNumber);
                 }
-                contentText.text((clicked ? clicked : data.con));
+                contentText.text(clicked ? clicked : data.con);
                 element.append(contentico);
                 element.append(contentText);
             } else if (data.model_type === 'count_down') {
@@ -672,7 +670,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                 var timeEle = element.get(0);
                 element.append(that.getCountDown(timeEle, data).countDown);
                 clearInterval(timeEle.timer);
-                timeEle.timer = setInterval(function () {
+                timeEle.timer = setInterval(function() {
                     element.html(that.getCountDown(timeEle, data).countDown);
                     if (that.getCountDown(timeEle, data).theTime < 0) {
                         clearInterval(timeEle.timer);
@@ -681,7 +679,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                 }, 1000);
             }
             elementout.append(element);
-            element.on('click', {contentico: contentico, contentText: contentText}, function (ev) {
+            element.on('click', { contentico: contentico, contentText: contentText }, function(ev) {
                 var contentico = ev.data.contentico,
                     contentText = ev.data.contentText;
                 if (data.model_type === 'phone') {
@@ -704,7 +702,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                                 voteId: data.button_id,
                                 name: data.projectName
                             },
-                            success: function (e) {
+                            success: function(e) {
                                 var $svg;
                                 if (e.errcode === 1) {
                                     if (svgId && !vars.svgJson['svg_' + svgId + 'a']) {
@@ -713,7 +711,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                                             url: vars.imgSite + 'imgs/buttonSvg/' + svgId + 'a.svg',
                                             type: 'GET',
                                             dataType: 'text',
-                                            success: function (svg) {
+                                            success: function(svg) {
                                                 $svg = $(svg);
                                                 $svg.css({
                                                     width: that.scale(data.picwidth),
@@ -749,7 +747,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                                     console.log(e.errmsg);
                                 }
                             },
-                            error: function (err) {
+                            error: function(err) {
                                 console.log('网络错误:', err);
                             }
                         });
@@ -769,7 +767,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * @param data
          * @param Swiper
          */
-        renderPswiper: function (data, Swiper) {
+        renderPswiper: function(data, Swiper) {
             var that = this;
             var imgData = [];
             var slider, n, i, container = $('<div class="swiper-container" style="z-index: 0"></div>'),
@@ -785,7 +783,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
             });
             container.append(wrapper);
             container.append(pagination);
-            data.data.map(function (container) {
+            data.data.map(function(container) {
                 var imgDom = $('<img/>');
                 imgDom.attr('src', that.imgfilter(container.picid));
                 slider = $('<div class="swiper-slide"></div>');
@@ -868,12 +866,12 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
             });
 
             // 图片放大
-            require.async(['photoswipe', 'photoswipeUI'], function (PhotoSwipe, PhotoSwipeUI) {
+            require.async(['photoswipe', 'photoswipeUI'], function(PhotoSwipe, PhotoSwipeUI) {
                 var pswpElement = $('.pswp')[0];
                 // 图片放大后下标
                 var imgindex = 0;
                 wrapper.off('click', '.swiper-slide');
-                wrapper.on('click', '.swiper-slide', function () {
+                wrapper.on('click', '.swiper-slide', function() {
                     imgindex = $(this).index();
                     var options = {
                         history: false,
@@ -895,7 +893,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                 loop: true,
                 observer: true,
                 observeParents: true,
-                onTouchStart: function (swiper) {
+                onTouchStart: function(swiper) {
                     swiper.update();
                 }
             });
@@ -913,7 +911,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * @param data
          * @param Swiper
          */
-        renderPswipers: function (data, Swiper) {
+        renderPswipers: function(data, Swiper) {
             var that = this;
             var slider, n, i, container = $('<div class="swiper-container" style="z-index: 0"></div>'),
                 wrapper = $('<div class="swiper-wrapper"></div>');
@@ -940,7 +938,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                 'z-index': 10
             });
             container.append(wrapper);
-            data.data.map(function (container) {
+            data.data.map(function(container) {
                 var imgDom = $('<img/>');
                 imgDom.attr('src', that.imgfilter(container.picid));
                 slider = $('<div class="swiper-slide" ></div>');
@@ -981,19 +979,19 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
             var swiperJson = {
                 speed: reg.test(effect) ? speed * 1000 : 10,
                 longSwipesRatio: 0.3,
-                loop: reg.test(effect) ? true : false,
+                loop: !!reg.test(effect),
                 autoplay: autoplay * 1000,
                 autoplayDisableOnInteraction: false,
                 effect: swiperEffect,
                 observer: true,
                 observeParents: true,
-                onInit: function (swiper) {
+                onInit: function(swiper) {
                     if (!reg.test(effect)) {
                         swiperAni.swiperAnimateCache(swiper);
                         swiperAni.swiperAnimate(swiper);
                     }
                 },
-                onSlideChangeEnd: function (swiper) {
+                onSlideChangeEnd: function(swiper) {
                     if (!reg.test(effect)) {
                         swiperAni.swiperAnimate(swiper);
                     }
@@ -1014,7 +1012,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * @param data
          * @returns {object} data、element、elementout、type
          */
-        renderCharts: function (data) {
+        renderCharts: function(data) {
             var that = this;
             var elementout = $('<div class="chart-wrapper"></div>');
             var element = $('<div class="chart"></div>');
@@ -1050,7 +1048,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                 background: 'rgba(0,0,0,0)'
             });
             // 统计表
-            setTimeout(function () {
+            setTimeout(function() {
                 that.render(data, element);
             }, 1500);
             // 图标样式属性 1：逐条显示，2:全部显示,3:只有column类型有，重叠全部显示
@@ -1083,7 +1081,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                         }
                         elementout.append(chartHeard);
                         // 图表点击切换
-                        chartHeard.on('click', 'span', function () {
+                        chartHeard.on('click', 'span', function() {
                             chartIndex = $(this).index();
                             $(this).css({
                                 'font-size': '16px',
@@ -1096,7 +1094,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                         });
                         // 图表切换
                         var hammertime = new Hammer(element[0]);
-                        hammertime.on('swipeleft', function () {
+                        hammertime.on('swipeleft', function() {
                             if (chartIndexLen === 1 || chartIndexLen > 1 && !data.content.data[1].data) {
                                 return false;
                             }
@@ -1110,7 +1108,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                             });
                             element.highcharts(that.prepareChartOption(data, chartIndex % chartIndexLen));
                         });
-                        hammertime.on('swiperight', function () {
+                        hammertime.on('swiperight', function() {
                             if (chartIndexLen === 1 || chartIndexLen > 1 && !data.content.data[1].data) {
                                 return false;
                             }
@@ -1149,7 +1147,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * @param data
          * @param e
          */
-        prepareChartOption: function (data, e) {
+        prepareChartOption: function(data, e) {
             var that = this;
             var dataContent = data.content,
                 dataOptions = data.content.options,
@@ -1261,7 +1259,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * @param data
          * @param e
          */
-        piePrepareChartOption: function (data, e) {
+        piePrepareChartOption: function(data, e) {
             var dataContent = data.content,
                 dataOptions = data.content.options,
                 fontSize = '12px',
@@ -1283,7 +1281,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                     legend: {
                         enabled: true,
                         useHTML: true,
-                        labelFormatter: function () {
+                        labelFormatter: function() {
                             return '<div style="font-size: ' + fontSize + '; color: ' + lineColor + '">' + this.name + '</div>';
                         }
                     },
@@ -1319,7 +1317,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * 加载视频
          * @param data
          */
-        renderVideo: function (data) {
+        renderVideo: function(data) {
             var that = this;
             var elementout = $('<div></div>');
             var element = $('<video></video>');
@@ -1335,7 +1333,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                 width: that.scale(data.w),
                 height: 'auto',
                 left: that.scale(data.left),
-                top: that.scale(data.top,'top'),
+                top: that.scale(data.top, 'top'),
                 position: 'absolute',
                 opacity: data.opacity,
                 transform: that.rotate(data.rotate)
@@ -1359,7 +1357,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
             contentareaplay.attr('src', vars.imgSite + 'imgs/play.png');
             // 视频播放控制
             var oVideo = element[0];
-            elementout.on('click', function () {
+            elementout.on('click', function() {
                 // 停止背景音乐播放
                 if (vars.audio) {
                     vars.audio.pause();
@@ -1374,7 +1372,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                     oVideo.pause();
                 }
             });
-            element.on('timeupdate', function () {
+            element.on('timeupdate', function() {
                 if (oVideo.currentTime === oVideo.duration) {
                     oVideo.currentTime = 0;
                     contentareaplay.fadeIn(300);
@@ -1395,7 +1393,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * 加载表单
          * @param data
          */
-        renderForm: function (data) {
+        renderForm: function(data) {
             var that = this;
             var elementout = $('<div></div>');
             var warn = $('<div></div>');
@@ -1474,7 +1472,6 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
             var inputCode;
             // 增加表单验证判断 limit值 nameTel和none代表 需要验证 和不需要验证
             if (data.limit === 'nameTel') {
-
                 inputCode = $('<input name="100" placeholder="请输入验证码" data-name="验证码" >');
                 inputCode.css({
                     width: '48%',
@@ -1503,7 +1500,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                     display: 'none'
                 });
                 telInput = elementout.find('input').eq(1);
-                telInput.on('input', function () {
+                telInput.on('input', function() {
                     telInput.val(telInput.val().replace(/[^-\d]/g, ''));
                     if (!telInput.val()) {
                         inputCode.hide();
@@ -1513,7 +1510,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                         getCode.css('display', 'inline-block');
                     }
                 });
-                getCode.on('click', function () {
+                getCode.on('click', function() {
                     if (!telInput.val() || !reg.test(telInput.val())) {
                         imgEle.attr('src', '');
                         if (!imgEle.attr('src')) {
@@ -1523,8 +1520,8 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                         }
                         pEle.html('手机号为空或格式不正确');
                         warn.show();
-                        setTimeout(function () {
-                            warn.fadeOut(300, function () {
+                        setTimeout(function() {
+                            warn.fadeOut(300, function() {
                                 telInput.focus();
                             });
                         }, 1000);
@@ -1537,11 +1534,11 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                             pEle.css('margin', '20px auto');
                         }
                         warn.show();
-                        setTimeout(function () {
+                        setTimeout(function() {
                             warn.fadeOut(300);
                         }, 2000);
                         // 调用发送验证码插件
-                        smsLogin.send(telInput.val(), function () {
+                        smsLogin.send(telInput.val(), function() {
                             // 记录日志
                             $.post(vars.phoneSite + '?c=web&a=ajaxSendCodeLog', {
                                 referer: document.referer,
@@ -1558,10 +1555,10 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                             }
                             pEle.html('发送成功!');
                             warn.fadeIn(300);
-                            setTimeout(function () {
+                            setTimeout(function() {
                                 warn.fadeOut(300);
                             }, 2000);
-                        }, function (err) {
+                        }, function(err) {
                             imgEle.attr('src', '');
                             if (!imgEle.attr('src')) {
                                 pEle.css('margin', '200px auto');
@@ -1570,7 +1567,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                             }
                             pEle.html(err);
                             warn.fadeIn(300);
-                            setTimeout(function () {
+                            setTimeout(function() {
                                 warn.fadeOut(300);
                             }, 2000);
                         });
@@ -1580,7 +1577,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                 elementout.append(getCode);
             }
             elementout.append(btn);
-            btn.on('click', {inputCode: inputCode}, function (e) {
+            btn.on('click', { inputCode: inputCode }, function(e) {
                 if (data.limit && data.limit === 'nameTel') {
                     nameInput = inputarray[0];
                     telInput = inputarray[1];
@@ -1594,8 +1591,8 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                         }
                         pEle.html('姓名不能为空');
                         warn.fadeIn(300);
-                        setTimeout(function () {
-                            warn.fadeOut(300, function () {
+                        setTimeout(function() {
+                            warn.fadeOut(300, function() {
                                 nameInput.focus();
                             });
                         }, 1000);
@@ -1609,8 +1606,8 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                         }
                         pEle.html('手机号为空或格式不正确');
                         warn.fadeIn(300);
-                        setTimeout(function () {
-                            warn.fadeOut(300, function () {
+                        setTimeout(function() {
+                            warn.fadeOut(300, function() {
                                 telInput.focus();
                             });
                         }, 1000);
@@ -1624,8 +1621,8 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                         }
                         pEle.html('验证码不能为空');
                         warn.fadeIn(300);
-                        setTimeout(function () {
-                            warn.fadeOut(300, function () {
+                        setTimeout(function() {
+                            warn.fadeOut(300, function() {
                                 codeInput.focus();
                             });
                         }, 1000);
@@ -1651,7 +1648,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                         }
                         pEle.html('您输入的内容不能全部为空');
                         warn.fadeIn(300);
-                        setTimeout(function () {
+                        setTimeout(function() {
                             warn.fadeOut(300);
                         }, 1000);
                         return;
@@ -1685,9 +1682,9 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
 
                 // 验证验证码
                 if (telInput && codeInput) {
-                    smsLogin.check(telInput.val(), codeInput.val(), function () {
+                    smsLogin.check(telInput.val(), codeInput.val(), function() {
                         that.formAjax(tmpData, pEle, imgEle, warn, data.sucmsg);
-                    }, function (err) {
+                    }, function(err) {
                         pEle.html(err + '<br>');
                         imgEle.attr('src', '');
                         if (!imgEle.attr('src')) {
@@ -1696,7 +1693,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                             pEle.css('margin', '20px auto');
                         }
                         warn.fadeIn(300);
-                        setTimeout(function () {
+                        setTimeout(function() {
                             warn.fadeOut(300);
                         }, 1000);
                     });
@@ -1704,7 +1701,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                     that.formAjax(tmpData, pEle, imgEle, warn, data.sucmsg);
                 }
             });
-            warn.on('click', function () {
+            warn.on('click', function() {
                 warn.hide();
             });
             return {
@@ -1722,14 +1719,14 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * @param imgEle image 标签
          * @param warn 提示外面盒子
          */
-        formAjax: function (tmpData, pEle, imgEle, warn, sucmsg) {
+        formAjax: function(tmpData, pEle, imgEle, warn, sucmsg) {
             $.ajax({
                 type: 'POST',
                 url: vars.phoneSite + '?c=web&a=ajaxSubSignInfo',
                 cache: false,
                 dataType: 'json',
                 data: tmpData,
-                success: function (e) {
+                success: function(e) {
                     if (parseInt(e.errcode) === 1) {
                         if (e.errmsg) {
                             pEle.html(sucmsg + '<br>恭喜您获得了' + e.errmsg);
@@ -1743,7 +1740,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                         }
                         imgEle.attr('src', vars.imgSite + 'imgs/sendsucess.png');
                         warn.fadeIn(300);
-                        setTimeout(function () {
+                        setTimeout(function() {
                             warn.fadeOut(300);
                         }, 2000);
                     } else {
@@ -1755,12 +1752,12 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                             pEle.css('margin', '20px auto');
                         }
                         warn.fadeIn(300);
-                        setTimeout(function () {
+                        setTimeout(function() {
                             warn.fadeOut(300);
                         }, 2000);
                     }
                 },
-                error: function () {
+                error: function() {
                     pEle.html('提交失败!<br>');
                     imgEle.attr('src', '');
                     if (!imgEle.attr('src')) {
@@ -1769,7 +1766,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                         pEle.css('margin', '20px auto');
                     }
                     warn.fadeIn(300);
-                    setTimeout(function () {
+                    setTimeout(function() {
                         warn.fadeOut(300);
                     }, 1000);
                 }
@@ -1780,7 +1777,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * @param data 当前元素数据
          * @param pageData 页面数据
          */
-        renderSite: function (data,pageData) {
+        renderSite: function(data, pageData) {
             var that = this;
             var elementout = $('<div></div>');
             var element = $('<iframe frameborder="0"></iframe>');
@@ -1816,7 +1813,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
             }
             if (iframeUrl) {
                 // 设置一个监听事件,等待页面渲染完成后执行iframe的src的赋值
-                var callback = function (ele) {
+                var callback = function(ele) {
                     // 加if判断 发布事件的时候只给当前显示的iframe赋src地址(eleAnimation.js 975行)
                     if (elementout.css('display') === 'block') {
                         element.attr('src', iframeUrl);
@@ -1863,10 +1860,10 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                     var timer = null;
                     var turnH = parseInt(pageTurn.css('top'));
                     // 解决iPhone 设置按钮top bug
-                    elementout.on('scroll', function () {
+                    elementout.on('scroll', function() {
                         // 降频处理
                         clearTimeout(timer);
-                        /*timer = setTimeout(function () {
+                        /* timer = setTimeout(function () {
                          pageTurn.css('top', turnH + elementout.scrollTop());
                          clearTimeout(timer);
                          }, 100);*/
@@ -1888,7 +1885,6 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                     element.css('height', winH);
                     elementout.css('height', winH);
                 }
-
             } else {
                 // android 下iframe不设置高度 会出现高度塌陷
                 element.css('height', that.scale(data.h));
@@ -1896,10 +1892,10 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
 
 
             if (pageData && pageData.pan === 'yes') {
-                pageTurnShowHide.on('click', function () {
+                pageTurnShowHide.on('click', function() {
                     if (pageTurn.hasClass('fromRightSlow')) {
                         pageTurn.removeClass('fromRightSlow').removeClass('delay2s').addClass('toRightHide');
-                        setTimeout(function () {
+                        setTimeout(function() {
                             pageTurnShowHide.css({
                                 left: '-26px',
                                 backgroundPosition: '-16px 4px',
@@ -1927,7 +1923,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                 elementout: elementout,
                 element: element,
                 pageTurn: pageTurn,
-                pageTurnTop: pageTurn ?  parseInt(pageTurn.css('top')) : 0,
+                pageTurnTop: pageTurn ? parseInt(pageTurn.css('top')) : 0,
                 seajsEmitRuned: false,
                 data: data
             };
@@ -1937,7 +1933,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * 获取cookie
          * @param name cookie名字
          */
-        getCookie: function (name) {
+        getCookie: function(name) {
             var arr = document.cookie.split('; ');
             for (var i = 0; i < arr.length; i++) {
                 var arr2 = arr[i].split('=');
@@ -1954,7 +1950,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * @param value cookie值
          * @param iDay 过期时间
          */
-        setCookie: function (name, value, iDay) {
+        setCookie: function(name, value, iDay) {
             if (iDay) {
                 var oDate = new Date();
                 oDate.setDate(oDate.getDate() + iDay);
@@ -1968,7 +1964,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * 删除cookie
          * @param name cookie名字
          */
-        removeCookie: function (name) {
+        removeCookie: function(name) {
             this.setCookie(name, 1, -1);
         },
 
@@ -1976,7 +1972,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
          * 创建透明弹层 用于显示元素的背景
          * @returns {*|jQuery|HTMLElement}
          */
-        createFloat: function () {
+        createFloat: function() {
             var that = this;
             var elementout = $('<div></div>');
             elementout.css({
@@ -1987,7 +1983,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function (require
                 left: 0,
                 top: 0,
                 position: 'absolute',
-                opacity: .69,
+                opacity: 0.69,
                 backgroundColor: '#000',
                 zIndex: 1000
             });

@@ -286,6 +286,9 @@ class AdminController extends AbstractAdminController
         try {
             $market = new MarketModel();
             $data = $market->getProjectById($id, 0, 'edit');
+            //因content单独在一张表里，需要再获取一下content
+            $content = $market->getProjectContentById($id, 'edit');
+            $data[0]['content'] = $content[0]['content'];
         } catch (Exception $e) {
             $jsonArr['errcode'] = 0;
             $jsonArr['errmsg'] = '服务器错误,项目复制失败';
@@ -910,6 +913,9 @@ class AdminController extends AbstractAdminController
             $market = new MarketModel();
             if ($from === 'open') {
                 $result = $market->getProjectById($id, 1, 'edit');
+                //因content单独在一张表里，需要再获取一下content
+                $content = $market->getProjectContentById($id, 'edit');
+                $result[0]['content'] = $content[0]['content'];
                 $market->updateLoadCount($id);
             } else {
                 $result = $market->getMultiTemplateById($id);
@@ -1718,6 +1724,35 @@ class AdminController extends AbstractAdminController
         } catch (Exception $e) {
             Output::outputData(['source' => 1, 'errcode' => 0, 'errmsg' => $e->getMessage()]);
             exit;
+        }
+    }
+
+    /**
+     * 将project表中content字段的值导入到content_*表的content字段中
+     */
+    public function insertContentAction()
+    {
+        error_reporting(E_ALL);
+        ini_set('display_errors', true);
+        $pagenum = intval($_GET['page']);
+        $market = new MarketModel();
+        $log = new Log('insertContentLog');
+
+        for ($page=$pagenum; $page <= $pagenum+24; $page++) {
+            $project = $market->getProjectsByPage($page, 200);
+
+            if (is_array($project)) {
+                foreach ($project as $key => $value) {
+                    $result = $market -> insertContent($value['id'], $value['content'], $page);
+                    if ($result) {
+                        $status = 'success';
+                    } else {
+                        $status = 'failed';
+                        $data = $value['id'] . ";;" . $status;
+                        $log->fileWrite($data, 'insertContentLog');
+                    }
+                }
+            }
         }
     }
 }

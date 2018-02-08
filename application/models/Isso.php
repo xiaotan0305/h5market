@@ -31,6 +31,7 @@
  */
 use models\Http\Oajk as OajkHttp;
 use models\Http\Homewww2 as Homewww2Http;
+use models\Http\Login as LoginHttp;
 
 class IssoModel extends BaseModel
 {
@@ -85,11 +86,10 @@ class IssoModel extends BaseModel
                     'method' => 'verifyTokenPc',
                     'user' => $this->_auth['oa']['user'],
                     'pwd' => $this->_auth['oa']['pwd'],
-                    'isso_sid' => $this->_auth['homewww2']['sid'],
                     'oa_token' => $http_param['cookie']['oa_token']
                 );
-                $OajkHttp = new OajkHttp();
-                $result = $OajkHttp->auth($query);
+                $LoginHttp = new LoginHttp();
+                $result = $LoginHttp->auth($query);
 
                 return $result['msg'];
             } else {

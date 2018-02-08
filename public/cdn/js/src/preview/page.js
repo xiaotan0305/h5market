@@ -1,10 +1,9 @@
 /**
  * Created by liyy on 2015/8/31.
- * @Last Modified by:   tankunpeng
- * @Last Modified time: 2016/1/5
+ * @Last Modified by: tankunpeng@fang.com
+ * @Last Modified time: 2018-02-08 14:25:29
  */
-define('page', ['jquery', 'jqueryTransit', 'eleAnimation', 'tools'], function (require) {
-    'use strict';
+define('page', ['jquery', 'jqueryTransit', 'eleAnimation', 'tools'], function(require) {
     var vars = seajs.data.vars;
 
     var $ = require('jquery'),
@@ -32,7 +31,7 @@ define('page', ['jquery', 'jqueryTransit', 'eleAnimation', 'tools'], function (r
          * 页面初始化
          * @param data 页面原始数据
          */
-        init: function (data) {
+        init: function(data) {
             var that = this;
             this.page = $('<div class="page"> </div>');
             this.pagebg = $('<div class="pagebg"></div>');
@@ -58,10 +57,10 @@ define('page', ['jquery', 'jqueryTransit', 'eleAnimation', 'tools'], function (r
                 this.pagebgimg.css({
                     position: 'absolute',
                     opacity: data.opacity,
-                    left: that.scale(data.bgpicleft,'left'),
-                    top: that.scale(data.bgpictop,'top'),
-                    width: data.bgpicwidth ? that.scale(data.bgpicwidth,'width') : '100%',
-                    height: data.bgpicheight && data.bgpicheight !== 'auto' ? that.scale(data.bgpicheight,'height') : '100%',
+                    left: that.scale(data.bgpicleft, 'left'),
+                    top: that.scale(data.bgpictop, 'top'),
+                    width: data.bgpicwidth ? that.scale(data.bgpicwidth, 'width') : '100%',
+                    height: data.bgpicheight && data.bgpicheight !== 'auto' ? that.scale(data.bgpicheight, 'height') : '100%',
                     '-webkit-filter': 'blur(' + data.blur + 'px)',
                     transform: 'rotate(' + data.rotate + 'deg)',
                     '-webkit-transform': 'rotate(' + data.rotate + 'deg)',
@@ -168,7 +167,7 @@ define('page', ['jquery', 'jqueryTransit', 'eleAnimation', 'tools'], function (r
                                 vars.clock.attr('src', vars.imgSite + 'imgs/icon-watch.png');
                                 // background-size: 80px 32px;
                                 vars.h5Timer.css({
-                                    'background': 'url(' + vars.imgSite + 'imgs/zfz-ying.png) 22px 4px no-repeat',
+                                    background: 'url(' + vars.imgSite + 'imgs/zfz-ying.png) 22px 4px no-repeat',
                                     'background-size': '80px 32px'
                                 }).show();
                             }
@@ -190,7 +189,6 @@ define('page', ['jquery', 'jqueryTransit', 'eleAnimation', 'tools'], function (r
                         if (ele) {
                             ele.initHide = true;
                         }
-
                     }
                 }
             }
@@ -212,16 +210,16 @@ define('page', ['jquery', 'jqueryTransit', 'eleAnimation', 'tools'], function (r
          * 图片地址过滤
          * @param str 字符串
          */
-        imgfilter: function (str) {
+        imgfilter: function(str) {
             return vars.imgUrlReg.test(str) ? str : vars.imgSite + 'imgs/' + str;
         },
 
         /**
          * 处理silde元素
          */
-        loadSwiper: function () {
+        loadSwiper: function() {
             var that = this;
-            require.async('swiper', function (Swiper) {
+            require.async('swiper', function(Swiper) {
                 var ele = tools.renderPswiper(that.slideCon, Swiper);
                 that.elearray.push(ele);
                 that.swiper = ele.swiper;
@@ -234,7 +232,7 @@ define('page', ['jquery', 'jqueryTransit', 'eleAnimation', 'tools'], function (r
          * 补全两位数字
          * @param n
          */
-        toDou: function (n) {
+        toDou: function(n) {
             n = parseInt(n);
             return n < 10 ? '0' + n : '' + n;
         },
@@ -242,9 +240,9 @@ define('page', ['jquery', 'jqueryTransit', 'eleAnimation', 'tools'], function (r
         /**
          * 处理图集sildes元素
          */
-        loadSwipers: function () {
+        loadSwipers: function() {
             var that = this;
-            require.async('swiper', function (Swiper) {
+            require.async('swiper', function(Swiper) {
                 var ele = tools.renderPswipers(that.slideCons, Swiper);
                 // that.elearray.push(ele);
                 that.swiperPhotos = ele.swiper;
@@ -257,9 +255,9 @@ define('page', ['jquery', 'jqueryTransit', 'eleAnimation', 'tools'], function (r
         /**
          * 处理chart元素
          */
-        loadChart: function () {
+        loadChart: function() {
             var that = this;
-            require.async(['highcharts', 'hammer'], function () {
+            require.async(['highcharts', 'hammer'], function() {
                 var ele = tools.renderCharts(that.charts);
                 that.chartEle = ele;
                 that.elearray.push(ele);
@@ -272,9 +270,9 @@ define('page', ['jquery', 'jqueryTransit', 'eleAnimation', 'tools'], function (r
          * @param ele 元素
          * @param eleCon 元素原始数据
          */
-        eleClick: function (ele, eleCon) {
+        eleClick: function(ele, eleCon) {
             var that = this;
-            ele.element.on('click', {ele: ele, toPage: eleCon.toPage, toUrl: eleCon.toUrl}, function (e) {
+            ele.element.on('click', { ele: ele, toPage: eleCon.toPage, toUrl: eleCon.toUrl }, function(e) {
                 var ele = e.data.ele,
                     toPage = e.data.toPage,
                     toUrl = e.data.toUrl || e.data.url,
@@ -285,7 +283,7 @@ define('page', ['jquery', 'jqueryTransit', 'eleAnimation', 'tools'], function (r
                 switch (data.eventAction) {
                     case 'magnify':
                         // 图片放大
-                        require.async(['photoswipe', 'photoswipeUI'], function (PhotoSwipe, PhotoSwipeUI) {
+                        require.async(['photoswipe', 'photoswipeUI'], function(PhotoSwipe, PhotoSwipeUI) {
                             var pswpElement = $('.pswp')[0];
                             var slides = [{
                                 src: imgSrc,
@@ -380,7 +378,7 @@ define('page', ['jquery', 'jqueryTransit', 'eleAnimation', 'tools'], function (r
          * 跳转页面
          * @param toPage 要跳转的页码
          */
-        changePage: function (toPage) {
+        changePage: function(toPage) {
             var that = this;
             // 跳转页面和当前页面一致时 不做响应
             if (parseInt(toPage) === vars.current) {
@@ -440,7 +438,7 @@ define('page', ['jquery', 'jqueryTransit', 'eleAnimation', 'tools'], function (r
         /**
          * 设置定时器
          */
-        timeReset: function (val, type) {
+        timeReset: function(val, type) {
             var that = this,
                 minute, second;
             val = val || 0;
@@ -470,7 +468,7 @@ define('page', ['jquery', 'jqueryTransit', 'eleAnimation', 'tools'], function (r
                 timerEndPage: vars.timerEndPage
             };
          */
-        timeUpDown: function (json) {
+        timeUpDown: function(json) {
             var that = this,
                 upNum;
 
@@ -479,11 +477,11 @@ define('page', ['jquery', 'jqueryTransit', 'eleAnimation', 'tools'], function (r
                 toPage = json.timerToPage;
             vars.upDownTimer = null;
             // 定义内部函数 方便重用
-            var timeDown = function () {
+            var timeDown = function() {
                 that.timeReset(val);
                 val--;
                 clearTimeout(vars.upDownTimer);
-                vars.upDownTimer = setTimeout(function () {
+                vars.upDownTimer = setTimeout(function() {
                     if (val >= 0) {
                         timeDown();
                     } else {
@@ -491,12 +489,12 @@ define('page', ['jquery', 'jqueryTransit', 'eleAnimation', 'tools'], function (r
                     }
                 }, 1000);
             };
-            var timeUp = function () {
+            var timeUp = function() {
                 upNum = upNum || 0;
                 that.timeReset(upNum, 'timeKeeper');
                 upNum++;
                 clearTimeout(vars.upDownTimer);
-                vars.upDownTimer = setTimeout(function () {
+                vars.upDownTimer = setTimeout(function() {
                     timeUp();
                 }, 1000);
             };
@@ -515,7 +513,7 @@ define('page', ['jquery', 'jqueryTransit', 'eleAnimation', 'tools'], function (r
          * @param e 页面下标
          * @param t Preloader对象
          */
-        loadelespic: function (e, t) {
+        loadelespic: function(e, t) {
             this.bgpic && t.addpic(this.bgimg);
             for (var ele in this.elearray) {
                 if (this.elearray.hasOwnProperty(ele)) {
@@ -529,9 +527,9 @@ define('page', ['jquery', 'jqueryTransit', 'eleAnimation', 'tools'], function (r
         /**
          * 隐藏页面元素
          */
-        hidePageElement: function () {
+        hidePageElement: function() {
             // 遍历页面中的元素
-            $.each(this.elearray, function (index, ele) {
+            $.each(this.elearray, function(index, ele) {
                 if (ele.eletype === 'charts' || ele.eletype === 'slide' || ele.eletype === 'slides' || ele.eletype === 'eleform') {
                     ele.elementout.hide();
                 } else {
@@ -544,9 +542,9 @@ define('page', ['jquery', 'jqueryTransit', 'eleAnimation', 'tools'], function (r
         /**
          * 显示页面元素动画效果
          */
-        showPageInAnimation: function (callback) {
+        showPageInAnimation: function(callback) {
             // 遍历页面中的元素
-            $.each(this.elearray, function (index, ele) {
+            $.each(this.elearray, function(index, ele) {
                 // 默认隐藏的元素
                 if (ele.initHide) {
                     ele.elementout.hide();
@@ -562,10 +560,9 @@ define('page', ['jquery', 'jqueryTransit', 'eleAnimation', 'tools'], function (r
                 } else if (ele.eletype === 'slides') {
                     // ele.elementout.show();
                     if (ele.eledata.auto) {
-                        setTimeout(function () {
+                        setTimeout(function() {
                             ele.swiper.startAutoplay();
-                        }, 4000)
-
+                        }, 4000);
                     }
                 } else {
                     eleAnimation.actAnimation(ele);
@@ -581,7 +578,7 @@ define('page', ['jquery', 'jqueryTransit', 'eleAnimation', 'tools'], function (r
          * @param type 类型 width height left top
          * @returns {string} 处理后数据
          */
-        scale: function (e,type) {
+        scale: function(e, type) {
             e = parseInt(Math.round(parseInt(e) * (type ? vars.radio.ratio[type] : vars.radio.scaleRatio)));
             return e + 'px';
         },

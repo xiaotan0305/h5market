@@ -11,6 +11,10 @@
         fileFilter: [],
         option: {
             url: '/bbs/?c=bbs&a=ajaxUploadImgNew',
+            // 增加图片上传node接口
+            urlnode:'',
+            // 添加projectId
+            projectId: '',
             imgContainer: '#upload',
             imgUrl: '',
             onSuccess: function (file, result) {
@@ -20,8 +24,29 @@
             filter: function (files, type) {
             }
         },
-        upload: function (file, uploadBase64) {
+        upload: function (file, uploadBase64,type) {
             var that = this;
+            if(type == 'pic') {
+            $.ajax({
+                url: that.option.urlnode,
+                method:'POST',
+                data: {
+                    cteateTime: new Date().getTime(),
+                    name:'uploaImg' + Math.random().toString(36).substring(2),
+                    projectId: that.option.projectId,
+                    base64:uploadBase64
+                },
+                success: function (data) {
+                    if (data.code !== '100') {
+                        that.option.onFailure(file, data);
+                    }
+                    that.option.onSuccess(file, data, uploadBase64);
+                },
+                fail:function () {
+                    that.option.onFailure(file, data);
+                }
+            });
+        } else {
             var xhr = new XMLHttpRequest();
             if (xhr.upload) {
                 xhr.upload.addEventListener("progress", function (event) {
@@ -62,6 +87,7 @@
                     xhr.send(formData);
                 }
             }
+        }
         },
 
     inputHandle: function (e) {
@@ -84,7 +110,7 @@
                             return false;
                         }
                         i++;
-                        self.upload(file, uploadBase64);
+                        self.upload(file, uploadBase64, uplodeFileType);
                         funAppendImage();
                     };
                     reader.readAsDataURL(file);

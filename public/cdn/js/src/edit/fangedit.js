@@ -2,8 +2,8 @@
  * @Author: liyy
  * @Date:   2015/9/9
  * @description: h5market控制器，主要代码编写
- * @Last Modified by:   liyy
- * @Last Modified time: 2015-11-23
+ * @Last Modified by: liuxinlu@fang.com
+ * @Last Modified time: 2018-02-01 13:44:55
  */
 (function () {
     'use strict';
@@ -1883,34 +1883,58 @@
                     // 图片和音乐文件上传
                     var uploaderObj = new upload({
                         url: Config.mediaUpload,
+                        urlnode: Config.psdUploadUrl,
+                        projectId: $scope.projectId,
                         onSuccess: function (file, result) {
-                            var data = JSON.parse(result);
-                            if (data.musicid) {
+
+                            var data = result;
+                            if ("audio/mp3" == file.type) {
+                                data = JSON.parse(result);
                                 $scope.musicUploading = false;
+                                if (data.errcode === 2) {
+                                    $scope.relogin(data.url, data.errmsg);
+                                    return;
+                                }
+                                if (data.errcode !== 1) {
+                                    var msgCon = '文件上传失败(；′⌒`)';
+                                    if (data.errmsg) {
+                                        msgCon = data.errmsg;
+                                    }
+                                    $scope.msgConfirm(msgCon);
+                                    return;
+                                }
                             } else {
                                 $scope.imgUploading = false;
-                            }
-                            if (data.errcode === 2) {
-                                $scope.relogin(data.url, data.errmsg);
-                                return;
-                            }
-                            if (data.errcode !== 1) {
-                                var msgCon = '文件上传失败(；′⌒`)';
-                                if (data.errmsg) {
-                                    msgCon = data.errmsg;
+                                if (data.code != '100') {
+                                    var msgCon = '图片上传失败(；′⌒`)';
+                                    if (data.errmsg) {
+                                        msgCon = data.errmsg;
+                                    }
+                                    $scope.msgConfirm(msgCon);
+                                    return;
                                 }
-                                $scope.msgConfirm(msgCon);
-                                return;
+                                // 将图片存入数据库
+                                $.ajax({
+                                    url: Config.mediaUpload,
+                                    method: 'GET',
+                                    async: false,
+                                    data: {
+                                        flag: 1,
+                                        fileName: file.name,
+                                        type: file.type,
+                                        url: Config.psdPicUrl + data.imgUrl
+                                    }
+                                });
                             }
                             var i = {
-                                id: data.url,
+                                id: data.url || Config.psdPicUrl + data.imgUrl,
                                 name: file.name
                             };
                             // 音乐文件添加入音乐文件，图片文件添加到图片上传数组
                             if (data.musicid) {
                                 i.musicid = data.musicid;
                             } else {
-                                i.picid = data.picid;
+                                i.picid = $scope.uuid(32);
                             }
                             $scope.$apply(function () {
                                 if (data.musicid) {
@@ -2188,7 +2212,6 @@
                         xhr.send(formData);
                     }
                 };
-
                 /**
                  * 显示模板标题封面
                  */
@@ -2201,17 +2224,19 @@
                             var uploadBase64;
                             var img = new Image();
                             img.src = canvas.toDataURL('image/png',0.25);
-                            if (ImageCompresser.support()) {
-                                try {
-                                    uploadBase64 = ImageCompresser.getImageBase64(img, $scope.conf);
-                                } catch (err) {
-                                    return false;
+                            img.onload=function(){
+                                if (ImageCompresser.support()) {
+                                    try {
+                                        uploadBase64 = ImageCompresser.getImageBase64(img, $scope.conf);
+                                    } catch (err) {
+                                        return false;
+                                    }
+                                    if (uploadBase64.indexOf('data:image') < 0) {
+                                        alert('上传照片格式不支持');
+                                        return false;
+                                    }
+                                    $scope.upload(uploadBase64);
                                 }
-                                if (uploadBase64.indexOf('data:image') < 0) {
-                                    alert('上传照片格式不支持');
-                                    return false;
-                                }
-                                $scope.upload(uploadBase64);
                             }
                         }
                     });

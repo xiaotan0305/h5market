@@ -54,9 +54,15 @@ class Bootstrap extends Yaf_Bootstrap_Abstract
         //Zookeeper配置
         $zk_conf = new Yaf_Config_Ini(APP_PATH . "/conf/zk.ini", RUN_ENVIRON);
         Yaf_Registry::set('zk', $zk_conf->toArray());
-        //数据库配置
-        $db_conf = new Yaf_Config_Ini(APP_PATH . "/conf/db.ini", RUN_ENVIRON);
-        Yaf_Registry::set('db', $db_conf->toArray());
+        if (RUN_ENVIRON == 'product') {
+            //数据库配置 单独存放在conf文件中
+            $filename = realpath(APP_PATH.'/../').DIRECTORY_SEPARATOR.'cfgfiles'.DIRECTORY_SEPARATOR.'h5market.fang.com'.DIRECTORY_SEPARATOR.'db.conf';
+            self::__includeConf($filename);
+        } else {
+            //数据库配置
+            $db_conf = new Yaf_Config_Ini(APP_PATH . "/conf/db.ini", RUN_ENVIRON);
+            Yaf_Registry::set('db', $db_conf->toArray());
+        }
         //接口配置
         $interface_conf = new Yaf_Config_Ini(APP_PATH . "/conf/interface.ini", RUN_ENVIRON);
         Yaf_Registry::set('interface', $interface_conf->toArray());
@@ -183,6 +189,44 @@ class Bootstrap extends Yaf_Bootstrap_Abstract
             ini_set('xhprof.output_dir', $this->_config['application']['logdir'].'xhprof');
             $dispatcher->registerPlugin(new XhprofPlugin());
         }
+    }
+
+    /**
+     * 引用外部数据库配置文件
+     * @param obj $dispatcher yaf分发器
+     * @return void
+     */
+    private function __includeConf($filename)
+    {
+        $data = file_get_contents($filename);
+        $getdata=str_replace("'", '"', $data);//将单引替换成双引
+        $getdata = preg_replace('/,\s*([\]}])/m', '$1', $getdata);//去掉多余的逗号
+        $data =  json_decode($getdata, true);
+        $res = array();
+        if ($data) {
+            //处理数据格式保持之前数据格式一致
+            foreach ($data as $key => $value) {
+                $dbdata = array(
+                    'dbtype' => $value['DBtype'],
+                    'charset' => $value['DBcharset'],
+                    'host' => $value['DBaddr'],
+                    'port' => $value['DBport'],
+                    'user' => $value['DBusername'],
+                    'pwd' => $value['DBpw'],
+                    'dbname' => $value['DBname'],
+                    'DBusertype' => $value['DBusertype']
+                );
+                $length = strlen($value['DBname'])+1;
+                if (strrpos($key, '_r') === (strlen($key)-2)) {
+                    $k = substr($key, $length, (strrpos($key, '_r')-$length));
+                    $res[$k]['slave'][] = $dbdata;
+                } else {
+                    $k = substr($key, $length, (strrpos($key, '_w')-$length));
+                    $res[$k]['master'] = $dbdata;
+                }
+            }
+        }
+        Yaf_Registry::set('db', $res);
     }
 }
 

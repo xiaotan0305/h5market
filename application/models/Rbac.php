@@ -762,27 +762,6 @@ class RbacModel extends BaseModel
 
         return $RbacWriteDb->updateUserByUserid($data, $email);
     }
-
-    /**
-     * 向数据库插入一条新建的项目数据
-     * @param array $data 一维数组项目数据
-     * @return bool
-     * @throws Exception
-     */
-    public function insertPassportUser($data)
-    {
-        //将id与添加时间合并到数组中
-        $data['id'] = Util::guid();
-        $data['createtime'] = $data['updatetime'] = time();
-
-        try {
-            $MarketWriteDb = new MarketWriteDb();
-            $result = $MarketWriteDb->insertData('passportUser', $data);
-            return $result;
-        } catch (Exception $e) {
-            throw $e;
-        }
-    }
 }
 
 /* End of file Rbac.php */

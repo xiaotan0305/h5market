@@ -48,9 +48,13 @@ class ApiController extends AbstractApiController
         try {
             $market = new MarketModel();
             $result = $market->getProjectById($id, 0, $type);
-            if (!$result) {
+            //因content单独在一张表里，需要再获取一下content
+            $content = $market->getProjectContentById($id, $type);
+            if (!$result || !$content) {
                 Output::outputData(['errcode' => 0, 'errmsg' => '数据出错']);
                 exit;
+            } else {
+                $result[0]['content'] = $content[0]['content'];
             }
         } catch (Exception $e) {
             Output::outputData(['errcode' => 0, 'errmsg' => $e->getMessage()]);

@@ -60,6 +60,29 @@ class MarketWrite extends Db
     }
 
     /**
+     * 利用事务将数据插入多张表
+     * @param string $from 插入的表名
+     * @param array  $data 插入的数据
+     * @return string/false
+     */
+    public function insertDataTrans($from, $data)
+    {
+        $this->db->beginTransaction();
+        $ret1 = $this->insertData($from[0], $data[0]);
+        $ret2 = $this->insertData($from[1], $data[1]);
+        if ($ret1 && $ret2) {
+            if ($this->db->commit()) {
+                return isset($data['id']) ? $data['id'] : $ret1;
+            } else {
+                return false;
+            }
+        } else {
+            $this->db->rollback();
+            return false;
+        }
+    }
+
+    /**
      * 事务，在插入表单数据的同时，将报名专题报名数加1
      * @param string $from 插入的表名
      * @param array  $data 插入的数据
@@ -98,6 +121,32 @@ class MarketWrite extends Db
             return 1;
         } else {
             return 0;
+        }
+    }
+
+    /**
+     * 事务更新方法
+     * @param string $from   更新的表名
+     * @param array  $wheres 更新条件数组
+     * @param array  $data   更新数据
+     * @return false/int
+     */
+    public function updateDataTrans($from, $wheres, $data)
+    {
+        $this->db->beginTransaction();
+        //当update的数据没有变化是,会返回受影响的行数为0,所以result的可能值为0,1,false
+        $ret1 = $this->from($from[0])->where($wheres[0], '', '')->update($data[0]);
+        $ret2 = $this->from($from[1])->where($wheres[1], '', '')->update($data[1]);
+
+        if ($ret1 !== false && $ret2 !== false) {
+            if ($this->db->commit()) {
+                return 1;
+            } else {
+                return false;
+            }
+        } else {
+            $this->db->rollback();
+            return false;
         }
     }
 
@@ -198,5 +247,18 @@ class MarketWrite extends Db
             $this->db->rollback();
             return false;
         }
+    }
+
+    /**
+     * 插入content方法
+     * @param string $from 插入的表名
+     * @param array  $data 插入的数据
+     * @return string/false
+     */
+    public function insertContent($from, $data)
+    {
+        $result = $this->from($from)->insert($data);
+
+        return $result;
     }
 }

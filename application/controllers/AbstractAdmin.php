@@ -79,7 +79,8 @@ abstract class AbstractAdminController extends BaseController
                         'userid' => $passportUserinfo['userid'],
                         'name' => $passportUserinfo['username'],
                     ];
-                    $insertResult = $RbacModel -> insertPassportUser($data);
+                    $MarketModel = new MarketModel();
+                    $insertResult = $MarketModel -> insertPassportUser($data);
                     if ($insertResult) {
                         self::$login_admin_info = $RbacModel -> getUserByUserid($passportUserinfo['userid']);
                     } else {
@@ -99,6 +100,17 @@ abstract class AbstractAdminController extends BaseController
         } else {
             $RbacModel = new RbacModel();
             $userinfo = $RbacModel->getUserByEmail($admin_username);
+
+            if (is_array($userinfo) && count($userinfo) == 0) {
+                //插入用户信息
+                $result = $RbacModel->addUser(['email'=> $admin_username, 'name' => $admin_username]);
+                if ($result) {
+                    $userinfo = $RbacModel->getUserByEmail($admin_username);
+                } else {
+                    $this->redirectToLogin();
+                    exit;
+                }
+            }
 
             if (is_array($userinfo) && count($userinfo) > 0) {
                 //在OA已登录的情况下先判断是否绑定通行证账号
@@ -143,15 +155,6 @@ abstract class AbstractAdminController extends BaseController
                             exit;
                         }
                     }
-                }
-            } else {
-                //插入用户信息
-                $result = $RbacModel->addUser(['email'=> $admin_username, 'name' => $admin_username]);
-                if ($result) {
-                    self::$login_admin_info = $RbacModel->getUserByEmail($admin_username);
-                } else {
-                    $this->redirectToLogin();
-                    exit;
                 }
             }
         }
