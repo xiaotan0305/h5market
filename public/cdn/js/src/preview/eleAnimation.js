@@ -1,7 +1,7 @@
 /**
  * Created by liyingying on 15/12/7.
  * @Last Modified by: tankunpeng@fang.com
- * @Last Modified time: 2018-02-08 14:57:29
+ * @Last Modified time: 2018-02-09 13:35:10
  */
 define('eleAnimation', ['snabbt'], function(require) {
     var snabbt = require('snabbt');
@@ -981,11 +981,12 @@ define('eleAnimation', ['snabbt'], function(require) {
             effect.in = this.getInEffect(ele);
             effect.on = this.getOnEffect(ele);
             effect.out = this.getOutEffect(ele);
+            var n = ele.element[0];
+            ele.elementout.hide();
+            var animations = {};
+            var o;
+            // 执行入场动画
             if (effect.in) {
-                var n = ele.element[0];
-                ele.elementout.hide();
-                var animations = {};
-                // 执行入场动画
                 animations.in = this.getAnimations(ele, effect.in);
                 animations.in[0].startCallback = function() {
                     ele.elementout.show();
@@ -996,41 +997,50 @@ define('eleAnimation', ['snabbt'], function(require) {
                     }
                 };
                 animations.in[0].delay = effect.in.delay > 300 ? parseInt(effect.in.delay - 300) : 0;
-                var o = snabbt(n, animations.in[0]);
+                o = snabbt(n, animations.in[0]);
                 for (var a = 1; a < animations.in.length; a++) {
                     o.snabbt(animations.in[a]);
                 }
-                // 执行场间动画
-                if (effect.on) {
-                    animations.on = this.getAnimations(ele, effect.on);
-                    animations.on[0].delay = effect.on.delay > 300 ? parseInt(effect.on.delay - 300) : 0;
-                    var loop = effect.on.loop ? effect.on.loop : 0;
-                    while (loop > 0) {
-                        for (var b = 0; b < animations.on.length; b++) {
+            }
+            // 执行场间动画
+            if (effect.on) {
+                animations.on = this.getAnimations(ele, effect.on);
+                animations.on[0].delay = effect.on.delay > 300 ? parseInt(effect.on.delay - 300) : 0;
+                var loop = effect.on.loop ? effect.on.loop : 0;
+                while (loop > 0) {
+                    for (var b = 0; b < animations.on.length; b++) {
+                        if (!o) {
+                            o = snabbt(n, animations.on[b]);
+                        }else {
                             o.snabbt(animations.on[b]);
                         }
-                        loop--;
-                        // 执行完第一次后取消delay
-                        animations.on[0].delay = 0;
+                        animations.on[b].startCallback = function() {
+                            ele.elementout.show();
+                        };
                     }
+                    loop--;
+                    // 执行完第一次后取消delay
+                    // animations.on[0].delay = 0;
                 }
-                // 执行出场动画
-                if (effect.out) {
-                    animations.out = this.getAnimations(ele, effect.out);
-                    animations.out[0].startCallback = function() {
-                        ele.elementout.show();
-                    };
-                    animations.out[0].callback = function() {
-                        ele.elementout.hide();
-                    };
-                    animations.out[0].delay = effect.out.delay > 300 ? parseInt(effect.out.delay - 300) : 0;
-                    for (var c = 0; c < animations.out.length; c++) {
-                        o.snabbt(animations.out[c]);
-                    }
-                }
-            } else {
-                ele.elementout.show();
             }
+            // 执行出场动画
+            if (effect.out) {
+                animations.out = this.getAnimations(ele, effect.out);
+                animations.out[0].startCallback = function() {
+                    ele.elementout.show();
+                };
+                animations.out[0].callback = function() {
+                    ele.elementout.hide();
+                };
+                animations.out[0].delay = effect.out.delay > 300 ? parseInt(effect.out.delay - 300) : 0;
+                if (!o) {
+                    o = snabbt(n, animations.out[0]);
+                }
+                for (var c = 1; c < animations.out.length; c++) {
+                    o.snabbt(animations.out[c]);
+                }
+            }
+            ele.elementout.show();
         },
         /**
          * 停止动画效果
