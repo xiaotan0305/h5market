@@ -21,10 +21,19 @@ seajs.config({
         photoswipe: 'plugin/photoswipe.min',
         photoswipeUI: 'plugin/photoswipe-ui-default.min',
         smsLogin: 'plugin/smsLogin',
-        swiperAni: 'plugin/swiper.animate'
+        swiperAni: 'plugin/swiper.animate',
+        // ebook
+        ebook_preloader: 'src/ebook/preloader',
+        ebook_card: 'src/ebook/card',
+        ebook_page: 'src/ebook/page',
+        ebook_eleAnimation: 'src/ebook/eleAnimation',
+        ebook_tools: 'src/ebook/tools',
+        ebook_pageeffect: 'src/ebook/pageeffect',
+        turn: 'plugin/turn'
+        // ebook_shape: 'src/ebook/shape'
 
     },
-    map: [function (uri) {
+    map: [function(uri) {
         return uri.match(/photoswipe|swiper|smsLogin/) ? uri + '?_' + imgVer : uri;
     }],
     debug: true

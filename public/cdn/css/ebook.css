@@ -1,0 +1,73 @@
+
+.flipbook-viewport{
+    overflow: hidden;
+    width: 70%;
+    height: 50px;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    z-index: 100000;
+    background: rgba(0,0,0,.4);
+    transform: translateX(-50%);
+}
+.page{
+	background-color:white;
+	background-repeat:no-repeat;
+	background-size:100% 100%;
+}
+
+
+/*上一页*/
+.previousPage{
+	width: 16%;
+	height: 50px;
+	position: absolute;
+	top: 0;
+	left: 25%;
+	z-index: 999999;
+	/* border:1px solid red; */
+    background: url(../imgs/btn_prev.png) 0 0 no-repeat;
+    opacity: .5;
+}
+.previousPage.active{
+    background: url(../imgs/btn_prev_active.png) 0 0 no-repeat;
+    opacity: 1;
+}
+.return{
+	width: 16%;
+	height: 50px;
+	position: absolute;
+	top: 0;
+	left: 44%;
+	z-index: 999999;
+    background: url(../imgs/btn_index.png) 0 0 no-repeat;
+    opacity: .5;
+}
+.return.active{
+    background: url(../imgs/btn_index_active.png) 0 0 no-repeat;
+    opacity: 1;
+}
+
+/*下一页*/
+.nextPage{
+	width: 16%;
+	height: 50px;
+	position: absolute;
+	top: 0;
+	left: 62%;
+	z-index: 999999;
+    background: url(../imgs/btn_next.png) 0 0 no-repeat;
+    opacity: .5;
+}
+.nextPage.active{
+    background: url(../imgs/btn_next_active.png) 0 0 no-repeat;
+    opacity: 1;
+}
+
+.btnImg{
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	z-index: 99999;
+	background-size: cover;
+}

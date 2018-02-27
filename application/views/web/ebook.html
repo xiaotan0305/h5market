@@ -1,0 +1,161 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{!$result.name!}</title>
+    <meta name="keywords" content="房产,房地产,买房,租房,业主论坛,业主社区,新房,二手房,写字楼,商铺,装修,家居,建材,家具,团购,房地产新闻,房地产业内精英,房地产博客"/>
+    <meta name="description"
+          content="{!$result.introduction!}"/>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="x5-orientation" content="portrait">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="stylesheet" charset="UTF-8" href="{!$applicationConfig.domain.imgUrl.admin!}css/sfmain.css?_{!$applicationConfig.application.imgver!}">
+    <link rel="stylesheet" charset="UTF-8" href="{!$applicationConfig.domain.imgUrl.admin!}css/ebook.css?_{!$applicationConfig.application.imgver!}">
+    <link rel="stylesheet" charset="UTF-8" href="{!$applicationConfig.domain.imgUrl.admin!}css/photoswipe.css">
+    <link rel="stylesheet" charset="UTF-8" href="{!$applicationConfig.domain.imgUrl.admin!}css/default-skin.css">
+    <script>
+        if ('wView' in window) {
+            window.wView.allowsInlineMediaPlayback = 'YES';
+            window.wView.mediaPlaybackRequiresUserAction = 'NO';
+        }
+    </script>
+</head>
+
+<body>
+<!--各个页面展示-->
+<div id="main" style="width:100%;height:100%;left:0;top:0;overflow:hidden;max-width: 640px;margin: 0 auto;position: relative;">
+    <!-- 正文盒子 -->
+    <div id="marketdym"></div>
+    <!-- 电子书展示 -->
+    <div class="flipbook-viewport" id="nav" style="display:none;">
+        <div class="previousPage" id="previousPage"></div>
+        <div class="nextPage active" id="nextPage"></div>
+        <div class="return" id="return"></div>
+    </div>
+    <!--音乐播放-->
+    <audio id="music" src="" autoplay preload loop></audio>
+    <img id="musiccontrolon" src="" style="-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;outline:none;opacity:0.7;width:30px;display:none;position:absolute;right:15px;top:15px;z-index:999"/>
+    <!--音乐停止-->
+    <img id="musiccontroloff" src="" style="-webkit-tap-highlight-color:rgba(0,0,0,0);outline:none;-webkit-user-select:none;width:30px;display:none;position:absolute;right:15px;top:15px;z-index:999"/>
+    <!--页面加载前动画-->
+    <div id="preloadarea" style="z-index:999;width:100%;height:100%;position:absolute;left:0px;top:0px;background:white;overflow:hidden;">
+        <div id="defaultLoading" style="display:none;">
+            <div class="wthum" style="position:absolute;width:60px;height:60px;background:rgba(57,187,171,1);border-radius:60px;left:50%;top:30%;margin:-30px;"></div>
+            <div class="wthum waitthum infinite" style="position:absolute;width:100px;height:100px;background:rgba(57,187,171,0.4);border-radius:120px;left:50%;top:30%;margin:-50px"></div>
+            <!--展示项目封面图-->
+            <div id="covert" style="display:none;backgrund:white;position:absolute;width:100px;height:100px;border-radius:120px;left:50%;top:30%;margin:-50px;overflow:hidden;z-index:10;">
+                <img id="cover" src="{!$result['cover']!}" style="display:none;width:100%;height:100%;border-radius:170px;">
+            </div>
+            <div class="pie pie1 sfcube" style="display:none"></div>
+            <div class="pie pie2 sfcube" style="display:none"></div>
+            <!--展示进度百分比-->
+            <div id="persent" style="margin-top:90px;text-indent:6px;position:absolute;top:30%;width:100%;left:0;color:rgb(180,180,180);font-size:18px;text-align:center"></div>
+        </div>
+        <div id="customLoading" style="width:100%;height:100%;max-width:640px;margin:0 auto;display: none;">
+            <img width="100%" height="100%" src="{!$result['loading']!}" alt="loading图"/>
+        </div>
+    </div>
+        <!--计时器-->
+    <div id="h5Timer" style="display: none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;outline:none;position:absolute;left:50%;margin-left:-60px;top:10px;z-index:999;width: 120px;height:50px;">
+        <div style="width:40px;position:absolute;left:0;top:0;"><img id="clock" src="" width="100%"></div>
+        <div id="gameTime" style="position:absolute;left:40px;top:10px;font-size: 18px;color: #fff;font-weight: 700;"><span id="gameMinute">00</span>:<span id="gameSecond">00</span></div>
+    </div>
+    <!--图片放大展示-->
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="pswp__bg"></div>
+        <div class="pswp__scroll-wrap">
+            <div class="pswp__container">
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+            </div>
+            <div class="pswp__ui pswp__ui--hidden">
+                <div class="pswp__top-bar">
+                    <div class="pswp__counter"></div>
+                    <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                    <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                    <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                    <div class="pswp__preloader">
+                        <div class="pswp__preloader__icn">
+                            <div class="pswp__preloader__cut">
+                                <div class="pswp__preloader__donut"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                    <div class="pswp__share-tooltip"></div>
+                </div>
+                <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+                </button>
+                <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+                </button>
+                <div class="pswp__caption">
+                    <div class="pswp__caption__center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="fontPreloader"></div>
+{!if $signInfo!}
+<input type="hidden" id="appid" value="{!$signInfo.appId!}"/>
+<input type="hidden" id="timestamp" value="{!$signInfo.timestamp!}"/>
+<input type="hidden" id="nonceStr" value="{!$signInfo.nonceStr!}"/>
+<input type="hidden" id="signature" value="{!$signInfo.signature!}"/>
+{!/if!}
+<input type="hidden" id="type" value="{!$type!}"/>
+<input type="hidden" id="mainSite" value="{!$applicationConfig.domain.imgUrl.admin!}"/>
+<input id="imgSite" type="hidden" value="{!$applicationConfig.domain.imgUrl.admin!}"/>
+<input id="projectID" type="hidden" value="{!$id!}"/>
+<input id="loadingSrc" type="hidden" value="{!$result['loading']!}"/>
+<!--http://js.h5.test.fang.com/--><!--mainSite-->
+<input id="pcSite" type="hidden" value="{!$applicationConfig.domain.siteUrl.admin!}"/>
+<!--http://h5admin.test.fang.com/-->
+<input id="phoneSite" type="hidden" value="{!$applicationConfig.domain.siteUrl.web!}"/>
+<!--http://h5.test.fang.com/-->
+<!--city-->
+<input id="city" type="hidden" value="{!$city!}"/>
+<!--channel-->
+<input id="channel" type="hidden" value="{!$channel!}"/>
+<!--source-->
+<input id="source" type="hidden" value="{!$source!}"/>
+<!--isPhone-->
+<input id="isPc" type="hidden" value="{!$isPc!}"/>
+<script>
+var jsbase = '{!$applicationConfig.domain.imgUrl.web!}js';
+</script>
+{!if $applicationConfig.domain.siteUrl.web|strpos:'m.fang.com/h5market'===false!}
+<script type="text/javascript" src="{!$applicationConfig.domain.imgUrl.web!}js/ebook_p.js"></script>
+<script type="text/javascript" src="{!$applicationConfig.domain.imgUrl.web!}js/src/ebook/main.js"></script>
+{!else!}
+<script type="text/javascript" src="{!$applicationConfig.domain.imgUrl.web!}js/??ebook_p.js,ebook_m.js?_{!$applicationConfig.application.imgver!}"></script>
+{!/if!}
+<script>
+    document.domain = 'fang.com';
+    var defaultImg = document.querySelector('#imgSite').value + "imgs/loadingpic.jpg",
+            defaultTitle = 'm.fang.com',
+            imgVer = '{!$applicationConfig.application.imgver!}';
+    seajs.use('src/ebook/main');
+    {!if !$isPc!}
+    if (location.href.indexOf('test.') === -1) {
+        var _dctc = _dctc || {};
+        _dctc._account = _dctc._account || ['UA-24140496-1','UA-24140496-20'];
+        _dctc.isNorth = _dctc.isNorth || 'Y';
+        _dctc.bid = '909001';
+        _dctc.urlowner = '{!$result.user!}@soufun.com';
+        var _dctc_onlyga = _dctc_onlyga || {};
+        _dctc_onlyga._account = _dctc_onlyga._account || ['UA-24140496-1', 'UA-24140496-20'];
+    }
+    {!/if!}
+</script>
+{!if !$isPc!}
+<img src="//uvwap.3g.fang.com/default/index?uvn=Y&amp;uvb=1&amp;uvr=&amp;uvl={!$applicationConfig.domain.siteUrl.web|urlencode!}{!$smarty.server.REQUEST_URI|substr:1|urlencode!}&amp;uvz={!100000000|mt_rand:999999999!}&amp;urlowner={!$result.user!}@soufun.com"
+     style="display:none;"/>
+{!/if!}
+</body>
+</html>

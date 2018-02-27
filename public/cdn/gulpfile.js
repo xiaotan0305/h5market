@@ -58,58 +58,86 @@ var path = {
         'js/src/preview/pageeffect.js',
         'js/src/preview/main.js'
     ],
+    ebook_pluginJs: [
+        'js/sea/sea.js',
+        'js/sea/config.js',
+        'js/jquery/2.1.1/jquery.js',
+        'js/jquery/jquery.transit.min.js',
+        'js/plugin/weixinshare.js',
+        'js/plugin/turn.js',
+        'js/plugin/snabbt.js'
+    ],
+    ebook_previewJs: [
+        'js/src/ebook/eleAnimation.js',
+        // 'js/src/ebook/shape.js',
+        'js/src/ebook/tools.js',
+        'js/src/ebook/page.js',
+        'js/src/ebook/card.js',
+        'js/src/ebook/preloader.js',
+        'js/src/ebook/pageeffect.js',
+        'js/src/ebook/main.js'
+    ],
     adminJs: 'js/src/**/*.js',
     build: 'build/'
 };
 
 // 样式处理
-gulp.task('styles', function () {
-    'use strict';
-    return gulp.src(url.indexOf('.css') !== -1 ? url : url + '/**/*.css').
+gulp.task('styles', function() {
+    return gulp.src(url.indexOf('.css') !== -1 ? url : url + '/**/*.css')
         // 压缩 css文件
-        pipe(minifycss()).
+        .pipe(minifycss())
         // 输出至文件夹
-        pipe(gulp.dest(path.build + 'css/'));
+        .pipe(gulp.dest(path.build + 'css/'));
 });
 
 // adminjs处理
-gulp.task('adminJs', function () {
-    'use strict';
-    return gulp.src(url.indexOf('.js') !== -1 ? url : url + '/**/*.js').
-    pipe(uglify()).
-    pipe(gulp.dest(path.build + 'js/'));
+gulp.task('adminJs', function() {
+    return gulp.src(url.indexOf('.js') !== -1 ? url : url + '/**/*.js')
+        .pipe(uglify())
+        .pipe(gulp.dest(path.build + 'js/'));
 });
 // 插件脚本处理
-gulp.task('pluginJs', function () {
-    'use strict';
-    return gulp.src(path.pluginJs).
-        pipe(uglify()).
+gulp.task('pluginJs', function() {
+    return gulp.src(path.pluginJs)
+        .pipe(uglify())
         // 合并文件
-        pipe(concat('p.js')).
-        pipe(gulp.dest('js'));
+        .pipe(concat('p.js'))
+        .pipe(gulp.dest('js'));
 });
 // 项目脚本合并处理
-gulp.task('previewJs', function () {
-    'use strict';
-    return gulp.src(path.previewJs).
-        pipe(uglify()).
+gulp.task('previewJs', function() {
+    return gulp.src(path.previewJs)
+        .pipe(uglify())
         // 合并文件
-        pipe(concat('m.js')).
-        pipe(gulp.dest('js'));
+        .pipe(concat('m.js'))
+        .pipe(gulp.dest('js'));
+});
+// 电子书插件脚本处理
+gulp.task('ebook_pluginJs', function() {
+    return gulp.src(path.ebook_pluginJs)
+        .pipe(uglify())
+        // 合并文件
+        .pipe(concat('ebook_p.js'))
+        .pipe(gulp.dest('js'));
+});
+// 电子书项目脚本合并处理
+gulp.task('ebook_previewJs', function() {
+    return gulp.src(path.ebook_previewJs)
+        .pipe(uglify())
+        // 合并文件
+        .pipe(concat('ebook_m.js'))
+        .pipe(gulp.dest('js'));
 });
 // 清理
-gulp.task('clean', function () {
-    'use strict';
-    return gulp.src([path.build, 'js/p.js', 'js/m.js', '!' + path.image], {read: false}).
-        pipe(clean());
+gulp.task('clean', function() {
+    return gulp.src([path.build, 'js/p.js', 'js/m.js', '!' + path.image], { read: false })
+        .pipe(clean());
 });
 // 预设任务
-gulp.task('default', ['clean'], function () {
-    'use strict';
+gulp.task('default', ['clean'], function() {
     if (url) {
-        gulp.start('styles','previewJs', 'pluginJs','adminJs');
+        gulp.start('styles', 'previewJs', 'pluginJs', 'adminJs');
     }else {
-        gulp.start('previewJs', 'pluginJs');
+        gulp.start('previewJs', 'pluginJs', 'ebook_previewJs', 'ebook_pluginJs');
     }
-
 });
