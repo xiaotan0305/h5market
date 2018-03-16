@@ -130,7 +130,7 @@ gulp.task('ebook_previewJs', function() {
 });
 // 清理
 gulp.task('clean', function() {
-    return gulp.src([path.build, 'js/p.js', 'js/m.js', '!' + path.image], { read: false })
+    return gulp.src([path.build, 'js/p.js', 'js/m.js', 'js/ebook_p.js', 'js/ebook_m.js', '!' + path.image], { read: false })
         .pipe(clean());
 });
 // 预设任务

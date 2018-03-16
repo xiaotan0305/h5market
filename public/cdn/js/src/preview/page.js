@@ -1,7 +1,7 @@
 /**
  * Created by liyy on 2015/8/31.
  * @Last Modified by: tankunpeng@fang.com
- * @Last Modified time: 2018-02-08 14:25:29
+ * @Last Modified time: 2018-03-16 18:23:15
  */
 define('page', ['jquery', 'jqueryTransit', 'eleAnimation', 'tools'], function(require) {
     var vars = seajs.data.vars;

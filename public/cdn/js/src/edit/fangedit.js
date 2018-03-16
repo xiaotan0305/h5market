@@ -3,7 +3,7 @@
  * @Date:   2015/9/9
  * @description: h5market控制器，主要代码编写
  * @Last Modified by: liuxinlu@fang.com
- * @Last Modified time: 2018-02-01 13:44:55
+ * @Last Modified time: 2018-03-05 18:28:52
  */
 (function () {
     'use strict';
@@ -3734,10 +3734,10 @@
                  */
                 $scope.addVideo = function () {
                     var vurl = $.trim($scope.video.videourl), vlength = vurl.length;
-                    if (vurl.indexOf('.soufun.com') === -1 && vurl.indexOf('.fang.com') === -1 && vurl.indexOf('.soufunimg.com') === -1) {
-                        $scope.msgConfirm('亲，只能添加soufun.com、fang.com或者soufunimg.com域名下的视频哦~');
-                        return;
-                    }
+                    // if (vurl.indexOf('.soufun.com') === -1 && vurl.indexOf('.fang.com') === -1 && vurl.indexOf('.soufunimg.com') === -1) {
+                    //     $scope.msgConfirm('亲，只能添加soufun.com、fang.com或者soufunimg.com域名下的视频哦~');
+                    //     return;
+                    // }
                     if (vurl.toLowerCase().substring(vlength - 4, vlength) !== '.mp4') {
                         $scope.msgConfirm('亲，视频只能是mp4格式哦~');
                         return;

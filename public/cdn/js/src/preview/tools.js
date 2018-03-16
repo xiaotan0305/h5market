@@ -1,7 +1,7 @@
 /**
  * Created by liyy on 2015/12/30.
  * @Last Modified by: tankunpeng@fang.com
- * @Last Modified time: 2018-02-08 14:36:44
+ * @Last Modified time: 2018-03-16 18:54:13
  */
 
 define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function(require) {
@@ -1444,7 +1444,25 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function(require)
             warn.append(pEle);
             for (var key in qlist) {
                 if (qlist.hasOwnProperty(key)) {
-                    var inputEle = $('<input/>');
+                    var inputEle;
+                    var isSeclet = false;
+                    var qName = qlist[key].name;
+                    var qNameList = [];
+                    if (qName.indexOf('|') > 0) {
+                        qNameList = qName.split('|');
+                        isSeclet = true;
+                    }
+                    if (isSeclet) {
+                        var sStr = '<select style="color:#757575;">';
+                        for (var i = 0, len = qNameList.length; i < len; i++) {
+                            var itemName = qNameList[i];
+                            sStr += '<option value="' + itemName + '">' + itemName + '</option>';
+                        }
+                        sStr += '</select>';
+                        inputEle = $(sStr);
+                    }else {
+                        inputEle = $('<input/>');
+                    }
                     inputEle.attr({
                         pos: key,
                         name: qlist[key].id,
@@ -1455,6 +1473,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function(require)
                         border: '2px solid ' + data.formcolor,
                         height: that.scale(80),
                         marginBottom: that.scale(20),
+                        color: '#757575',
                         fontSize: that.scale(30)
                     });
                     inputEle.attr({
