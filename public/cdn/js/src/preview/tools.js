@@ -1,7 +1,7 @@
 /**
  * Created by liyy on 2015/12/30.
- * @Last Modified by: tankunpeng@fang.com
- * @Last Modified time: 2018-03-16 18:54:13
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2018-07-05 14:15:30
  */
 
 define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function(require) {
@@ -197,7 +197,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function(require)
                 width: that.scale(data.w),
                 height: that.scale(data.h),
                 left: that.scale(data.left),
-                top: that.scale(data.top, 'top'),
+                top: that.scale(data.top),
                 position: 'absolute',
                 opacity: data.opacity,
                 transform: that.rotate(data.rotate)
@@ -269,7 +269,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function(require)
                 position: 'absolute',
                 width: that.scale(data.w),
                 // width: 'auto',
-                top: that.scale(data.top, 'top'),
+                top: that.scale(data.top),
                 left: that.scale(data.left),
                 height: that.scale(data.height),
                 transform: that.rotate(data.rotate),
@@ -1333,7 +1333,7 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function(require)
                 width: that.scale(data.w),
                 height: 'auto',
                 left: that.scale(data.left),
-                top: that.scale(data.top, 'top'),
+                top: that.scale(data.top),
                 position: 'absolute',
                 opacity: data.opacity,
                 transform: that.rotate(data.rotate)
@@ -1350,8 +1350,10 @@ define('tools', ['jquery', 'hammer', 'smsLogin', 'swiperAni'], function(require)
             contentareaplay.css({
                 position: 'absolute',
                 left: '50%',
+                width: '50px',
+                height: '50px',
                 top: '50%',
-                margin: '-50px 0 0 -50px',
+                margin: '-25px 0 0 -25px',
                 opacity: '0.7'
             });
             contentareaplay.attr('src', vars.imgSite + 'imgs/play.png');

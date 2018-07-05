@@ -1,10 +1,9 @@
 /**
  * Created by liyy on 2015/8/31.
- * @Last Modified by:   tankunpeng
- * @Last Modified time: 2015/10/19
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2018-07-05 13:59:55
  */
-define('card', ['jquery', 'page', 'pageeffect', 'hammer', 'tools'], function (require) {
-    'use strict';
+define('card', ['jquery', 'page', 'pageeffect', 'hammer', 'tools'], function(require) {
     var vars = seajs.data.vars;
     var $ = require('jquery'),
         Page = require('page'),
@@ -36,7 +35,7 @@ define('card', ['jquery', 'page', 'pageeffect', 'hammer', 'tools'], function (re
 
     Card.prototype = {
 
-        ensureCanvas: function () {
+        ensureCanvas: function() {
             var radio = {},
                 e, t, n, i, o = 640,
                 a = 1008,
@@ -110,7 +109,7 @@ define('card', ['jquery', 'page', 'pageeffect', 'hammer', 'tools'], function (re
          * @param data 所有数据
          * @returns {boolean}
          */
-        init: function (data) {
+        init: function(data) {
             if (typeof data === 'undefined' || !data) {
                 return false;
             }
@@ -138,7 +137,7 @@ define('card', ['jquery', 'page', 'pageeffect', 'hammer', 'tools'], function (re
          * @param data 页面原始数据
          * @param n  页面开始加载的页码
          */
-        loadPage: function (data, n) {
+        loadPage: function(data, n) {
             // 转化成数字
             n = Math.ceil(n / this.pageLoadStep) * this.pageLoadStep;
             if (n >= vars.pageNum) {
@@ -180,7 +179,7 @@ define('card', ['jquery', 'page', 'pageeffect', 'hammer', 'tools'], function (re
          * 初始化上拉动画效果
          * @param e 当前页效果
          */
-        initpanUpAnimations: function (e) {
+        initpanUpAnimations: function(e) {
             var t = this.pages[vars.current + 1].page[0];
             var n = this.pages[vars.current].page[0];
             this.panUpAnimations = [];
@@ -194,7 +193,7 @@ define('card', ['jquery', 'page', 'pageeffect', 'hammer', 'tools'], function (re
          * 初始化下拉动画效果
          * @param e 当前页效果
          */
-        initpanDownAnimations: function (e) {
+        initpanDownAnimations: function(e) {
             e = this.pages[vars.current - 1];
             var t = this.pages[vars.current].page[0];
             this.panDownAnimations = [];
@@ -206,15 +205,15 @@ define('card', ['jquery', 'page', 'pageeffect', 'hammer', 'tools'], function (re
          * 是否有下一页
          * @returns {boolean}
          */
-        hasNextPage: function () {
+        hasNextPage: function() {
             if (vars.current >= vars.pageNum - 1) {
                 return false;
             }
             return true;
         },
-        debouncedCallback: function (e, t) {
+        debouncedCallback: function(e, t) {
             var n = t;
-            return function () {
+            return function() {
                 n--;
                 e();
             };
@@ -224,7 +223,7 @@ define('card', ['jquery', 'page', 'pageeffect', 'hammer', 'tools'], function (re
          * 过渡到下一页
          * @param e 回调函数
          */
-        animateToNextPage: function (e) {
+        animateToNextPage: function(e) {
             var t = this.panUpAnimations ? this.panUpAnimations.length : 1;
             var n = this.debouncedCallback(e, t);
             for (var name in this.panUpAnimations) {
@@ -240,7 +239,7 @@ define('card', ['jquery', 'page', 'pageeffect', 'hammer', 'tools'], function (re
          * 过渡到上一页
          * @param e 回调函数
          */
-        animateToPrevPage: function (e) {
+        animateToPrevPage: function(e) {
             var t = this.panDownAnimations ? this.panDownAnimations.length : 1;
             var n = this.debouncedCallback(e, t);
             for (var name in this.panDownAnimations) {
@@ -256,7 +255,7 @@ define('card', ['jquery', 'page', 'pageeffect', 'hammer', 'tools'], function (re
          * 拖动处理
          * @param ev 事件对象
          */
-        onPan: function (ev) {
+        onPan: function(ev) {
             ev.preventDefault();
             var t = vars.screen.height;
             // var t = window.innerHeight;
@@ -373,7 +372,7 @@ define('card', ['jquery', 'page', 'pageeffect', 'hammer', 'tools'], function (re
         /**
          * 初始化绑定事件
          */
-        initswipeaction: function () {
+        initswipeaction: function() {
             if (typeof this.containner === 'undefined') return;
             var that = this;
             that.hammerPages = new Hammer.Manager(vars.isPc ? document.body : that.containner[0]);
@@ -386,11 +385,11 @@ define('card', ['jquery', 'page', 'pageeffect', 'hammer', 'tools'], function (re
             that.hammerPages.get('pan').set({
                 direction: Hammer.DIRECTION_VERTICAL
             });
-            that.hammerPages.on('pan', function (ev) {
+            that.hammerPages.on('pan', function(ev) {
                 that.onPan(ev);
             });
         },
-        start: function (e, t, n) {
+        start: function(e, t, n) {
             var that = this;
             if (typeof this.pages === 'undefined' || !this.pages[e]) return;
             if (typeof t === 'undefined') {
@@ -429,7 +428,7 @@ define('card', ['jquery', 'page', 'pageeffect', 'hammer', 'tools'], function (re
          * 下一页
          * @param fn
          */
-        nextpage: function (fn) {
+        nextpage: function(fn) {
             var that = this;
             if (!this.hasNextPage()) {
                 return;
@@ -480,7 +479,7 @@ define('card', ['jquery', 'page', 'pageeffect', 'hammer', 'tools'], function (re
                     'font-size': '12px',
                     opacity: '0.3'
                 });
-                setTimeout(function () {
+                setTimeout(function() {
                     if (that.pages[vars.current].chartEle) {
                         tools.render(that.pages[vars.current].charts, that.pages[vars.current].chartEle.element);
                     }
@@ -488,7 +487,7 @@ define('card', ['jquery', 'page', 'pageeffect', 'hammer', 'tools'], function (re
             }
             // 判断是否含视频，切换页面视频暂停播放
             if (video.length) {
-                video.each(function (index, element) {
+                video.each(function(index, element) {
                     element.pause();
                     $(element).next().fadeIn(300);
                 });
@@ -513,10 +512,10 @@ define('card', ['jquery', 'page', 'pageeffect', 'hammer', 'tools'], function (re
             }
 
             nextPage.show();
-            this.animateToNextPage(function () {
+            this.animateToNextPage(function() {
                 nowPage.hide();
                 // 等待插件运行元素效果结束执行css设为空
-                setTimeout(function () {
+                setTimeout(function() {
                     nowPage.css('transform', '');
                 }, 0);
                 if (!nowP.hide) {
@@ -543,7 +542,7 @@ define('card', ['jquery', 'page', 'pageeffect', 'hammer', 'tools'], function (re
          * 上一页
          * @param fn
          */
-        prevpage: function (fn) {
+        prevpage: function(fn) {
             var that = this;
             if (vars.current === 0) {
                 return false;
@@ -568,7 +567,7 @@ define('card', ['jquery', 'page', 'pageeffect', 'hammer', 'tools'], function (re
                     'font-size': '12px',
                     opacity: '0.3'
                 });
-                setTimeout(function () {
+                setTimeout(function() {
                     if (that.pages[vars.current].chartEle) {
                         tools.render(that.pages[vars.current].charts, that.pages[vars.current].chartEle.element);
                     }
@@ -578,7 +577,7 @@ define('card', ['jquery', 'page', 'pageeffect', 'hammer', 'tools'], function (re
                 preVideo = pre.find('video');
             // 判断是否含视频，切换页面视频暂停播放
             if (video.length) {
-                video.each(function (index, element) {
+                video.each(function(index, element) {
                     element.pause();
                     $(element).next().fadeIn(300);
                 });
@@ -600,9 +599,9 @@ define('card', ['jquery', 'page', 'pageeffect', 'hammer', 'tools'], function (re
                 this.initpanDownAnimations(currentP);
             }
             pre.show();
-            this.animateToPrevPage(function () {
+            this.animateToPrevPage(function() {
                 current.hide();
-                setTimeout(function () {
+                setTimeout(function() {
                     current.css('transform', '');
                 }, 0);
                 if (!currentP.hide) {
@@ -625,7 +624,7 @@ define('card', ['jquery', 'page', 'pageeffect', 'hammer', 'tools'], function (re
             }
             fn && fn();
         },
-        fitscreen: function (scale, t) {
+        fitscreen: function(scale, t) {
             var n = scale * $(window).width() / 640,
                 r = scale * $(window).height() / 1010;
             this.sc = n > r ? n : r;
